@@ -1,0 +1,68 @@
+package fr.adaming.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity(name="roles")
+@Table(name = "user_role")
+public class Role {
+
+	/* _____________________ Attributs ________________________ */
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(name = "role")
+	private String roleName;
+
+	/* _____________________ Association (UML) ________________________ */
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id_user")
+	private User user;
+
+	/* _____________________ Constructeurs ________________________ */
+
+	public Role() {
+		super();
+	}
+
+	public Role(String roleName) {
+		super();
+		this.roleName = roleName;
+	}
+	
+	/* _____________________ Getters et Setters ________________________ */
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+}
