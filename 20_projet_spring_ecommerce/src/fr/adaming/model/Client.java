@@ -6,28 +6,28 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
+@Entity (name="client")
 @DiscriminatorValue("1")
 public class Client extends User {
-	
-	/*_____________________ Attributs ________________________*/
-	
-	@Column(name="nom")
+
+	/* _____________________ Attributs ________________________ */
+
+	@Column(name = "nom")
 	private String nom;
-	
-	@Column(name="adresse")
+
+	@Column(name = "adresse")
 	private String adresse;
-	
-	@Column(name="telephone")
+
+	@Column(name = "telephone")
 	private String telephone;
-	
-	/*_____________________ Constructeurs ________________________*/
-	
+
+	/* _____________________ Constructeurs ________________________ */
+
 	// Constructeur vide
 	public Client() {
 		super();
 	}
-	
+
 	// Constructeur chargé sans l'id
 	public Client(String mail, String password, List<Role> listeRoles, String nom, String adresse, String telephone) {
 		super(mail, password, listeRoles);
@@ -35,15 +35,15 @@ public class Client extends User {
 		this.adresse = adresse;
 		this.telephone = telephone;
 	}
-	
+
 	// Constructeur chargé sans l'id
-		public Client(String mail, String password, String nom, String adresse, String telephone) {
-			super(mail, password);
-			this.nom = nom;
-			this.adresse = adresse;
-			this.telephone = telephone;
-		}
-	
+	public Client(String mail, String password, String nom, String adresse, String telephone) {
+		super(mail, password);
+		this.nom = nom;
+		this.adresse = adresse;
+		this.telephone = telephone;
+	}
+
 	// Constructeur chargé avec tout
 	public Client(int id, String mail, String password, List<Role> listeRoles, String nom, String adresse,
 			String telephone) {
@@ -52,9 +52,9 @@ public class Client extends User {
 		this.adresse = adresse;
 		this.telephone = telephone;
 	}
-	
-	/*_____________________ Getters et Setters ________________________*/
-	
+
+	/* _____________________ Getters et Setters ________________________ */
+
 	public String getNom() {
 		return nom;
 	}
@@ -77,6 +77,13 @@ public class Client extends User {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	/* ________________ Redéfinition de la méthode toString _________________ */
+	
+	@Override
+	public String toString() {
+		return "Client [nom=" + nom + ", adresse=" + adresse + ", telephone=" + telephone + "]";
 	}
 
 }

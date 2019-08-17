@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IClientDao;
 import fr.adaming.dao.IRoleDao;
@@ -33,12 +34,11 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	public int addClientService(Client pClient) {
 		int pIdClient = clientDao.addClientDao(pClient);
-		
-		// Créer un role (avec le roleName 'ROLE_CLIENT') et l'attribuer au client
 		Role role = new Role();
-		role.setUser(clientDao.getClientDao(pIdClient));
 		role.setRoleName("ROLE_CLIENT");
+		role.setUser(clientDao.getClientDao(pIdClient));
 		roleDao.addRoleDao(role);
+
 		return pIdClient;
 	}
 
@@ -46,9 +46,18 @@ public class ClientServiceImpl implements IClientService {
 	public void updateClientService(Client pClient) {
 		clientDao.updateClientDao(pClient);
 	}
-
+	
+	@Transactional
 	@Override
 	public void deleteClientService(int pIdClient) {
+		
+		Client client = clientDao.getClientDao(pIdClient);
+		
+		List<Role> listRole = client.getListeRoles();
+		
+		for(Role role : listRole) {
+			roleDao.deleteRoleDao(role.getId());
+		}
 		clientDao.deleteClientDao(pIdClient);
 	}
 

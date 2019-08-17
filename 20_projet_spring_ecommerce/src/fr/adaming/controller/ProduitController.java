@@ -5,13 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ManageProduit {
+public class ProduitController {
 	
-	@RequestMapping(value = "/managerproduit/test")
+	@RequestMapping(value = "/produit/test")
 	public String tester(Model model) {
 		
 		
-		return "test2";
+		return "testProduit";
 	}
 
 }

@@ -13,20 +13,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>test2</h1>
+	
+<!-- Page test à supprimer quand tout est OK -->
 
-	<s:authentication property="authorities" var="listeRoles" />
-	<ul>
-		<c:forEach items="${listeRoles}" var="role">
-			<li>${role.authority}</li>
-		</c:forEach>
-
-	</ul>
+<h1>On est passé par la méthode 'tester()' de ProduitController</h1>
 
 
-	<a href="${pageContext.request.contextPath}/client/test/">test
-		client</a>
-	<a href="${pageContext.request.contextPath}/managerproduit/test/">test
-		produit</a>
+<a href="${pageContext.request.contextPath}/index.jsp" >Retour à index</a>
+
 </body>
 </html>

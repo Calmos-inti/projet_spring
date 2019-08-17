@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+
 @Entity(name = "produit")
 @Table(name = "produits")
 public class Produit {
@@ -19,16 +21,22 @@ public class Produit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produit")
 	private int idProduit;
+	
 	@Column(name = "designation")
 	private String designation;
+	
 	@Column(name = "description")
 	private String description;
+	
 	@Column(name = "prix")
 	private double prix;
+	
 	@Column(name = "quantite")
 	private int quantite;
+	
 	@Column(name = "selection")
 	private boolean selection;
+	
 	@Column(name = "photo")
 	private String photo;
 
@@ -40,7 +48,7 @@ public class Produit {
 	/* _____________________ Constructeurs ________________________ */
 
 	// constructeur vide
-	
+
 	public Produit() {
 		super();
 	}
@@ -135,5 +143,4 @@ public class Produit {
 		this.categorie = categorie;
 	}
 
-	
 }

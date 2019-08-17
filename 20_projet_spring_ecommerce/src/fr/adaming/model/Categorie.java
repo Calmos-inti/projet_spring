@@ -11,37 +11,38 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
-@Entity(name="categorie")
+@Entity(name = "categorie")
 @Table(name = "categories")
 public class Categorie {
 
 	/* _____________________ Attributs ________________________ */
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categorie")
 	private int idCategorie;
+	
 	@Column(name = "nom")
 	private String nomCategorie;
+	
 	@Column(name = "photo")
 	private byte[] photo;
+	
 	@Column(name = "description")
 	private String description;
 
-	//transformation de l'association ULM en Java
-	@OneToMany(mappedBy="categorie", cascade=CascadeType.ALL)
+	// transformation de l'association ULM en Java
+	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
 	private List<Produit> listeProduits;
-	
+
 	/* _____________________ Constructeurs ________________________ */
-	
-	//constructeur vide
+
+	// constructeur vide
 	public Categorie() {
 		super();
 	}
 
-	//constructeur chargé sans l'ID
+	// constructeur chargé sans l'ID
 
 	public Categorie(String nomCategorie, byte[] photo, String description, List<Produit> listeProduits) {
 		super();
@@ -49,10 +50,10 @@ public class Categorie {
 		this.photo = photo;
 		this.description = description;
 		this.listeProduits = listeProduits;
-		
+
 	}
-	
-	//constructeur chargé sans l'ID
+
+	// constructeur chargé sans l'ID
 
 	public Categorie(int idCategorie, String nomCategorie, byte[] photo, String description,
 			List<Produit> listeProduits) {
@@ -104,8 +105,5 @@ public class Categorie {
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
 	}
-	
-	
-	
-	
+
 }

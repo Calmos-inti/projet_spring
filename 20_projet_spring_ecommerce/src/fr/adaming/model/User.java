@@ -2,20 +2,22 @@ package fr.adaming.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity(name="user")
+@Table(name="users")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", 
 					 discriminatorType=DiscriminatorType.INTEGER)	
@@ -36,8 +38,7 @@ public class User {
 	private String password;
 	
 	/*_____________________ Association (UML) ________________________*/
-	
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Role> listeRoles;
 	
 
@@ -104,6 +105,13 @@ public class User {
 
 	public void setListeRoles(List<Role> listeRoles) {
 		this.listeRoles = listeRoles;
+	}
+
+	/* ________________ Redéfinition de la méthode toString _________________ */
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", mail=" + mail + ", password=" + password + ", listeRoles=" + listeRoles + "]";
 	}
 	
 }

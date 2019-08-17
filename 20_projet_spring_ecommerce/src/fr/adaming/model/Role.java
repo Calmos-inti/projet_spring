@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name="roles")
+@Entity(name="role")
 @Table(name = "user_role")
 public class Role {
 
@@ -24,8 +25,8 @@ public class Role {
 
 	/* _____________________ Association (UML) ________________________ */
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id_user")
+	@ManyToOne(fetch = FetchType.EAGER) //lasy
+	@JoinColumn(name = "user_id", nullable = false) // , referencedColumnName = "id_user"insertable = false, updatable = false
 	private User user;
 
 	/* _____________________ Constructeurs ________________________ */
@@ -65,4 +66,10 @@ public class Role {
 		this.user = user;
 	}
 
+	/* ________________ Redéfinition de la méthode toString _________________ */
+	
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", roleName=" + roleName  + "]";
+	}
 }
