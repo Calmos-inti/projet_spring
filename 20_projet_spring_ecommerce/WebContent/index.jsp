@@ -28,5 +28,16 @@
 <a href="${pageContext.request.contextPath}/client/test/" >test client</a>
 <a href="${pageContext.request.contextPath}/managerproduit/test/" >test produit</a>
 
+<h1>tests Clément</h1>
+<table>
+<tr>
+			<td align="left"> Partie Categorie</td>
+			
+			<td align="right">
+				<a href="categorie/liste" >Lien</a>
+				<!-- NB : au clic sur le lien => envoi d'une requete http en get avec l'url /fonctionnaire/liste  -->
+			</td>
+		</tr>
+		</table>
 </body>
 </html>

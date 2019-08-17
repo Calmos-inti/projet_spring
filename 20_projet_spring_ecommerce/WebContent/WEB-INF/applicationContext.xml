@@ -66,6 +66,8 @@
  				<value>fr.adaming.model.Client</value>
  				<value>fr.adaming.model.User</value>
  				<value>fr.adaming.model.Role</value>
+ 				<value>fr.adaming.model.Produit</value>
+ 				<value>fr.adaming.model.Categorie</value>
 			</list>
 		</property>		
 	</bean>
