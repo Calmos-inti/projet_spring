@@ -40,9 +40,10 @@ public class ProduitDaoImpl implements IProduitDao{
 	
 	@Transactional
 	@Override
-	public void deleteProduit(Produit pProduit) {
+	public void deleteProduit(int pIdProduit) {
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(pProduit);
+		Produit pOut = session.get(Produit.class, pIdProduit);
+		session.delete(pOut);
 	}
 	
 	@Transactional

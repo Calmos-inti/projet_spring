@@ -36,8 +36,8 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public void deleteProduit(Produit pProduit) {
-		produitDao.deleteProduit(pProduit);
+	public void deleteProduit(int pIdProduit) {
+		produitDao.deleteProduit(pIdProduit);
 	}
 
 	@Override

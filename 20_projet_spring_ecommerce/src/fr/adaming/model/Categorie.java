@@ -66,7 +66,7 @@ public class Categorie {
 	}
 
 	/* _____________________ Getters & Setters ________________________ */
-	public long getIdCategorie() {
+	public int getIdCategorie() {
 		return idCategorie;
 	}
 

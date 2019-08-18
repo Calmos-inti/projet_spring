@@ -52,7 +52,13 @@
 		<tr>
 			<td align="left">Partie Categorie</td>
 
-			<td align="right"><a href="categorie/liste">Lien</a> <!-- NB : au clic sur le lien => envoi d'une requete http en get avec l'url /fonctionnaire/liste  -->
+			<td align="right"><a href="categorie/liste">Lien</a>
+			</td>
+		</tr>
+		<tr>
+			<td align="left">Partie Produit</td>
+
+			<td align="right"><a href="produit/liste">Lien</a> 
 			</td>
 		</tr>
 	</table>

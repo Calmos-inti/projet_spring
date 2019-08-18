@@ -8,7 +8,7 @@ public interface IProduitDao {
 	
 	public int addProduit(Produit pProduit);
 	public void updateProduit (Produit pProduit);;
-	public void deleteProduit (Produit pProduit);;
+	public void deleteProduit (int pIdProduit);
 	public Produit getProduit(int pIdProduit);
 	public List<Produit> getAllProduit();
 	

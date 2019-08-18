@@ -28,10 +28,11 @@
 				
 				<tr>
 				
-					<td> <form:label path="photo"> Photo :</form:label> </td>
+   		<td> <form:label path="photo"> Photo :</form:label> </td>
 					<td>
 						<form:input path="photo"/>
 					</td>
+					
 				
 				</tr>
 				
@@ -47,7 +48,7 @@
 				<!-- bouton -->
 				
 				<tr>
-					<td colspan="2">
+					<td colspan="3">
 						<input type="submit" value="Ajouter cette nouvelle catégorie"/>
 					</td>
 				</tr>

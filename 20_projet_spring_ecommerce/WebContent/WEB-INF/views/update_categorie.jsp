@@ -23,7 +23,7 @@
 				
 					<td></td>
 					<td>
-						<form:hidden path="idCategorie"/>
+	<form:hidden path="idCategorie"/>
 					</td>
 				
 				</tr>
