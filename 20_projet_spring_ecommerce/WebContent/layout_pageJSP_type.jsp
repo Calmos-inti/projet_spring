@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <!-- ======================================= LES TAGLIBS ========================================== -->
 <!-- taglib de jsp -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Acceuil</title>
+<title>Titre de la page</title>
 
 <!-- Spécification du chemin de la lib Popper -->
 <script
@@ -42,12 +43,10 @@
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
 
-
 				<!-- =============== inclusion Carousel ========================== -->
 				<%@ include file="/resources/template/carousel.jsp"%>
 
 				<!-- =============== end carousel ========================== -->
-
 
 				<br /> <br />
 				<div class="row">
@@ -60,45 +59,21 @@
 					</div>
 					<!-- end col-2 -->
 
-
 					<!-- =============== fin menu gauche ========================== -->
 
 
 					<!-- =============== début du Core ========================== -->
 
 					<div class="col-8 ">
-						<div class="container marketing">
 
-							<div class="row">
+						<!--//////////////////////////////////////////////////////////////-->
+						<!--////////////////////// Contenu ici ///////////////////////////-->
+						<!--//////////////////////////////////////////////////////////////-->
 
-								<c:forEach items="${liste_categories}" var="categorie">
-
-									<div class="col-4">
-										<svg class="bd-placeholder-img rounded-circle" width="140"
-											height="140" xmlns="http://www.w3.org/2000/svg"
-											preserveAspectRatio="xMidYMid slice" focusable="false"
-											role="img" aria-label="Placeholder: 140x140">
-					<title>Placeholder</title><rect width="100%" height="100%"
-												fill="#777" />
-					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-
-										<h3>${categorie.nomCategorie}</h3>
-										<p>${categorie.description}</p>
-										<p>
-											<a class="btn btn-secondary" href="#" role="button">voir
-												la liste &raquo;</a>
-										</p>
-									</div>
-								</c:forEach>
-
-							</div>
-							<!-- end row -->
-						</div>
-						<!-- end conteneur marketing -->
 					</div>
 					<!-- end col-8 -->
 					<!-- =============== fin du Core ========================== -->
+
 
 				</div>
 				<!-- end row -->
@@ -108,7 +83,6 @@
 		<!-- end row justify-content-center -->
 	</div>
 	<!-- end container-fluid -->
-
 
 	<br />
 	<br />
