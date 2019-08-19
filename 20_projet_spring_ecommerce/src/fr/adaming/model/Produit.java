@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,8 +42,10 @@ public class Produit {
 	private String photo;
 
 	// transformation de l'association UML en Java
-	@ManyToOne
-	@JoinColumn(name = "categorie_id", referencedColumnName = "id_categorie")
+//	@ManyToOne
+//	@JoinColumn(name = "categorie_id", referencedColumnName = "id_categorie")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "categorie_id", nullable = false) 
 	private Categorie categorie;
 
 	/* _____________________ Constructeurs ________________________ */

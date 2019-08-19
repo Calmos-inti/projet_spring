@@ -30,6 +30,20 @@ public class CategorieController {
 
 		/* ___________________méthodes gestionnaires_________________________*/
 		
+		@RequestMapping(value = "/categorie/test")
+		public String tester() {
+
+			// ================== TEST AJOUT CATEGORIE =================================
+			
+			Categorie categorie1 = new Categorie("Chausettes", null, "les meilleurs chaussettes sur le marché!");
+			Categorie categorie2 = new Categorie("Tee-Shirts", null, "les meilleurs tee-shirt sur le marché!");
+			Categorie categorie3 = new Categorie("Vestes", null, "les meilleurs vestes sur le marché!");
+			categorieManager.addCategorie(categorie1);
+			categorieManager.addCategorie(categorie2);
+			categorieManager.addCategorie(categorie3);
+			return "testProduit";
+		}
+		
 		@RequestMapping(value = "/categorie/liste", method = RequestMethod.GET)
 		public String listeCategoriesBDD(ModelMap modelDonnees) {
 

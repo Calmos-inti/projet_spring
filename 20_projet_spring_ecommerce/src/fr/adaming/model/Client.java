@@ -36,7 +36,7 @@ public class Client extends User {
 		this.telephone = telephone;
 	}
 
-	// Constructeur chargé sans l'id
+	// Constructeur chargé sans l'id et la liste des roles
 	public Client(String mail, String password, String nom, String adresse, String telephone) {
 		super(mail, password);
 		this.nom = nom;

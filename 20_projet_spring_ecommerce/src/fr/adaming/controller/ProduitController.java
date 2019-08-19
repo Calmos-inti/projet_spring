@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 
@@ -29,8 +30,53 @@ public class ProduitController {
 	public void setProduitManager(IProduitService produitManager) {
 		this.produitManager = produitManager;
 	}
+	
+	@Autowired
+	private ICategorieService categorieManager;
+
+	// setter pour injection spring
+	public void setCategorieManager(ICategorieService categorieManager) {
+		this.categorieManager = categorieManager;
+	}
 
 	/* ___________________méthodes gestionnaires_________________________*/
+	
+	@RequestMapping(value = "/produit/test")
+	public String tester() {
+
+		// ================== TEST AJOUT CATEGORIE =================================
+		
+		Produit produit1 = new Produit("Chaussette bleu", "Chausette 100% coton, conford optimal...", 2, 20, true, null);
+		produit1.setCategorie(categorieManager.getCategorie(1));
+		
+		Produit produit2 = new Produit("Chaussette rouge", "Chausette 100% coton, conford optimal...", 2, 35, true, null);
+		produit2.setCategorie(categorieManager.getCategorie(1));
+		
+		Produit produit3 = new Produit("Chaussette blanche", "Chausette 100% coton, conford optimal...", 2, 50, true, null);
+		produit3.setCategorie(categorieManager.getCategorie(1));
+		
+		Produit produit4 = new Produit("Tee-Shirts bleu", "Tee-Shirts 100% coton, conford optimal...", 2, 20, true, null);
+		produit4.setCategorie(categorieManager.getCategorie(2));
+		
+		Produit produit5 = new Produit("Tee-Shirts bleu", "Tee-Shirts 100% coton, conford optimal...", 2, 20, true, null);
+		produit5.setCategorie(categorieManager.getCategorie(2));
+		
+		Produit produit6 = new Produit("Veste bleu", "Veste 100% coton, conford optimal...", 2, 20, true, null);
+		produit6.setCategorie(categorieManager.getCategorie(3));
+		
+		Produit produit7 = new Produit("Veste bleu", "Veste 100% coton, conford optimal...", 2, 20, true, null);
+		produit7.setCategorie(categorieManager.getCategorie(3));
+		
+		produitManager.addProduit(produit1);
+		produitManager.addProduit(produit2);
+		produitManager.addProduit(produit3);
+		produitManager.addProduit(produit4);
+		produitManager.addProduit(produit5);
+		produitManager.addProduit(produit6);
+		produitManager.addProduit(produit7);
+		
+		return "testProduit";
+	}
 	
 	@RequestMapping(value = "/produit/liste", method = RequestMethod.GET)
 	public String listeProduitsBDD(ModelMap modelDonnees) {

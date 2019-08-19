@@ -157,155 +157,77 @@
 
 				</div>
 				<!-- =============== end carousel ========================== -->
-				<br /><br/>
-
-				<!-- =============== menu gauche ========================== -->
+				<br /> <br />
 				<div class="row">
+				<!-- =============== menu gauche ========================== -->
+				
 					<div class="col-2">
 
-						<div class="accordion" id="accordionExample">
+						<ul class="nav flex-column">
+						
+							<c:forEach items="${liste_categories}" var="categorie">
+								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown07"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${categorie.nomCategorie}</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown07">
+								<c:forEach items="${categorie.listeProduits}" var="produit">
+									<a class="dropdown-item" href="#">${produit.designation}</a> 
+								</c:forEach>
+							</div></li>
+							</c:forEach>
+						
+						</ul> <!-- end nav flex-column -->
 
+					</div> 	<!-- end col-2 -->
 
-							<div class="card">
-								<div class="card-header" id="heading1">
-									<h6 class="mb-0">
-										<button class="btn btn-link" type="button"
-											data-toggle="collapse" data-target="#collapseOne"
-											aria-expanded="true" aria-controls="collapseOne">
-											Categorie 1</button>
-									</h6>
-								</div>
-
-								<div id="collapseOne" class="collapse show"
-									aria-labelledby="headingOne" data-parent="#accordionExample">
-									<div class="card-body">
-									
-									<a href="#">Categorie 1-Produit 1</a>
-									<a href="#">Categorie 1-Produit 2</a>
-									<a href="#">Categorie 1-Produit 3</a>
-									
-									</div>
 	
-								</div>
-							</div>
-
-
-							<div class="card">
-								<div class="card-header" id="headingTwo">
-									<h6 class="mb-0">
-										<button class="btn btn-link collapsed" type="button"
-											data-toggle="collapse" data-target="#collapseTwo"
-											aria-expanded="false" aria-controls="collapseTwo">
-											Categorie 2</button>
-									</h6>
-								</div>
-								<div id="collapseTwo" class="collapse"
-									aria-labelledby="headingTwo" data-parent="#accordionExample">
-									<div class="card-body">									
-									<a href="#">Categorie 2-Produit 1</a>
-									<a href="#">Categorie 2-Produit 2</a>
-									<a href="#">Categorie 2-Produit 3</a>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="card">
-								<div class="card-header" id="headingThree">
-									<h6 class="mb-0">
-										<button class="btn btn-link collapsed" type="button"
-											data-toggle="collapse" data-target="#collapseThree"
-											aria-expanded="false" aria-controls="collapseThree">
-											Categorie 3</button>
-									</h6>
-								</div>
-								<div id="collapseThree" class="collapse"
-									aria-labelledby="headingThree" data-parent="#accordionExample">
-									
-									<div class="card-body">
-										<a href="#">Categorie 3-Produit 1</a>
-										<a href="#">Categorie 3-Produit 2</a>
-										<a href="#">Categorie 3-Produit 3</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-					<!-- =============== fin menu gauche ========================== -->
+				<!-- =============== fin menu gauche ========================== -->
 
 
 
-					<!-- =============== début du Core ========================== -->
+				<!-- =============== début du Core ========================== -->
 
-					<div class="col-8 ">
-						<div class="container marketing">
-
-							<div class="row">
-								<div class="col-4">
-									<svg class="bd-placeholder-img rounded-circle" width="140"
-										height="140" xmlns="http://www.w3.org/2000/svg"
-										preserveAspectRatio="xMidYMid slice" focusable="false"
-										role="img" aria-label="Placeholder: 140x140">
+				<div class="col-8 ">
+					<div class="container marketing">
+						
+						<div class="row">
+						
+						<c:forEach items="${liste_categories}" var="categorie">
+						
+							<div class="col-4">
+								<svg class="bd-placeholder-img rounded-circle" width="140"
+									height="140" xmlns="http://www.w3.org/2000/svg"
+									preserveAspectRatio="xMidYMid slice" focusable="false"
+									role="img" aria-label="Placeholder: 140x140">
 					<title>Placeholder</title><rect width="100%" height="100%"
-											fill="#777" />
+										fill="#777" />
 					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<h3>Catégorie1</h3>
-									<p>description</p>
-									<p>
-										<a class="btn btn-secondary" href="#" role="button">voir
-											la liste &raquo;</a>
-									</p>
-								</div>
-
-								<div class="col-4">
-									<svg class="bd-placeholder-img rounded-circle" width="140"
-										height="140" xmlns="http://www.w3.org/2000/svg"
-										preserveAspectRatio="xMidYMid slice" focusable="false"
-										role="img" aria-label="Placeholder: 140x140">
-					<title>Placeholder</title><rect width="100%" height="100%"
-											fill="#777" />
-					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<h3>Catégorie2</h3>
-									<p>description</p>
-									<p>
-										<a class="btn btn-secondary" href="#" role="button">voir
-											la liste &raquo;</a>
-									</p>
-								</div>
-
-
-								<div class="col-4">
-									<svg class="bd-placeholder-img rounded-circle" width="140"
-										height="140" xmlns="http://www.w3.org/2000/svg"
-										preserveAspectRatio="xMidYMid slice" focusable="false"
-										role="img" aria-label="Placeholder: 140x140">
-					<title>Placeholder</title><rect width="100%" height="100%"
-											fill="#777" />
-					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<h3>Catégorie3</h3>
-									<p>description</p>
-									<p>
-										<a class="btn btn-secondary" href="#" role="button">voir
-											la liste &raquo;</a>
-									</p>
-								</div>
-
-
-
+					
+					
+								<h3>${categorie.nomCategorie}</h3>
+								<p>${categorie.description}</p>
+								<p>
+									<a class="btn btn-secondary" href="#" role="button">voir la
+										liste &raquo;</a>
+								</p>
 							</div>
-							<!-- end row -->
-						</div>
-					</div>
-					<!-- =============== fin du Core ========================== -->
+						</c:forEach>
+	
 
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+						</div>	<!-- end row -->
+					</div> <!-- end conteneur marketing --> 
+				</div> <!-- end col-8 -->
+				<!-- =============== fin du Core ========================== -->
+
+			</div> <!-- end row -->
+		</div> <!-- end col-sm-10 -->
+	</div>	<!-- end row justify-content-center -->
+</div>	<!-- end container-fluid -->
+
+
 	<!-- /.container --> <!-- FOOTER --> <footer class="container">
-	<br/><br/>
+		<br /> <br />
 		<p class="float-right">
 			<a href="#">Back to top</a>
 		</p>

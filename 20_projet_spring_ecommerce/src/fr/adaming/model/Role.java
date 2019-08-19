@@ -26,7 +26,7 @@ public class Role {
 	/* _____________________ Association (UML) ________________________ */
 
 	@ManyToOne(fetch = FetchType.EAGER) //lasy
-	@JoinColumn(name = "user_id", nullable = false) // , referencedColumnName = "id_user"insertable = false, updatable = false
+	@JoinColumn(name = "user_id", nullable = false) 
 	private User user;
 
 	/* _____________________ Constructeurs ________________________ */

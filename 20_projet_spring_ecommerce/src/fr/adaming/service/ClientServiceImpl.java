@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IClientDao;
 import fr.adaming.dao.IRoleDao;
@@ -47,7 +46,6 @@ public class ClientServiceImpl implements IClientService {
 		clientDao.updateClientDao(pClient);
 	}
 	
-	@Transactional
 	@Override
 	public void deleteClientService(int pIdClient) {
 		

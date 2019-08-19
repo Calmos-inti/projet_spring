@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IRoleDao;
 import fr.adaming.dao.IUserDao;
@@ -54,7 +53,6 @@ public class UserServiceImpl implements IUserService {
 		userDao.updateUserDao(pUser);
 	}
 	
-	@Transactional
 	@Override
 	public void deleteUserService(int pIdUser) {
 		User user = userDao.getUserDao(pIdUser);
