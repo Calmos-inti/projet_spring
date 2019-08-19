@@ -66,7 +66,7 @@
 
 					<!-- =============== début du Core ========================== -->
 
-					<div class="col-8 ">
+					<div class="col-10 ">
 						<div class="container marketing">
 
 							<div class="row">
@@ -86,8 +86,7 @@
 										<h3>${categorie.nomCategorie}</h3>
 										<p>${categorie.description}</p>
 										<p>
-											<a class="btn btn-secondary" href="#" role="button">voir
-												la liste &raquo;</a>
+											<a class="btn btn-info" href="${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}" role="button">Voir tous les articles &raquo;</a>
 										</p>
 									</div>
 								</c:forEach>

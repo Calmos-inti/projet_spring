@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+
 <!-- ======================================= LES TAGLIBS ========================================== -->
 <!-- taglib de jsp -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,6 +8,8 @@
 <!-- taglib de Spring Security -->
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
 
+<!-- déclaration de la taglib de Spring MVC form -->
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -64,14 +66,71 @@
 
 					<!-- =============== début du Core ========================== -->
 
-					<div class="col-10 ">
 
-						<!--//////////////////////////////////////////////////////////////-->
-						<!--////////////////////// Contenu ici ///////////////////////////-->
-						<!--//////////////////////////////////////////////////////////////-->
+					<div class="col-10">
+
+
+						<c:forEach items="${liste_produits}" var="produit">
+
+							<div class="card">
+								<div class="card-body ">
+									<div class="row">
+										<div class="col-3">
+											<svg class="bd-placeholder-img rounded-circle" width="140"
+												height="140" xmlns="http://www.w3.org/2000/svg"
+												preserveAspectRatio="xMidYMid slice" focusable="false"
+												role="img" aria-label="Placeholder: 140x140">
+					<title>Placeholder</title><rect width="100%" height="100%"
+													fill="#777" />
+					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+										</div>
+
+
+										<div class="col-6">
+											<h4 class="card-title">${produit.designation}</h4>
+											<h6 class="card-subtitle mb-2 text-muted">${produit.categorie.nomCategorie}</h6>
+											<p class="card-text">${produit.description}</p>
+										</div>
+
+
+
+										<div class="col-3">
+											<form:form modelAttribute="#" action="#" method="post">
+
+												<h5>${produit.prix} euros</h5>
+
+												<span class="badge badge-success">Encore
+													${produit.quantite} articles disponibles ! </span>
+
+												<fieldset>
+													<div class="form-group row">
+														
+														
+													
+													<label class="col-sm-8 col-form-label" >Quantité :</label>
+													 <div class="col-sm-4">
+													<select	class="form-control-plaintext" id="#">
+														<c:forEach var="i" begin="1" end="${produit.quantite}"
+															step="1">
+															<option>${i}</option>
+														</c:forEach>
+													</select>
+													</div>
+													</div>
+												</fieldset>
+												<button type="button" class="btn btn-outline-success">Ajouter au Panier</button>
+											</form:form>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+							<br />
+						</c:forEach>
 
 					</div>
-					<!-- end col-10 -->
+					<!-- end col-8 -->
 					<!-- =============== fin du Core ========================== -->
 
 
