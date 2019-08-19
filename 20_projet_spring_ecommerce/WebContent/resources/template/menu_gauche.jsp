@@ -1,17 +1,30 @@
-<ul class="nav flex-column">
-						
-	<c:forEach items="${liste_categories}" var="categorie">
-		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown07"
-			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${categorie.nomCategorie}</a>
-							
-			<div class="dropdown-menu" aria-labelledby="dropdown07">
-				<a class="dropdown-item" href="${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}">Afficher tous les articles</a>
-				<div class="dropdown-divider"></div>
-				<c:forEach items="${categorie.listeProduits}" var="produit">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/accueil/produit?idProduit=${produit.idProduit}">${produit.designation}</a> 
-				</c:forEach>
+
+
+
+<c:forEach items="${liste_categories}" var="categorie">
+	<div class="row">
+		<div class="btn-group col-12" role="group"
+			aria-label="Button group with nested dropdown">
+			<button type="button" class="btn btn-outline-primary"
+				onclick="location.href='${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}'">
+				${categorie.nomCategorie}</button>
+			<div class="btn-group" role="group">
+				<button id="btnGroupDrop1" type="button"
+					class="btn btn-outline-primary dropdown-toggle"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1"
+					x-placement="bottom-start"
+					style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
+					<c:forEach items="${categorie.listeProduits}" var="produit">
+						<a class="dropdown-item"
+							href="${pageContext.request.contextPath}/accueil/produit?idProduit=${produit.idProduit}">${produit.designation}</a>
+					</c:forEach>
+				</div>
 			</div>
-		</li>
-	</c:forEach>
-						
-</ul> <!-- end nav flex-column -->
+
+		</div>
+	</div>
+	<div>
+		<br />
+	</div>
+</c:forEach>

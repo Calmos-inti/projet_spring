@@ -54,16 +54,16 @@ public class ProduitController {
 		Produit produit3 = new Produit("Chaussette blanche", "Chausette 100% coton, confort optimal...", 2, 50, true, null);
 		produit3.setCategorie(categorieManager.getCategorie(1));
 		
-		Produit produit4 = new Produit("Tee-Shirts bleu", "Tee-Shirts 100% coton, confort optimal...", 2, 20, true, null);
+		Produit produit4 = new Produit("Tee-Shirts bleu", "Tee-Shirts 100% coton, confort optimal...", 10, 40, true, null);
 		produit4.setCategorie(categorieManager.getCategorie(2));
 		
-		Produit produit5 = new Produit("Tee-Shirts bleu", "Tee-Shirts 100% coton, confort optimal...", 2, 20, true, null);
+		Produit produit5 = new Produit("Tee-Shirts blanc", "Tee-Shirts 100% coton, confort optimal...", 20, 35, true, null);
 		produit5.setCategorie(categorieManager.getCategorie(2));
 		
-		Produit produit6 = new Produit("Veste bleu", "Veste 100% coton, confort optimal...", 2, 20, true, null);
+		Produit produit6 = new Produit("Veste rouge", "Veste 100% coton, confort optimal...", 30, 10, true, null);
 		produit6.setCategorie(categorieManager.getCategorie(3));
 		
-		Produit produit7 = new Produit("Veste bleu", "Veste 100% coton, confort optimal...", 2, 20, true, null);
+		Produit produit7 = new Produit("Veste bleu", "Veste 100% coton, confort optimal...", 45, 25, true, null);
 		produit7.setCategorie(categorieManager.getCategorie(3));
 		
 		produitManager.addProduit(produit1);
