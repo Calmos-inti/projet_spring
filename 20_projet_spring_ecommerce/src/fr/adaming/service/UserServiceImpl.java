@@ -34,16 +34,10 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public int addUserService(User pUser) {
 		int pIdUser = userDao.addUserDao(pUser);
-		
-		Role role1 = new Role();
-		role1.setRoleName("ROLE_CLIENT");
-		role1.setUser(userDao.getUserDao(pIdUser));
-		roleDao.addRoleDao(role1);
-		
-		Role role2 = new Role();
-		role2.setRoleName("ROLE_PRODUIT");
-		role2.setUser(userDao.getUserDao(pIdUser));
-		roleDao.addRoleDao(role2);
+		Role role = new Role();
+		role.setRoleName("ROLE_PRODUIT");
+		role.setUser(userDao.getUserDao(pIdUser));
+		roleDao.addRoleDao(role);
 
 		return pIdUser;
 	}

@@ -28,26 +28,9 @@ public class Client extends User {
 		super();
 	}
 
-	// Constructeur chargé sans l'id
-	public Client(String mail, String password, List<Role> listeRoles, String nom, String adresse, String telephone) {
-		super(mail, password, listeRoles);
-		this.nom = nom;
-		this.adresse = adresse;
-		this.telephone = telephone;
-	}
-
 	// Constructeur chargé sans l'id et la liste des roles
-	public Client(String mail, String password, String nom, String adresse, String telephone) {
-		super(mail, password);
-		this.nom = nom;
-		this.adresse = adresse;
-		this.telephone = telephone;
-	}
-
-	// Constructeur chargé avec tout
-	public Client(int id, String mail, String password, List<Role> listeRoles, String nom, String adresse,
-			String telephone) {
-		super(id, mail, password, listeRoles);
+	public Client(String mail, String password, Boolean enabled, String nom, String adresse, String telephone) {
+		super(mail, password, enabled);
 		this.nom = nom;
 		this.adresse = adresse;
 		this.telephone = telephone;

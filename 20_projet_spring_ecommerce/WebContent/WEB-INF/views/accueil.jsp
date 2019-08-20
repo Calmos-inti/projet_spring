@@ -12,7 +12,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Acceuil</title>
+<title>Accueil</title>
+
+<!-- lib icone : Fontawesome -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
 
 <!-- Spécification du chemin de la lib Popper -->
 <script
@@ -71,6 +77,7 @@
 
 							<div class="row">
 
+
 								<c:forEach items="${liste_categories}" var="categorie">
 
 									<div class="col-4">
@@ -86,9 +93,12 @@
 										<h3>${categorie.nomCategorie}</h3>
 										<p>${categorie.description}</p>
 										<p>
-											<a class="btn btn-info" href="${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}" role="button">Voir tous les articles &raquo;</a>
+											<a class="btn btn-info"
+												href="${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}"
+												role="button">Voir tous les articles &raquo;</a>
 										</p>
 									</div>
+									<br />
 								</c:forEach>
 
 							</div>

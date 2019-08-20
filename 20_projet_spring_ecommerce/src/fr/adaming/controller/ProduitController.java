@@ -40,7 +40,7 @@ public class ProduitController {
 
 	/* ___________________méthodes gestionnaires_________________________*/
 	
-	@RequestMapping(value = "/produit/test")
+	@RequestMapping(value = "/produit/test", method = RequestMethod.GET)
 	public String tester() {
 
 		// ================== TEST AJOUT CATEGORIE =================================

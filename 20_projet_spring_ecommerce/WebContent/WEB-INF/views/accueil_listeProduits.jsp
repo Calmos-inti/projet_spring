@@ -15,7 +15,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Titre de la page</title>
+<title>liste produits</title>
+
+<!-- lib icone : Fontawesome -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
 
 <!-- Spécification du chemin de la lib Popper -->
 <script
@@ -69,6 +75,24 @@
 
 					<div class="col-10">
 
+						<c:if test="${nombre_trouve != 0 && mot_cle!=null}">
+							<div class="alert alert-dismissible alert-success">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>${nombre_trouve}</strong> article(s) trouvé(s) avec le
+								mot-clé ${mot_cle} !
+							</div>
+							<br />
+						</c:if>
+
+						<c:if test="${nombre_trouve == 0}">
+							<div class="alert alert-dismissible alert-warning">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								Aucun article avec le mot-clé <strong>${mot_cle}</strong> n'a
+								été trouvé !
+							</div>
+							<br />
+						</c:if>
+
 
 						<c:forEach items="${liste_produits}" var="produit">
 
@@ -97,28 +121,29 @@
 										<div class="col-3">
 											<form:form modelAttribute="#" action="#" method="post">
 
-												<h5>${produit.prix} euros</h5>
+												<h5>${produit.prix}&euro;</h5>
 
 												<span class="badge badge-success">Encore
 													${produit.quantite} articles disponibles ! </span>
 
 												<fieldset>
 													<div class="form-group row">
-														
-														
-													
-													<label class="col-sm-8 col-form-label" >Quantité :</label>
-													 <div class="col-sm-4">
-													<select	class="form-control-plaintext" id="#">
-														<c:forEach var="i" begin="1" end="${produit.quantite}"
-															step="1">
-															<option>${i}</option>
-														</c:forEach>
-													</select>
-													</div>
+
+
+
+														<label class="col-sm-8 col-form-label">Quantité :</label>
+														<div class="col-sm-4">
+															<select class="form-control-plaintext" id="#">
+																<c:forEach var="i" begin="1" end="${produit.quantite}"
+																	step="1">
+																	<option>${i}</option>
+																</c:forEach>
+															</select>
+														</div>
 													</div>
 												</fieldset>
-												<button type="button" class="btn btn-outline-success">Ajouter au Panier</button>
+												<button type="button" class="btn btn-outline-success">Ajouter
+													au Panier</button>
 											</form:form>
 										</div>
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.adaming.model.Categorie;
@@ -24,7 +25,7 @@ public class AccueilController {
 	public void setCategorieManager(ICategorieService categorieManager) {
 		this.categorieManager = categorieManager;
 	}
-	
+
 	@Autowired
 	private IProduitService produitManager;
 
@@ -32,9 +33,8 @@ public class AccueilController {
 	public void setProduitManager(IProduitService produitManager) {
 		this.produitManager = produitManager;
 	}
-	
 
-	public void infoMenu_gauche(ModelMap modelDonnees) {
+	public void infoMenuGauche(ModelMap modelDonnees) {
 
 		// Recupération de la liste des categories depuis la BDD
 		List<Categorie> listeCategories = categorieManager.getAllCategories();
@@ -44,20 +44,20 @@ public class AccueilController {
 
 	}
 
-	@RequestMapping(value = "/accueil")
+	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
 	public String allerAccueil(ModelMap modelDonnees) {
 
 		/* ________ Récupération des infos pour la page accueil ___________________ */
 
-		infoMenu_gauche(modelDonnees);
+		infoMenuGauche(modelDonnees);
 
 		return "accueil";
 	}
 
-	@RequestMapping(value = "/accueil/liste_produit")
+	@RequestMapping(value = "/accueil/liste_produit", method = RequestMethod.GET)
 	public String listerProduits(@RequestParam("idCategorie") int pIdCategorie, ModelMap modelDonnees) {
-		
-		infoMenu_gauche(modelDonnees);
+
+		infoMenuGauche(modelDonnees);
 
 		// Recupération de la liste des produits depuis la BDD
 		List<Produit> listeProduit = categorieManager.getCategorie(pIdCategorie).getListeProduits();
@@ -67,20 +67,51 @@ public class AccueilController {
 
 		return "accueil_listeProduits";
 	}
-	
-	@RequestMapping(value = "/accueil/produit")
+
+	@RequestMapping(value = "/accueil/produit", method = RequestMethod.GET)
 	public String rechercheProduitsbyId(@RequestParam("idProduit") int pIdProduit, ModelMap modelDonnees) {
-		
-		infoMenu_gauche(modelDonnees);
+
+		infoMenuGauche(modelDonnees);
 
 		// Recupération de la liste des produits depuis la BDD
 		Produit produit = produitManager.getProduit(pIdProduit);
-		
+
 		List<Produit> listeProduit = new ArrayList<>();
 		listeProduit.add(produit);
-		
+
 		// Etape 2 : Encapsulation de la liste dans l'objet ModelMap
 		modelDonnees.addAttribute("liste_produits", listeProduit);
+
+		return "accueil_listeProduits";
+	}
+
+	@RequestMapping(value = "/accueil/recherche", method = RequestMethod.GET)
+	public String rechercheProduitsMotCle(@RequestParam("mot") String pMot, ModelMap modelDonnees) {
+
+		infoMenuGauche(modelDonnees);
+
+		List<Produit> listeProduit = produitManager.getAllProduit();
+		List<Produit> listeRecherche = new ArrayList<>();
+
+//		StringTokenizer st = new StringTokenizer(pMot);
+//		
+//		while (st.hasMoreTokens()) {
+
+			for (Produit produit : listeProduit) {
+
+				if (produit.getDesignation().toUpperCase().contains(pMot.toUpperCase())) {
+					listeRecherche.add(produit);
+				} else if (produit.getDescription().toUpperCase().contains(pMot.toUpperCase())) {
+					listeRecherche.add(produit);
+				}
+			}
+//		}
+		
+		int nombreTrouve = listeRecherche.size();
+			
+		modelDonnees.addAttribute("liste_produits", listeRecherche);
+		modelDonnees.addAttribute("nombre_trouve", nombreTrouve);
+		modelDonnees.addAttribute("mot_cle", pMot);
 
 		return "accueil_listeProduits";
 	}

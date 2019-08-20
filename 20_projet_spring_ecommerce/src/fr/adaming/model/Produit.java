@@ -39,7 +39,7 @@ public class Produit {
 	private boolean selection;
 	
 	@Column(name = "photo")
-	private String photo;
+	private byte[] photo;
 
 	// transformation de l'association UML en Java
 //	@ManyToOne
@@ -57,7 +57,7 @@ public class Produit {
 	}
 
 	// constructeur chargé sans ID
-	public Produit(String designation, String description, double prix, int quantite, boolean selection, String photo) {
+	public Produit(String designation, String description, double prix, int quantite, boolean selection, byte[] photo) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -69,7 +69,7 @@ public class Produit {
 
 	// constructeur chargé avec ID
 	public Produit(int idProduit, String designation, String description, double prix, int quantite, boolean selection,
-			String photo) {
+			byte[] photo) {
 		super();
 		this.idProduit = idProduit;
 		this.designation = designation;
@@ -130,11 +130,11 @@ public class Produit {
 		this.selection = selection;
 	}
 
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 

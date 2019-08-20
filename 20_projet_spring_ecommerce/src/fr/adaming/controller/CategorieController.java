@@ -35,7 +35,7 @@ public class CategorieController {
 
 			// ================== TEST AJOUT CATEGORIE =================================
 			
-			Categorie categorie1 = new Categorie("Chausettes", null, "les meilleurs chaussettes sur le marché!");
+			Categorie categorie1 = new Categorie("Chaussettes", null, "les meilleurs chaussettes sur le marché!");
 			Categorie categorie2 = new Categorie("Tee-Shirts", null, "les meilleurs tee-shirt sur le marché!");
 			Categorie categorie3 = new Categorie("Vestes", null, "les meilleurs vestes sur le marché!");
 			categorieManager.addCategorie(categorie1);

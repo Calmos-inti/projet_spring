@@ -37,6 +37,9 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	@Column(name="enabled")
+	private boolean enabled;
+	
 	/*_____________________ Association (UML) ________________________*/
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Role> listeRoles;
@@ -49,35 +52,32 @@ public class User {
 		super();
 	}
 	
-	// Constructeur chargé sans l'id
-		public User(String mail, String password) {	
-			super();
-			this.mail = mail;
-			this.password = password;	
-		}
+	// Constructeur chargé sans l'id et listeRoles
 	
-	// Constructeur chargé sans l'id
-	public User(String mail, String password, List<Role> listeRoles) {	
+	public User(String mail, String password, boolean enabled) {
 		super();
 		this.mail = mail;
 		this.password = password;
-		this.listeRoles = listeRoles;	
+		this.enabled = enabled;
 	}
 
 	// Constructeur chargé avec tout
-	public User(int id, String mail, String password, List<Role> listeRoles) {
+	public User(int id, String mail, String password, boolean enabled, List<Role> listeRoles) {
 		super();
 		this.id = id;
 		this.mail = mail;
 		this.password = password;
+		this.enabled = enabled;
 		this.listeRoles = listeRoles;
 	}
-
+	
 	/*_____________________ Getters et Setters ________________________*/
 	
 	public int getId() {
 		return id;
 	}
+
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -105,6 +105,14 @@ public class User {
 
 	public void setListeRoles(List<Role> listeRoles) {
 		this.listeRoles = listeRoles;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	/* ________________ Redéfinition de la méthode toString _________________ */
