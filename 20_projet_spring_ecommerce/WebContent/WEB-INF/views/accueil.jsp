@@ -55,7 +55,12 @@
 				<!-- =============== end carousel ========================== -->
 
 
-				<br /> <br />
+				<!-- =============== inclusion Barre recherche ==================== -->
+				<Br/>
+				<%@ include file="/resources/template/barre_recheche.jsp"%>
+				<Br/>
+				<!-- =============== end Barre recherche ========================== -->
+				
 				<div class="row">
 					<!-- =============== inclusion menu gauche ========================== -->
 
@@ -73,6 +78,23 @@
 					<!-- =============== début du Core ========================== -->
 
 					<div class="col-10 ">
+
+
+						<c:if test="${nom_client != null}">
+							<div class="row row justify-content-center">
+								<div class="col-8 ">
+									<div class="alert alert-dismissible alert-success">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<h5 align="center">
+											Bienvenue <strong>${nom_client}</strong> !
+										</h5>
+									</div>
+								</div>
+							</div>
+							<br />
+						</c:if>
+
+
 						<div class="container marketing">
 
 							<div class="row">

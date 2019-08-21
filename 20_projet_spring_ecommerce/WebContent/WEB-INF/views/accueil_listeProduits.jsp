@@ -56,7 +56,13 @@
 
 				<!-- =============== end carousel ========================== -->
 
-				<br /> <br />
+				<!-- =============== inclusion Barre recherche ==================== -->
+				<Br/>
+				<%@ include file="/resources/template/barre_recheche.jsp"%>
+				<Br/>
+				<!-- =============== end Barre recherche ========================== -->
+				
+				
 				<div class="row">
 					<!-- =============== inclusion menu gauche ========================== -->
 

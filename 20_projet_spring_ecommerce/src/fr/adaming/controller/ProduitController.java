@@ -75,7 +75,7 @@ public class ProduitController {
 		produitManager.addProduit(produit7);
 		
 		return "testProduit";
-	}
+	}	
 	
 	@RequestMapping(value = "/produit/liste", method = RequestMethod.GET)
 	public String listeProduitsBDD(ModelMap modelDonnees) {

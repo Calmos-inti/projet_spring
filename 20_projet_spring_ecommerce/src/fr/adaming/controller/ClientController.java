@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fr.adaming.dao.IRoleDao;
-import fr.adaming.dao.IUserDao;
 import fr.adaming.model.Client;
 import fr.adaming.model.Role;
 import fr.adaming.model.User;
