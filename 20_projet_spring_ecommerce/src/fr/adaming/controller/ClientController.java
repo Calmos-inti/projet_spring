@@ -37,10 +37,10 @@ public class ClientController {
 	public void setUserServ(UserServiceImpl userServ) {
 		this.userServ = userServ;
 	}
-	
+
 	@Autowired
 	IRoleService roleService;
-	
+
 	public void setRoleDao(IRoleService roleService) {
 		this.roleService = roleService;
 	}
@@ -61,14 +61,14 @@ public class ClientController {
 		clServ.addClientService(client2);
 		clServ.addClientService(client3);
 		clServ.addClientService(client4);
-		
+
 		int idSuperAdmin = clServ.addClientService(superAdmin);
-		
+
 		Role role1 = new Role();
 		role1.setRoleName("ROLE_PRODUIT");
 		role1.setUser(clServ.getClientService(idSuperAdmin));
 		roleService.addRoleService(role1);
-		
+
 		Role role2 = new Role();
 		role2.setRoleName("ROLE_CATEGORIE");
 		role2.setUser(clServ.getClientService(idSuperAdmin));
@@ -82,6 +82,14 @@ public class ClientController {
 		System.out.println("> Client à l'id 1: " + clientFind);
 		System.out.println("---------------------------------------------------");
 
+		// ================== TEST GET CLIENT =================================
+
+		Client clientFind2 = clServ.getClientbyMailService(superAdmin.getMail());
+
+		System.out.println("---------------------get by mail ------------------");
+		System.out.println("> Client avec le mail a@a: " + clientFind2);
+		System.out.println("---------------------------------------------------");
+
 		// ================== TEST GETALL CLIENT =================================
 
 		List<Client> listeClient = clServ.getAllClientService();
@@ -93,14 +101,14 @@ public class ClientController {
 		System.out.println("---------------------------------------------------");
 
 		// ================== TEST DELETE CLIENT =================================
-//		clServ.deleteClientService(2);
-//
-//		System.out.println("---------------------delete (id 2)-------------------");
-//		Client clientFind2 = clServ.getClientService(2);
-//
-//		System.out.println("---------------------get by id 2-------------------");
-//		System.out.println("> Client à l'id 2: " + clientFind2);
-//		System.out.println("---------------------------------------------------");
+		// clServ.deleteClientService(2);
+		//
+		// System.out.println("---------------------delete (id 2)-------------------");
+		// Client clientFind2 = clServ.getClientService(2);
+		//
+		// System.out.println("---------------------get by id 2-------------------");
+		// System.out.println("> Client à l'id 2: " + clientFind2);
+		// System.out.println("---------------------------------------------------");
 
 		// ================== TEST UPDATE CLIENT =================================
 
@@ -109,26 +117,26 @@ public class ClientController {
 		System.out.println("---------------------update (id 3) nom = 'Jean'-------------------");
 		clientFind3.setNom("Jean");
 		clServ.updateClientService(clientFind3);
-		
+
 		System.out.println("---------------------get by id 3-------------------");
 		System.out.println("> Client à l'id 3: " + clientFind3);
 		System.out.println("---------------------------------------------------");
-		
+
 		// ================== TEST CLIENT 1 =================================
 		Client clientout = clServ.getClientService(1);
-		
+
 		System.out.println("-----------------TEST : client 1-------------------");
 		System.out.println("> mail client 1 : " + clientout.getMail());
 		System.out.println("---------------------------------------------------");
-		
+
 		List<Role> listRole = clientout.getListeRoles();
-		
+
 		System.out.println("---------------------role client id=1-------------------");
 		for (Role role : listRole) {
 			System.out.println("> " + role);
 		}
 		System.out.println("---------------------------------------------------");
-		
+
 		// ================== TEST AJOUT USER =================================
 		User user1 = new User("user1@mail.com", "admin", true);
 		User user2 = new User("user2@mail.com", "admin", true);
@@ -159,14 +167,14 @@ public class ClientController {
 		System.out.println("---------------------------------------------------");
 
 		// ================== TEST DELETE USER =================================
-//		userServ.deleteUserService(6);
-//
-//		System.out.println("---------------------delete (id 6)-------------------");
-//		User userFind6 = userServ.getUserService(6);
-//
-//		System.out.println("---------------------get by id 6-------------------");
-//		System.out.println("> User à l'id 6: " + userFind6);
-//		System.out.println("---------------------------------------------------");
+		// userServ.deleteUserService(6);
+		//
+		// System.out.println("---------------------delete (id 6)-------------------");
+		// User userFind6 = userServ.getUserService(6);
+		//
+		// System.out.println("---------------------get by id 6-------------------");
+		// System.out.println("> User à l'id 6: " + userFind6);
+		// System.out.println("---------------------------------------------------");
 
 		// ================== TEST UPDATE USER =================================
 
