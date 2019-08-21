@@ -48,7 +48,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-				/WEB-INF/ecommerce-security.xml,
+				/WEB-INF/ecommerce-security.xml,  
 				/WEB-INF/applicationContext.xml,
 				/WEB-INF/ecommerce-servlet.xml		
 		</param-value>

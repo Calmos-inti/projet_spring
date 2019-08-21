@@ -62,10 +62,9 @@
 			</td>
 		</tr>
 	</table>
+	<br/>
+	<hr/>
 	
-	
-	<hr />
-	<br />
 	
 	<h3>login :</h3>
 	<a href="${pageContext.request.contextPath}/login.jsp">login</a>

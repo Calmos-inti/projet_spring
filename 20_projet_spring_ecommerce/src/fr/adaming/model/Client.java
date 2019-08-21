@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity (name="client")
 @DiscriminatorValue("1")
@@ -20,6 +23,16 @@ public class Client extends User {
 
 	@Column(name = "telephone")
 	private String telephone;
+	
+	
+	
+	/* _____________________ Association (UML) ________________________ */
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="client")
+	private List<Commande> listeCommandes;
+	
+	@OneToOne
+	private Panier panier;
 
 	/* _____________________ Constructeurs ________________________ */
 
@@ -62,11 +75,35 @@ public class Client extends User {
 		this.telephone = telephone;
 	}
 
+	public List<Commande> getListeCommandes() {
+		return listeCommandes;
+	}
+
+	public void setListeCommandes(List<Commande> listeCommandes) {
+		this.listeCommandes = listeCommandes;
+	}
+
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
+
+	
 	/* ________________ Redéfinition de la méthode toString _________________ */
 	
 	@Override
 	public String toString() {
-		return "Client [nom=" + nom + ", adresse=" + adresse + ", telephone=" + telephone + "]";
+		return "Client [nom=" + nom + ", adresse=" + adresse + ", telephone=" + telephone + ", listeCommandes="
+				+ listeCommandes + ", panier=" + panier + "]";
 	}
 
+
+	
+	
+	
+
+	
 }

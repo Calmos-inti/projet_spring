@@ -75,6 +75,7 @@
 		</div>
 	</nav>
 
+<!-- ///////////////////////panier ////////////////////////////////// -->
 
 	<div id="panier" class="collapse">
 		<div class="container">

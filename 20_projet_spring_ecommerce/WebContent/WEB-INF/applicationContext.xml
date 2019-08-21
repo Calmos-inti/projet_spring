@@ -73,6 +73,9 @@
  				<value>fr.adaming.model.Role</value>
  				<value>fr.adaming.model.Produit</value>
  				<value>fr.adaming.model.Categorie</value>
+ 				<value>fr.adaming.model.Panier</value>
+ 				<value>fr.adaming.model.Commande</value>
+ 				<value>fr.adaming.model.LignePanier</value>
 			</list>
 		</property>		
 	</bean>
