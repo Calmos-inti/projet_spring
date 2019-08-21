@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
@@ -121,6 +122,11 @@ public class ProduitController {
 		
 		data.put("produitCommand", produit);
 		
+		//ajout de la liste de catégories
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+		data.put("liste_categories", listeCategories);
+		
 		// Etape 2 : cration nom logique vue + renvoi du ModelandView
 		String nomVue = "ajouter_produit";
 		
@@ -144,11 +150,20 @@ public class ProduitController {
 	@RequestMapping(value="/produit/updateform", method=RequestMethod.GET)
 	public ModelAndView setUpFormulaireUpdate(@RequestParam("fonctId") int pIdFonc) {
 		
+		//Etape 1 : création de l'objet à retourner pour les données
+		Map<String, Object> data = new HashMap<String, Object>();
+		
 		//Etape 1 : récupération de la catégorie à modifier (via son ID) 
 		Produit produitUpdate = produitManager.getProduit(pIdFonc);
+		data.put("produitUpCommand", produitUpdate);
+		
+		//ajout de la liste de catégories
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+		data.put("liste_categories", listeCategories);
 		
 		//Etape 2 : redirection vers la page de modif + Envoi du fonctionnaire  pour modifier la catégorie
-		return new ModelAndView("update_produit", "produitUpCommand", produitUpdate);	
+		return new ModelAndView("update_produit", data);	
 	} 
 	
 

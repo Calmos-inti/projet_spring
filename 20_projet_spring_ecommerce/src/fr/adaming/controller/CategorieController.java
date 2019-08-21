@@ -86,6 +86,10 @@ public class CategorieController {
 			
 			data.put("categorieCommand", categorie);
 			
+			List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+			data.put("liste_categories", listeCategories);
+			
 			// Etape 2 : cration nom logique vue + renvoi du ModelandView
 			String nomVue = "ajouter_categorie";
 			

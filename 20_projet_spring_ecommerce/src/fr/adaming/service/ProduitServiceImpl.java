@@ -50,4 +50,10 @@ public class ProduitServiceImpl implements IProduitService{
 		return produitDao.getAllProduit();
 	}
 
+
+	@Override
+	public int associateProduit(Produit pProduit) {
+		return produitDao.associateProduit(pProduit);
+	}
+
 }

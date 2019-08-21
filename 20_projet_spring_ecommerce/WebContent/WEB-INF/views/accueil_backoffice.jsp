@@ -6,8 +6,6 @@
 
 <!-- taglib de Spring Security -->
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
-
-  <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,11 +42,13 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
+<br/>
+		<div align="center">
+		<h1>
+		Administration Manager</h1></div>
 			<br/>
-		<div align="center"><h1>
-		Administration Manager produits</h1></div>
 			<br/>
-			<br/>
+		
 		
 				<!-- =============== inclusion menu gauche ========================== -->
 <div class="row">
@@ -57,81 +57,18 @@
 						<%@ include file="/resources/template/menu_vertical_gauche.jsp"%>
 
 					</div>
-					<div class="col-1"></div>
-<div class="col-5" style="background-color:lightgrey" >
-<br/>
-		<div align="center"><h3 style="color: darkblue">Ajout d'une nouvelle catégorie</h3></div>
-		<br/>
-		<br/>
-		<form:form modelAttribute="categorieCommand" action="categorie/add" method="post">
-			
-			<table width="60%" align="center" cellpadding="6" >
-				
-				<tr>
-				
-					<td colspan="3" align="center"> <form:label path="nomCategorie"> Nom :</form:label> </td>
-					<td>
-						<form:input path="nomCategorie"/>
-					</td>
-				
-				</tr>
-				<tr>
-				
-					<td colspan="3" align="center"> <form:label path="description"> Description :</form:label> </td>
-					<td>
-						<form:textarea path="description"/>
-					</td>
-				
-				</tr>
-			
-				<tr>
-				
-					<td colspan="3" align="center"> <form:label for="photo" path="photo"> Photo :</form:label> </td>
-					<td>
-						<form:input path="photo" type="file"/>
-					</td>
-				
-				</tr>
-				
-				<!-- bouton -->
-				
-				<tr>
-					<td colspan="3">
-						<input type="submit" type="button" class="btn btn-success" value="Ajouter cette nouvelle catégorie"/>
-					</td>
-				</tr>
-			</table>
-		</form:form>
+<div class="col-10" align="center">
+		
+AJOUTER ICI LA LISTE DES COMMANDES !!!
+	
+
+</div>
 	</div>
-	<div class="col-1"></div>
-					<div class="col-3">
-					
-					<p align="center">Mémento : Liste
-			des catégories</p>
-
-		<table cellspacing="0" cellpadding="6" width="100%" border="1px">
-			<tr bgcolor="grey" style="color: white;">
-				<th>Id</th>
-				<th>Nom</th>
-			</tr>
-
-			<c:forEach items="${liste_categories}" var="fonct">
-				<tr bgcolor="white">
-					<td><b>${fonct.idCategorie}</b></td>
-					<td>${fonct.nomCategorie}</td>
-				</tr>
-			
-			</c:forEach>
-
-		</table>
-					</div>
-					
-</div>
-</div>
-</div>
-</div>
-
-	<br />
+	</div>
+	</div>
+	</div>
+	
+		<br />
 	<br />
 	<!-- =============== inlusion du footer ========================== -->
 	<%@ include file="/resources/template/footer.jsp"%>
