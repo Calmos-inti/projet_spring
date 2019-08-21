@@ -15,7 +15,7 @@
 		
 		<!-- Formulaire -->
 		
-		<form:form modelAttribute="categorieUpCommand" action="${pageContext.request.contextPath}/categorie/update" method="post">
+		<form:form modelAttribute="categorieUpCommand" enctype="multipart/form-data" action="${pageContext.request.contextPath}/categorie/update" method="post">
 			
 			<table width="100%" align="center">
 				
@@ -41,9 +41,9 @@
 				<!-- champ fonction -->
 				<tr>
 				
-					<td> <form:label path="photo"> Photo :</form:label> </td>
+					<td> <form:label for="photo" path="photo"> Photo :</form:label> </td>
 					<td>
-						<form:input path="photo"/>
+						<form:input type="file" path="photo"/>
 					</td>
 				
 				</tr>

@@ -35,7 +35,7 @@
 				<tr bgcolor="lightyellow">
 					<td><b>${fonct.idCategorie}</b></td>
 					<td>${fonct.nomCategorie}</td>
-					<td>${fonct.photo}</td>
+					<td><img src="${pageContext.request.contextPath}/myImage/imageCategorieDisplay?id=${fonct.photo}"/></td>
 					<td>${fonct.description}</td>
 
 					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
@@ -55,6 +55,19 @@
 
 		</table>
 
+		<br/>
+		<br/>
+		<br/>
+		
+			<table>
+
+		<tr>
+			<td align="left">Partie Produit</td>
+
+			<td align="right"><a href="produit/liste">Lien</a> 
+			</td>
+		</tr>
+	</table>
 
 	</div>
 

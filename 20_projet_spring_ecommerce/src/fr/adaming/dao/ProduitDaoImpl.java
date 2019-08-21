@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -57,7 +58,17 @@ public class ProduitDaoImpl implements IProduitDao{
 	@Override
 	public List<Produit> getAllProduit() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("FROM produit c").list();
+		return session.createQuery("FROM produit p").list();
+	}
+
+	@Transactional
+	@Override
+	public int associateProduit(Produit pProduit) {
+		Session session = sessionFactory.getCurrentSession();
+		Query req = session.createQuery("UPDATE produit p SET id_categorie=?1 WHERE id_produit=?2");
+		req.setParameter(1, pProduit.getCategorie().getIdCategorie());
+		req.setParameter(2, pProduit.getIdProduit());
+		return (int) req.getSingleResult();
 	}
 
 }

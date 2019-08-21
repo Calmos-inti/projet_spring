@@ -13,7 +13,7 @@
 
 <div>
 		<h1 style="background-color: lightgreen; color: darkgreen">Ajout d'une nouvelle catégorie</h1>
-		<form:form modelAttribute="categorieCommand" action="categorie/add" method="post">
+		<form:form modelAttribute="categorieCommand" enctype="multipart/form-data" action="categorie/add" method="post" >
 			
 			<table width="100%">
 				
@@ -28,9 +28,9 @@
 				
 				<tr>
 				
-   		<td> <form:label path="photo"> Photo :</form:label> </td>
+   		<td> <form:label for="photo" path="photo"> Photo :</form:label> </td>
 					<td>
-						<form:input path="photo"/>
+						<form:input type="file" path="photo"/>
 					</td>
 					
 				

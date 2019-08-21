@@ -93,5 +93,7 @@
 		<property name="sessionFactory" ref="sessionFactoryBean" />
 	
 	</bean>
+	
+
 
 </beans>
