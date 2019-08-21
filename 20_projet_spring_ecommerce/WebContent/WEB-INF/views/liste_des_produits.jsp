@@ -45,9 +45,10 @@
 <br/>
 		<div align="center">
 		<h1>
-		Administration Manager produits</h1></div>
+		Liste des produits</h1></div>
 			<br/>
 			<br/>
+		
 		
 				<!-- =============== inclusion menu gauche ========================== -->
 <div class="row">

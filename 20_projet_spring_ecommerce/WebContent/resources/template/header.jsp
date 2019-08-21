@@ -15,15 +15,12 @@
 
 				<!-- à faire : rendre la balise accessible uniquement au 'ROLE_PRODUIT' -->
 				
+				<s:authorize access="hasRole('ROLE_PRODUIT')">
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/accueil_backoffice">Administration Produits</a></li>
+</s:authorize>
+			
 				
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/produit/liste/">Manager
-						Produit</a></li>
-
-				<!-- à faire : rendre la balise accessible uniquement au 'ROLE_CATEGORIE' -->
-				
-				<s:authorize access="hasRole('ROLE_CATEGORIE')">
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/categorie/liste/">Manager
-						Catégorie</a></li></s:authorize>
+			
 			</ul>
 			<!-- end coté gauche -->
 
