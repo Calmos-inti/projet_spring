@@ -86,7 +86,7 @@
 				</h4>
 				<br />
 				<button type="button" class="btn btn-outline-primary btn-lg"
-					onclick="location.href='#'">Créer un Compte</button>
+					onclick="location.href='${pageContext.request.contextPath}/accueil/creerCompte'">Créer un Compte</button>
 
 				<br />
 				<p class="mt-5 mb-3 text-muted">&copy; 2019 AKC Shop, Inc.</p>
