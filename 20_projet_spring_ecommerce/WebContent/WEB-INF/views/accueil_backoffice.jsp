@@ -45,7 +45,7 @@
 <br/>
 		<div align="center">
 		<h1>
-		Liste des produits</h1></div>
+		Administration Manager</h1></div>
 			<br/>
 			<br/>
 		
@@ -58,50 +58,8 @@
 
 					</div>
 <div class="col-10" align="center">
-		<table cellspacing="0" cellpadding="10" width="100%">
-			
-			
-			<tr bgcolor="grey" style="color: white"; align="center">
-				<th>Id</th>
-				<th>Catégorie</th>
-				<th>Désignation</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Photo</th>
-				<th colspan="3">Operations</th>
-			</tr>
-
-			<!-- attribut_liste_foncts = listeFonctionnaires -->
-			<c:forEach items="${liste_produits}" var="fonct">
-				<tr bgcolor="lightyellow">
-					<td><b>${fonct.idProduit}</b></td>
-					<td><u>${fonct.categorie.nomCategorie}</u></td>
-					<td><i>${fonct.designation}</i></td>
-					<td>${fonct.description}</td>
-					<td><b>${fonct.prix}</b></td>
-					<td>${fonct.quantite}</td>
-					<td><img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${fonct.idProduit}"/></td>
-					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
-					<td><a
-						href="${pageContext.request.contextPath}/produit/delete/${fonct.idProduit}"><img src="${pageContext.request.contextPath}/../../images/iconeSupprimer.png" alt="supprimer"/></a>
-					</td>
-					
 		
-					<td>
-						<a href="${pageContext.request.contextPath}/produit/updateform?fonctId=${fonct.idProduit}">Modifier</a>
-					</td>	
-							
-				</tr>
-				
-			
-			</c:forEach>
-
-		</table>
-		<br/>
-		<br/>
-		<br/>
-		
+AJOUTER ICI LA LISTE DES COMMANDES !!!
 	
 
 </div>

@@ -174,5 +174,13 @@ public class AccueilController {
         
 	    return "accueil";
 	}
+	@RequestMapping(value = "/accueil_backoffice", method = RequestMethod.GET)
+	public String allerAccueilBackOffice (ModelMap modelDonnees) {
+
+		infoMenuGauche(modelDonnees);
+
+		return "accueil_backoffice";
+	}
+	
 
 }

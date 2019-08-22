@@ -11,6 +11,7 @@ public interface IProduitDao {
 	public void deleteProduit (int pIdProduit);
 	public Produit getProduit(int pIdProduit);
 	public List<Produit> getAllProduit();
+	public int associateProduit (Produit pProduit);
 	
 	/*--------------------------------------------------------*/
 	

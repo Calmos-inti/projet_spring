@@ -11,5 +11,6 @@ public interface ICategorieDao {
 	public void deleteCategorie (int pIdCategorie);
 	public Categorie getCategorie (int pIdCategorie);
 	public List<Categorie> getAllCategories();
+	
 
 }

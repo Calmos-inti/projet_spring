@@ -40,8 +40,10 @@ public class ClientServiceImpl implements IClientService {
 		role.setUser(clientDao.getClientDao(pIdClient));
 		roleDao.addRoleDao(role);
 		
-		// Instanciation du Panier et association avec client avec pClient.setPanier( new Panier() )
+		// Instanciation du Panier et association avec client avec :
 		
+		//  new Panier() + l'ajouter dans la bdd
+		// pClient.setPanier( )
 		
 		return pIdClient;
 	}

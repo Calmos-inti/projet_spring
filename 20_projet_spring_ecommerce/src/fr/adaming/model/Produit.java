@@ -38,7 +38,7 @@ public class Produit {
 	@Column(name = "selection")
 	private boolean selection;
 	
-	@Column(name = "photo")
+	@Column(name = "photo", columnDefinition="longblob")
 	private byte[] photo;
 
 	// transformation de l'association UML en Java

@@ -1,5 +1,6 @@
 package fr.adaming.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
@@ -121,6 +124,11 @@ public class ProduitController {
 		
 		data.put("produitCommand", produit);
 		
+		//ajout de la liste de catégories
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+		data.put("liste_categories", listeCategories);
+		
 		// Etape 2 : cration nom logique vue + renvoi du ModelandView
 		String nomVue = "ajouter_produit";
 		
@@ -129,12 +137,22 @@ public class ProduitController {
 	}
 	
 	@RequestMapping(value="/produit/add", method=RequestMethod.POST)
-	public String addCategorieBdd(@ModelAttribute("produitCommand") Produit pProduit, ModelMap modeleDonnees) {
+	public String addCategorieBdd(
+		 @RequestParam("photo") MultipartFile photo, @RequestParam("designation") String designation, @RequestParam("idCategorie") Integer idCategorie, 
+			@RequestParam("description") String description, @RequestParam("prix") Double prix,
+			@RequestParam("quantite") Integer quantite, ModelMap modelDonnees) throws IOException {
 		
-		produitManager.addProduit(pProduit);
+
+		
+		byte[] photoBytes = photo.getBytes();
+		
+		Produit produit = new Produit(designation, description, prix, quantite, true, photoBytes);
+		produit.setCategorie(categorieManager.getCategorie(1));
+		
+		produitManager.addProduit(produit);
 		
 		//redirection vers liste_fonctionnaires
-		modeleDonnees.addAttribute("liste_produits", produitManager.getAllProduit());
+		modelDonnees.addAttribute("liste_produits", produitManager.getAllProduit());
 		
 		return "redirect:/produit/liste";
 		
@@ -144,11 +162,20 @@ public class ProduitController {
 	@RequestMapping(value="/produit/updateform", method=RequestMethod.GET)
 	public ModelAndView setUpFormulaireUpdate(@RequestParam("fonctId") int pIdFonc) {
 		
+		//Etape 1 : création de l'objet à retourner pour les données
+		Map<String, Object> data = new HashMap<String, Object>();
+		
 		//Etape 1 : récupération de la catégorie à modifier (via son ID) 
 		Produit produitUpdate = produitManager.getProduit(pIdFonc);
+		data.put("produitUpCommand", produitUpdate);
+		
+		//ajout de la liste de catégories
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+		data.put("liste_categories", listeCategories);
 		
 		//Etape 2 : redirection vers la page de modif + Envoi du fonctionnaire  pour modifier la catégorie
-		return new ModelAndView("update_produit", "produitUpCommand", produitUpdate);	
+		return new ModelAndView("update_produit", data);	
 	} 
 	
 
