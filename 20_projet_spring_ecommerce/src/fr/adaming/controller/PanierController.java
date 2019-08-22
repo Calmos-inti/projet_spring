@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import fr.adaming.model.Panier;
+import fr.adaming.model.Produit;
 import fr.adaming.service.IPanierService;
 
 public class PanierController {
@@ -109,27 +110,8 @@ public class PanierController {
 		
 	}
 	
-	@RequestMapping(value="/panier/updateform", method=RequestMethod.GET)
-	public ModelAndView setUpFormulaireUpdate(@RequestParam("panierId") int pIdPan) {
-		
-		//Etape 1 : récupération de la catégorie à modifier (via son ID) 
-		Panier panierUpdate = panierManager.getPanierService(pIdPan);
-		
-		//Etape 2 : redirection vers la page de modif + Envoi du panier  
-		return new ModelAndView("update_panier", "panierUpCommand", panierUpdate);	
-	} 
-	
-
-	@RequestMapping(value="/panier/update", method=RequestMethod.POST)
-	public String updatePanierBDD(@ModelAttribute("panierUpCommand") Panier panierUpdate, ModelMap modeleDonnes) {
-		
-		panierManager.updatePanierService(panierUpdate);
-		
-		// 2. recup de la liste des paniers dans la bdd
-		modeleDonnes.addAttribute("liste_paniers", panierManager.getAllPanierService());
-		
-		return "redirect:/panier/liste";
+	@RequestMapping(value="/panier/addProduit", method=RequestMethod.POST)
+	public void addProduitPanier(Produit p, int quantite) {
 		
 	}
-
 }

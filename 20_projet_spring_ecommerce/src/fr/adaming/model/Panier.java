@@ -1,6 +1,8 @@
 package fr.adaming.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import fr.adaming.controller.ProduitPanier;
 
 @Entity (name="panier")
 @Table(name="paniers")
@@ -26,6 +30,8 @@ public class Panier {
 	
 	@Column (name ="total")
 	private int total;
+	
+	
 	
 	//* _____________________ Association (UML) ________________________ */
 	
