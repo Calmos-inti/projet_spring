@@ -47,6 +47,10 @@ public class Produit {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "categorie_id", nullable = false) 
 	private Categorie categorie;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="lignePanier_id",nullable = false)
+	private LignePanier lignePanier;
 
 	/* _____________________ Constructeurs ________________________ */
 

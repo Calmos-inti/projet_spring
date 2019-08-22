@@ -21,6 +21,7 @@ public class Panier {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_panier")
 	private int id;
 	
 	@Column (name ="total")
