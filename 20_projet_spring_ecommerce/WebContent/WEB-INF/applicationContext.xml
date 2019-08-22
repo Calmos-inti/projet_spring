@@ -8,66 +8,79 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- ==================================================================== -->
 	<!-- ===== Association des requetes aux controllers spring mvc ========== -->
 	<!-- ==================================================================== -->
-	<mvc:annotation-driven/>
-	
+	<mvc:annotation-driven />
+
 	<!-- ==================================================================== -->
 	<!-- =========== Mapping du fichier resources (Bootstrap) =============== -->
 	<!-- ==================================================================== -->
-	
-	<mvc:resources mapping="/resources/**" location="/resources/bootstrap-Litera" />
-	
+
+	<mvc:resources mapping="/resources/**"
+		location="/resources/bootstrap-Litera" />
+
 	<!-- ==================================================================== -->
 	<!-- ===== Activation de la détection automatique des beans spring ====== -->
 	<!-- ==================================================================== -->
-	
-	<context:component-scan base-package="fr.adaming"/>
-	
+
+	<context:component-scan
+		base-package="fr.adaming" />
+
 	<!-- ==================================================================== -->
 	<!-- ======= Emplacement du fichier de propriété (db.properties) ======== -->
 	<!-- ==================================================================== -->
-	
-	<context:property-placeholder location="/WEB-INF/db.properties"/>
-	
+
+	<context:property-placeholder
+		location="/WEB-INF/db.properties" />
+
 	<!-- ==================================================================== -->
 	<!-- ================= Déclaration du bean de la DataSource ============= -->
 	<!-- ==================================================================== -->
-	
-	<bean id="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	
+
+	<bean id="dataSourceBean"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
 		<!-- Injections des infos de connexions à la bdd -->
 		<property name="driverClassName" value="${db.diverClass}" />
-		<property name="url" value="${db.url}"/>
+		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.user}" />
 		<property name="password" value="${db.password}" />
-	
+
 	</bean>
+	
+	<!-- ==================================================================== -->
+	<!-- ==== Déclaration du bean multipartResolver (pour les images) ======= -->
+	<!-- ==================================================================== -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
 	<!-- ==================================================================== -->
 	<!-- ============== Déclaration du bean de la SessionFactory ============ -->
 	<!-- ==================================================================== -->
-	
-	<!-- NB : l'implémentation de la SessionFacctory d'Hibernate en spring est LocalSessionFactoryBean -->
-	<bean id="sessionFactoryBean" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-	
+
+	<!-- NB : l'implémentation de la SessionFacctory d'Hibernate en spring est 
+		LocalSessionFactoryBean -->
+	<bean id="sessionFactoryBean"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
 		<!-- 1. Injection du Bean de la DataSource dans la sessionFactory -->
 		<property name="dataSource" ref="dataSourceBean" />
-		
+
 		<!-- 2. Les propriéts d'Hibernate -->
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${db.dialect}</prop>
 				<prop key="hibernate.show_sql">${db.showSql}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${db.hbm2ddl.auto}</prop>
-			</props>		
+			</props>
 		</property>
-		
+
 		<!-- 3. déclaration des fichiers des classes annotées -->
 		<property name="annotatedClasses">
 			<list>
+<<<<<<< HEAD
  				<value>fr.adaming.model.Client</value>
  				<value>fr.adaming.model.User</value>
  				<value>fr.adaming.model.Role</value>
@@ -76,27 +89,38 @@
  				<value>fr.adaming.model.Panier</value>
  				<value>fr.adaming.model.Commande</value>
  				<value>fr.adaming.model.LignePanier</value>
+=======
+				<value>fr.adaming.model.Client</value>
+				<value>fr.adaming.model.User</value>
+				<value>fr.adaming.model.Role</value>
+				<value>fr.adaming.model.Produit</value>
+				<value>fr.adaming.model.Categorie</value>
+>>>>>>> branch 'master' of https://github.com/Calmos-inti/projet_spring
 			</list>
-		</property>		
+		</property>
 	</bean>
-	
+
 	<!-- =================================================================================================== -->
-	<!-- === Activation de la détection automatique des annotation des transaction ex : @transactional ===== -->
+	<!-- === Activation de la détection automatique des annotation des transaction 
+		ex : @transactional ===== -->
 	<!-- =================================================================================================== -->
-	
-	<tx:annotation-driven transaction-manager="transactionManagerBean"/>
-	
+
+	<tx:annotation-driven
+		transaction-manager="transactionManagerBean" />
+
 	<!-- ======================================================================================== -->
-	<!-- ===== Déclaration du bean du gestionnaires des transactions (transaction Manager) ====== -->
+	<!-- ===== Déclaration du bean du gestionnaires des transactions (transaction 
+		Manager) ====== -->
 	<!-- ======================================================================================== -->
-	
-	<bean id="transactionManagerBean" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-	
+
+	<bean id="transactionManagerBean"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+
 		<!-- injection du bean de la session factory dans le transaction Manager -->
 		<property name="sessionFactory" ref="sessionFactoryBean" />
-	
+
 	</bean>
-	
+
 
 
 </beans>

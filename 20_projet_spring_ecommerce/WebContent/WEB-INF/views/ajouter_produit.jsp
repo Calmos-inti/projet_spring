@@ -8,7 +8,7 @@
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
 
   <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -63,32 +63,32 @@
 		<div align="center"><h3 style="color: darkblue">Ajout d'un nouveau produit</h3></div>
 		<br/>
 		<br/>
-		<form:form modelAttribute="produitCommand" action="produit/add" method="post">
+		<form action="${pageContext.request.contextPath}/produit/add" method="post" enctype="multipart/form-data">
 			
 			<table width="60%" align="center" cellpadding="6" >
 				
 				<tr>
 				
-					<td colspan="3" align="center"> <form:label path="designation"> Designation :</form:label> </td>
+					<td colspan="3" align="center"> <label> Nom :</label> </td>
 					<td>
-						<form:input path="designation"/>
+						<input type ="text" name="designation"/>
 					</td>
 				
 				</tr>
 					<tr>
 				
-					<td colspan="3" align="center" > <form:label path="categorie.idCategorie"> Catégorie :</form:label> </td>
+					<td colspan="3" align="center" > <label> Catégorie :</label> </td>
 					<td>
-						<form:input path="categorie.idCategorie"/>
+						<input type="number" name="idCategorie"/>
 					</td>
 				
 				</tr>
 				
 				<tr>
 				
-   		<td colspan="3" align="center" > <form:label path="description"> Description :</form:label> </td>
+   		<td colspan="3" align="center" > <label> Description :</label> </td>
 					<td>
-						<form:textarea path="description" />
+						<textarea name="description" ></textarea>
 					</td>
 					
 				
@@ -96,45 +96,41 @@
 				
 				<tr>
 				
-					<td colspan="3" align="center"> <form:label path="prix"> Prix :</form:label> </td>
+					<td colspan="3" align="center"> <label> Prix :</label> </td>
 					<td>
-						<form:input path="prix"/>
+						<input type="number" name="prix"/>
 					</td>
 				
 				</tr>
 				
 				<tr>
 				
-					<td colspan="3" align="center"> <form:label path="quantite"> Quantité :</form:label> </td>
+					<td colspan="3" align="center"> <label > Quantité :</label> </td>
 					<td>
-						<form:input path="quantite"/>
+						<input type="number" name="quantite"/>
 					</td>
 				
 				</tr>
-				<tr>
-				<td colspan="3" align="center"></td>
-					<td> <form:hidden path="selection"/> 
-					</td>
 				
-				</tr>
 				<tr>
 				
-					<td colspan="3" align="center"> <form:label for="photo" path="photo"> Photo :</form:label> </td>
+					<td colspan="3" align="center"> 
+					<label > Photo :</label> </td>
 					<td>
-						<form:input path="photo" type="file"/>
+						<input name="photo" type="file"/>
 					</td>
 				
 				</tr>
 				
-				<!-- bouton -->
+				bouton
 				
 				<tr>
 					<td colspan="3">
-						<input type="submit" type="button" class="btn btn-success" value="Ajouter ce nouveau produit"/>
+						<button type="submit" class="btn btn-success">Ajouter ce produit</button>
 					</td>
 				</tr>
 			</table>
-		</form:form>
+		</form>
 	</div>
 			<div class="col-1"></div>
 					<div class="col-3">

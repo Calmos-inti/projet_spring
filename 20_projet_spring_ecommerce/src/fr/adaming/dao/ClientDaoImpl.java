@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +59,18 @@ public class ClientDaoImpl implements IClientDao{
 	public List<Client> getAllClientDao() {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createQuery("FROM client c").list();
+	}
+	
+	@Transactional (readOnly = true)
+	@Override
+	public Client getClientbyMailDao(String pMail) {
+
+	Session session = sessionFactory.getCurrentSession();
+	
+	Query query = sessionFactory.getCurrentSession().createQuery("FROM client c WHERE c.mail = :pMail");
+	query.setParameter("pMail", pMail);
+	
+    return  (Client) query.list().get(0);
 	}
 
 }

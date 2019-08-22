@@ -1,5 +1,6 @@
 package fr.adaming.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
@@ -135,12 +137,22 @@ public class ProduitController {
 	}
 	
 	@RequestMapping(value="/produit/add", method=RequestMethod.POST)
-	public String addCategorieBdd(@ModelAttribute("produitCommand") Produit pProduit, ModelMap modeleDonnees) {
+	public String addCategorieBdd(
+		 @RequestParam("photo") MultipartFile photo, @RequestParam("designation") String designation, @RequestParam("idCategorie") Integer idCategorie, 
+			@RequestParam("description") String description, @RequestParam("prix") Double prix,
+			@RequestParam("quantite") Integer quantite, ModelMap modelDonnees) throws IOException {
 		
-		produitManager.addProduit(pProduit);
+
+		
+		byte[] photoBytes = photo.getBytes();
+		
+		Produit produit = new Produit(designation, description, prix, quantite, true, photoBytes);
+		produit.setCategorie(categorieManager.getCategorie(1));
+		
+		produitManager.addProduit(produit);
 		
 		//redirection vers liste_fonctionnaires
-		modeleDonnees.addAttribute("liste_produits", produitManager.getAllProduit());
+		modelDonnees.addAttribute("liste_produits", produitManager.getAllProduit());
 		
 		return "redirect:/produit/liste";
 		

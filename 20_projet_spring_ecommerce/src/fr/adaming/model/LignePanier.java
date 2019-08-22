@@ -26,8 +26,12 @@ public class LignePanier {
 	@Column(name="quantite")
 	private int quantité;
 	
+	private double prix;
+	
 	//* _____________________ Association (UML) ________________________ */
 	
+
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy ="ligne_panier")
 	private List<Produit> listeProduit;
 	
@@ -58,6 +62,31 @@ public class LignePanier {
 		this.quantité = quantité;
 		this.listeProduit = listeProduit;
 	}
+	
+	
+	
+	
+
+	public LignePanier(int quantité, double prix, List<Produit> listeProduit, Panier panier) {
+		super();
+		this.quantité = quantité;
+		this.prix = prix;
+		this.listeProduit = listeProduit;
+		this.panier = panier;
+	}
+
+
+	
+	
+
+	public LignePanier(int quantité, double prix, List<Produit> listeProduit) {
+		super();
+		this.quantité = quantité;
+		this.prix = prix;
+		this.listeProduit = listeProduit;
+	}
+
+
 
 	/* _____________________ Getters et Setters ________________________ */
 
@@ -97,6 +126,27 @@ public class LignePanier {
 
 
 
+	public double getPrix() {
+		return prix;
+	}
+
+
+
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+
+
+
+	public Panier getPanier() {
+		return panier;
+	}
+
+
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
 	
 	
 	

@@ -1,22 +1,17 @@
 package fr.adaming.controller;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -163,19 +158,20 @@ public class AccueilController {
 	@RequestMapping(value = "/accueil/ajouterClient", method = RequestMethod.POST)
 	public String AddClient(@ModelAttribute("clientCommand") Client pClient, ModelMap modeleDonnees, HttpServletRequest request) {
 		
+		// récupération des infos pour le menu gauche
 		infoMenuGauche(modeleDonnees);
 		
 		pClient.setEnabled(true);
 		clientService.addClientService(pClient);
 	
 		modeleDonnees.addAttribute("nom_client", pClient.getNom());
-		
+			
 		// Auto connexion
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(pClient.getMail(), pClient.getPassword(), authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-		
+        
 	    return "accueil";
 	}
 	@RequestMapping(value = "/accueil_backoffice", method = RequestMethod.GET)

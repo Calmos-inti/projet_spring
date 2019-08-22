@@ -21,5 +21,7 @@ public interface IClientDao {
 	public Client getClientDao(int pIdClient);
 
 	public List<Client> getAllClientDao();
+	
+	public Client getClientbyMailDao(String pMail);
 
 }

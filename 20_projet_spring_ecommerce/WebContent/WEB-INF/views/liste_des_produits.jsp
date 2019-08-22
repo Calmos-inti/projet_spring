@@ -81,7 +81,7 @@
 					<td>${fonct.description}</td>
 					<td><b>${fonct.prix}</b></td>
 					<td>${fonct.quantite}</td>
-					<td>${fonct.photo}</td>
+					<td><img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${fonct.idProduit}"/></td>
 					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
 					<td><a
 						href="${pageContext.request.contextPath}/produit/delete/${fonct.idProduit}"><img src="${pageContext.request.contextPath}/../../images/iconeSupprimer.png" alt="supprimer"/></a>

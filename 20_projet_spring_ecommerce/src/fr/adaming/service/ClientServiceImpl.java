@@ -33,11 +33,18 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	public int addClientService(Client pClient) {
 		int pIdClient = clientDao.addClientDao(pClient);
+		
+		// Instanciation du role 'ROLE_CLIENT' et association avec client
 		Role role = new Role();
 		role.setRoleName("ROLE_CLIENT");
 		role.setUser(clientDao.getClientDao(pIdClient));
 		roleDao.addRoleDao(role);
-
+		
+		// Instanciation du Panier et association avec client avec :
+		
+		//  new Panier() + l'ajouter dans la bdd
+		// pClient.setPanier( )
+		
 		return pIdClient;
 	}
 
@@ -68,5 +75,14 @@ public class ClientServiceImpl implements IClientService {
 	public List<Client> getAllClientService() {
 		return clientDao.getAllClientDao();
 	}
-
+	
+	/**
+	 * Recheche de client par son adresse mail.
+	 * @param pMail : mail du client
+	 * @return Client : le premier client trouvé dans la BDD avec mail = pMail
+	 */
+	@Override
+	public Client getClientbyMailService(String pMail) {
+		return clientDao.getClientbyMailDao(pMail);
+	}
 }
