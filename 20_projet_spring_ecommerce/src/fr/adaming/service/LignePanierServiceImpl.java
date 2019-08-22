@@ -31,7 +31,7 @@ public class LignePanierServiceImpl implements ILignePanierService {
 
 	@Override
 	public int addLignePanierService(LignePanier pLignePanier) {
-	
+		pLignePanier.setPrix(pLignePanier.getQuantité()*pLignePanier.getProduit().getPrix());
 		return lignePanierDao.addLignePanierDao(pLignePanier);
 	}
 

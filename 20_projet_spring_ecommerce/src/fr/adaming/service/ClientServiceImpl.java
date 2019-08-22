@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.adaming.dao.IClientDao;
+import fr.adaming.dao.IPanierDao;
 import fr.adaming.dao.IRoleDao;
 import fr.adaming.model.Client;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Role;
 
 @Service
@@ -19,6 +21,9 @@ public class ClientServiceImpl implements IClientService {
 	
 	@Autowired
 	IRoleDao roleDao;
+	
+	@Autowired
+	IPanierDao panierDao;
 
 	// Setters de la dao pour injection Spring
 	public void setClientDao(IClientDao clientDao) {
@@ -28,8 +33,14 @@ public class ClientServiceImpl implements IClientService {
 	public void setRoleDao(IRoleDao roleDao) {
 		this.roleDao = roleDao;
 	}
+	
+	public void setPanierDao(IPanierDao panierDao) {
+		this.panierDao = panierDao;
+	}
+
 
 	/* ____________________ Méthodes du crude ________________________ */
+
 	@Override
 	public int addClientService(Client pClient) {
 		int pIdClient = clientDao.addClientDao(pClient);
@@ -42,8 +53,9 @@ public class ClientServiceImpl implements IClientService {
 		
 		// Instanciation du Panier et association avec client avec :
 		
-		//  new Panier() + l'ajouter dans la bdd
-		// pClient.setPanier( )
+		Panier panier = new Panier();
+		panier.setClient(clientDao.getClientDao(pIdClient));
+		panierDao.addPanierDao(panier);
 		
 		return pIdClient;
 	}

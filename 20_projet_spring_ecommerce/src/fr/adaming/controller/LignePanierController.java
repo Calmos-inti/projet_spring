@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.adaming.model.LignePanier;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ILignePanierService;
 import fr.adaming.service.IPanierService;
+import fr.adaming.service.IProduitService;
 
 @Controller
 public class LignePanierController {
@@ -36,28 +38,63 @@ public class LignePanierController {
 		this.panierManager = panierManager;
 	}
 	
+	@Autowired
+	private IProduitService produitManager;
+
+	// setter pour injection spring
+	public void setProduitManager(IProduitService produitManager) {
+		this.produitManager = produitManager;
+	}
 	
 	/* _____________________ TESTS LIGNE PANIER________________________________ */
 	
 	@RequestMapping(value="/ligne_panier/test")
 	public String tester() {
 		
+		
+		Produit produit1 = produitManager.getProduit(1);
+		Produit produit2 = produitManager.getProduit(2);
+		Produit produit3 = produitManager.getProduit(3);
+		Produit produit4 = produitManager.getProduit(4);
+		
+		
 		LignePanier lp1 = new LignePanier();
+		lp1.setProduit(produit1);
+		lp1.setQuantité(1);
 		lp1.setPanier(panierManager.getPanierService(1));
+		
 		LignePanier lp2 = new LignePanier();
-		lp2.setPanier(panierManager.getPanierService(2));
+		lp2.setProduit(produit2);
+		lp2.setQuantité(2);
+		lp2.setPanier(panierManager.getPanierService(1));
+		
 		LignePanier lp3 = new LignePanier();
-		lp3.setPanier(panierManager.getPanierService(3));
-//		LignePanier lp4 = new LignePanier(3, null);
-//		lp1.setPanier(panierManager.getPanierService(1));
+		lp3.setProduit(produit3);
+		lp3.setQuantité(3);
+		lp3.setPanier(panierManager.getPanierService(2));
+		
+		LignePanier lp4 = new LignePanier();
+		lp4.setProduit(produit4);
+		lp4.setQuantité(4);
+		lp4.setPanier(panierManager.getPanierService(3));
+		
 		
 		lignePanierManager.addLignePanierService(lp1);
 		lignePanierManager.addLignePanierService(lp2);
 		lignePanierManager.addLignePanierService(lp3);
-//		lignePanierManager.addLignePanierService(lp4);
+		lignePanierManager.addLignePanierService(lp4);
 		
 		return "testProduit";
 	}
+	
+	@RequestMapping(value="/commande/test")
+	public String testerCommande() {
+		
+			
+		return "testProduit";
+	}
+	
+	
 		
 		@RequestMapping(value = "/ligne_panier/liste", method = RequestMethod.GET)
 		public String listeLignePaniersBDD(ModelMap modelDonnees) {

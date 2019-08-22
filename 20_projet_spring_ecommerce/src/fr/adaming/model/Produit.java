@@ -1,5 +1,7 @@
 package fr.adaming.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -52,6 +55,10 @@ public class Produit {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="lignePanier_id",nullable = false)
 	private LignePanier lignePanier;
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="lignePanier_id",nullable = false)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "produit")
+	private List<LignePanier> listeLignePanier;
 
 	/* _____________________ Constructeurs ________________________ */
 
@@ -150,5 +157,15 @@ public class Produit {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+
+	public List<LignePanier> getListeLignePanier() {
+		return listeLignePanier;
+	}
+
+	public void setListeLignePanier(List<LignePanier> listeLignePanier) {
+		this.listeLignePanier = listeLignePanier;
+	}
+	
+	
 
 }

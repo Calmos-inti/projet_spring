@@ -2,15 +2,20 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 
@@ -21,8 +26,8 @@ public class Panier {
 	/* _____________________ Attributs ________________________ */
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_panier")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_panier")
 	private int id;
 	
 	@Column (name ="total")
@@ -33,9 +38,12 @@ public class Panier {
 	//* _____________________ Association (UML) ________________________ */
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="panier")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<LignePanier> listeLignePanier;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="client_Id",			
+				referencedColumnName="id_user")
 	private Client client;
 
 	
@@ -126,15 +134,15 @@ public class Panier {
 
 
 
-	public Client getIdClient() {
+	public Client getClient() {
 		return client;
 	}
 
 
 
 
-	public void setIdClient(Client idClient) {
-		this.client = idClient;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 
