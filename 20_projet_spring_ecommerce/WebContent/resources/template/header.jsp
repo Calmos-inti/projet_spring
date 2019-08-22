@@ -15,13 +15,13 @@
 
 				<!-- à faire : rendre la balise accessible uniquement au 'ROLE_PRODUIT' -->
 				
-				<s:authorize access="hasRole('ROLE_PRODUIT')">
-					<li class="nav-item"><span class="badge badge-warning mr-sm-2">Manager Produit</span></li>
-				</s:authorize>
 			
-				<s:authorize access="hasRole('ROLE_CATEGORIE')">
+					<li class="nav-item"><span class="badge badge-warning mr-sm-2" onclick="location.href='${pageContext.request.contextPath}/accueil_backoffice.jsp'">Manager Produit</span></li>
+			
+			
+				
 				<li class="nav-item"><span class="badge badge-danger mr-sm-2">Manager Catégorie</span></li>
-				</s:authorize>
+			
 			
 			</ul>
 			<!-- end coté gauche -->
@@ -44,7 +44,7 @@
 					</div></li>
 				<!-- end dropdown 'mon espace' -->
 
-				<s:authorize access="hasRole('ROLE_ANONYMOUS')">
+				
 					
 					<button type="button" class="btn btn-outline-primary mr-sm-2"
 						onclick="location.href='${pageContext.request.contextPath}/accueil/creerCompte'">S'inscrire</button>
@@ -54,15 +54,13 @@
 						onclick="location.href='${pageContext.request.contextPath}/login.jsp'">Se
 						Connecter</button>
 
-				</s:authorize>
-
-				<s:authorize access="hasAnyRole('ROLE_CLIENT', 'ROLE_PRODUIT')">
+		
 
 					<li class="nav-item" ><a class="nav-link text-danger" 
 						href="${pageContext.request.contextPath}/logout"><i
 							class="fas fa-power-off"></i> Se Déconnecter</a></li>
 
-				</s:authorize>
+				
 			</ul>
 			<!-- end coté droit -->
 		</div>

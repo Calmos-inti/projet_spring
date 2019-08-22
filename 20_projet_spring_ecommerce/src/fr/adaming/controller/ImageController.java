@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.adaming.model.Caroussel;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICarousselService;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
@@ -33,6 +35,13 @@ public class ImageController {
 
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
+	}
+	
+	@Autowired
+	private ICarousselService carousselService;
+	
+	public void setCarousselService(ICarousselService carousselService) {
+		this.carousselService = carousselService;
 	}
 
 	@RequestMapping(value = "/imageCategorieDisplay", method = RequestMethod.GET)
@@ -54,6 +63,39 @@ public class ImageController {
 
 		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
 		response.getOutputStream().write(produit.getPhoto());
+		response.getOutputStream().close();
+	}
+	
+	@RequestMapping(value = "/image1CarousselDisplay", method = RequestMethod.GET)
+	public void carousselImage1(@RequestParam("id") int itemId, HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
+
+		Caroussel caroussel = carousselService.getCarousselService(itemId);
+
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(caroussel.getPhoto());
+		response.getOutputStream().close();
+	}
+	
+	@RequestMapping(value = "/image2CarousselDisplay", method = RequestMethod.GET)
+	public void carousselImage2(@RequestParam("id") int itemId, HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
+
+		Caroussel caroussel = carousselService.getCarousselService(itemId);
+
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(caroussel.getPhoto2());
+		response.getOutputStream().close();
+	}
+	
+	@RequestMapping(value = "/image3CarousselDisplay", method = RequestMethod.GET)
+	public void carousselImage3(@RequestParam("id") int itemId, HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
+
+		Caroussel caroussel = carousselService.getCarousselService(itemId);
+
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(caroussel.getPhoto3());
 		response.getOutputStream().close();
 	}
 

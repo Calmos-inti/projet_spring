@@ -88,6 +88,7 @@
  				<value>fr.adaming.model.Panier</value>
  				<value>fr.adaming.model.Commande</value>
  				<value>fr.adaming.model.LignePanier</value>
+<value>fr.adaming.model.Caroussel</value>
 
 			</list>
 		</property>

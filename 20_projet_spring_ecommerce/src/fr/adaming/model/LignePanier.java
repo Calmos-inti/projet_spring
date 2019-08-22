@@ -34,9 +34,9 @@ public class LignePanier {
 	
 
 	// a faire : ManyToMany
-//	@OneToMany(fetch = FetchType.EAGER, mappedBy ="lignePanier")
-//	@Fetch(value = FetchMode.SUBSELECT)
-//	private List<Produit> listeProduit;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy ="lignePanier")
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Produit> listeProduit;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="panier_id",nullable=false)
