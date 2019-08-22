@@ -6,17 +6,12 @@
 		<ul class="navbar-nav mr-auto">
 
 			<!-- Tâches gestionnaire produit -->
-			<li class="nav-item active"><a class="nav-link" href="#">Gestion
+			<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/accueil_backoffice">Gestion
 					Commandes <span class="sr-only">(current)</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link" href="#">Nouveau
-					Produit</a></li>
-
 			<!-- Tâches gestionnaire catégorie -->
-			<li class="nav-item"><a class="nav-link" href="#">Nouvelle
-					Catégorie</a></li>
-
+			
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="dropdown07"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestion

@@ -2,7 +2,6 @@ package fr.adaming.controller;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,12 +16,10 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
-import fr.adaming.service.ProduitServiceImpl;
 
 @Controller
 @RequestMapping("/myImage")
 public class ImageController {
-
 
 	@Autowired
 	private ICategorieService categorieService;
@@ -33,30 +30,31 @@ public class ImageController {
 
 	@Autowired
 	private IProduitService produitService;
-	
+
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
 
-
 	@RequestMapping(value = "/imageCategorieDisplay", method = RequestMethod.GET)
-	  public void showImage(@RequestParam("id") int itemId, HttpServletResponse response,HttpServletRequest request) 
-	          throws ServletException, IOException{
+	public void showImage(@RequestParam("id") int itemId, HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
 
-		Categorie categorie= categorieService.getCategorie(itemId);
-	            
-	    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-	    response.getOutputStream().write(categorie.getPhoto());
-	    response.getOutputStream().close();
-}
+		Categorie categorie = categorieService.getCategorie(itemId);
+
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(categorie.getPhoto());
+		response.getOutputStream().close();
+	}
+
 	@RequestMapping(value = "/imageProduitDisplay", method = RequestMethod.GET)
-	  public void show2Image(@RequestParam("id") int itemId, HttpServletResponse response,HttpServletRequest request) 
-	          throws ServletException, IOException{
+	public void show2Image(@RequestParam("id") int itemId, HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
 
-		Produit produit= produitService.getProduit(itemId);
-	            
-	    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-	    response.getOutputStream().write(produit.getPhoto());
-	    response.getOutputStream().close();
-}
+		Produit produit = produitService.getProduit(itemId);
+
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(produit.getPhoto());
+		response.getOutputStream().close();
+	}
+
 }

@@ -1,8 +1,11 @@
 package fr.adaming.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 
 @Controller
@@ -60,8 +65,8 @@ public class CategorieController {
 
 		} 
 	
-		@RequestMapping(value = { "/categorie/delete/{pCategorieId}"}, method = RequestMethod.GET)
-		public String deleteCategorieBdd(@PathVariable("pCategorieId") int aCategorieId,
+		@RequestMapping(value = { "/categorie/delete"}, method = RequestMethod.GET)
+		public String deleteCategorieBdd(@RequestParam("idCategorie") int aCategorieId,
 				ModelMap modelDonnees) {
 
 			//Etape 1 : suppression de la catégorie depuis la BDD
@@ -71,8 +76,8 @@ public class CategorieController {
 			List<Categorie> listeCategorieBDD = categorieManager.getAllCategories();
 			modelDonnees.addAttribute("liste_categories", listeCategorieBDD);
 
-			// Etape 3 : Renvoi non logique + redirection
-			return "redirect:/categorie/liste";
+			// Etape 3 : Renvoi non logique
+			return "accueil";
 
 		} 
 
@@ -97,41 +102,68 @@ public class CategorieController {
 
 		}
 		
-		@RequestMapping(value="/categorie/add", method=RequestMethod.POST)
-		public String addCategorieBdd(@ModelAttribute("categorieCommand") Categorie pCategorie, ModelMap modeleDonnees) {
+		@RequestMapping(value = "/categorie/add", method = RequestMethod.POST)
+		public String addCategorieBdd(
+				@RequestParam("photo") MultipartFile photo,
+				@RequestParam("designation") String designation,
+				@RequestParam("description") String description, ModelMap modelDonnees) throws IOException {
+
+			byte[] photoBytes = photo.getBytes();
 			
-			categorieManager.addCategorie(pCategorie);
+			Categorie categorie = new Categorie(designation, photoBytes, description);
 			
-			//redirection vers liste_fonctionnaires
-			modeleDonnees.addAttribute("liste_categories", categorieManager.getAllCategories());
+			categorieManager.addCategorie(categorie);
 			
-			return "redirect:/categorie/liste";
-			
-		} 
+			/*______________récupération des info pour l'accueil______________________________*/
+			// Recupération de la liste des categories depuis la BDD
+			List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+			// Encapsulation de la liste dans l'objet ModelMap
+			modelDonnees.addAttribute("liste_categories", listeCategories);
+
+			return "accueil";
+
+		}
 		
 		
 		@RequestMapping(value="/categorie/updateform", method=RequestMethod.GET)
-		public ModelAndView setUpFormulaireUpdate(@RequestParam("fonctId") int pIdFonc) {
+		public String setUpFormulaireUpdate(@RequestParam("idCategorie") int pIdFonc, HttpServletRequest req) {
 			
 			//Etape 1 : récupération de la catégorie à modifier (via son ID) 
 			Categorie categorieUpdate = categorieManager.getCategorie(pIdFonc);
 			
-			//Etape 2 : redirection vers la page de modif + Envoi du fonctionnaire  pour modifier la catégorie
-			return new ModelAndView("update_categorie", "categorieUpCommand", categorieUpdate);	
+			req.setAttribute("categorie", categorieUpdate);
+			
+			
+			return "update_categorie";	
 		} 
 		
 
 		@RequestMapping(value="/categorie/update", method=RequestMethod.POST)
-		public String updateFonctionnaireBDD(@ModelAttribute("categorieUpCommand") Categorie categorieUpdate, ModelMap modeleDonnes) {
+		public String setUpFormulaireUpdate(
+				@RequestParam("photo") MultipartFile photo,
+				@RequestParam("nom") String nom,
+				@RequestParam("description") String description,
+				@RequestParam("idCategorie") Integer id	, ModelMap modelDonnees) throws IOException {
 			
-			categorieManager.updateCategorie(categorieUpdate);
+			byte[] photoBytes = photo.getBytes();
 			
-			// 2. recup de la liste des fonctionnaire dans la bdd
-			modeleDonnes.addAttribute("liste_categories", categorieManager.getAllCategories());
+			Categorie categorie = categorieManager.getCategorie(id);
+			categorie.setNomCategorie(nom);
+			categorie.setDescription(description);
+			categorie.setPhoto(photoBytes);
 			
-			return "redirect:/categorie/liste";
+			categorieManager.updateCategorie(categorie);
 			
-		}
+			/*______________récupération des info pour l'accueil______________________________*/
+			// Recupération de la liste des categories depuis la BDD
+			List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+			// Encapsulation de la liste dans l'objet ModelMap
+			modelDonnees.addAttribute("liste_categories", listeCategories);
+			
+			return "accueil";	
+		} 
 		
 	}
 

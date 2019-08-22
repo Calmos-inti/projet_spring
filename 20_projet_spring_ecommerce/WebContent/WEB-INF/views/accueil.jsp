@@ -47,7 +47,7 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
-			
+
 
 
 				<!-- =============== inclusion Carousel ========================== -->
@@ -57,11 +57,11 @@
 
 
 				<!-- =============== inclusion Barre recherche ==================== -->
-				<Br/>
+				<Br />
 				<%@ include file="/resources/template/barre_recheche.jsp"%>
-				<Br/>
+				<Br />
 				<!-- =============== end Barre recherche ========================== -->
-				
+
 				<div class="row">
 					<!-- =============== inclusion menu gauche ========================== -->
 
@@ -80,20 +80,19 @@
 
 					<div class="col-10 ">
 
-
-						<c:if test="${nom_client != null}">
-							<div class="row row justify-content-center">
-								<div class="col-8 ">
-									<div class="alert alert-dismissible alert-success">
-										<button type="button" class="close" data-dismiss="alert">&times;</button>
-										<h5 align="center">
-											Bienvenue <strong>${nom_client}</strong> !
-										</h5>
+						<s:authorize access="hasRole('ROLE_CATEGORIE')">
+							<div class="container">
+								<div class="row justify-content-center">
+									<div class="col-6 ">
+										<button
+											onclick="location.href='${pageContext.request.contextPath}/addCategorie'"
+											class="btn btn-outline-secondary btn-lg btn-block "
+											type="button">Ajouter une Catégorie</button>
 									</div>
 								</div>
 							</div>
 							<br />
-						</c:if>
+						</s:authorize>
 
 
 						<div class="container marketing">
@@ -104,22 +103,32 @@
 								<c:forEach items="${liste_categories}" var="categorie">
 
 									<div class="col-4">
-										<svg class="bd-placeholder-img rounded-circle" width="140"
-											height="140" xmlns="http://www.w3.org/2000/svg"
-											preserveAspectRatio="xMidYMid slice" focusable="false"
-											role="img" aria-label="Placeholder: 140x140">
-					<title>Placeholder</title><rect width="100%" height="100%"
-												fill="#777" />
-					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+										<div class="card" style="margin-bottom: 25px">
+											<div class="card-body">
+												<img
+													src="${pageContext.request.contextPath}/myImage/imageCategorieDisplay?id=${categorie.idCategorie}" />
 
-
-										<h3>${categorie.nomCategorie}</h3>
-										<p>${categorie.description}</p>
-										<p>
-											<a class="btn btn-info"
-												href="${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}"
-												role="button">Voir tous les articles &raquo;</a>
-										</p>
+												<h3>${categorie.nomCategorie}</h3>
+												<p>${categorie.description}</p>
+												<p>
+													<a class="btn btn-info"
+														href="${pageContext.request.contextPath}/accueil/liste_produit?idCategorie=${categorie.idCategorie}"
+														role="button">Voir tous les articles &raquo;</a>
+												</p>
+												
+												<s:authorize access="hasRole('ROLE_CATEGORIE')">
+												<p>
+													<a class="btn btn-warning"
+														href="${pageContext.request.contextPath}/categorie/updateform?idCategorie=${categorie.idCategorie}"
+														role="button">Modifier</a>
+																											<a class="btn btn-danger"
+														href="${pageContext.request.contextPath}/categorie/delete?idCategorie=${categorie.idCategorie}"
+														role="button">Supprimer</a>
+												</p>
+												</s:authorize>
+												
+											</div>
+										</div>
 									</div>
 									<br />
 								</c:forEach>

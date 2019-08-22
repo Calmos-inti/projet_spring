@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+
 <!-- taglib de jsp -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- taglib de Spring Security -->
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
 
-  <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -41,129 +41,127 @@
 	<!-- =============== inclusion du header ========================== -->
 	<%@ include file="/resources/template/header.jsp"%>
 	<!-- ============================================================== -->
+	<br />
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
-			<br/>
-		<div align="center"><h1>
-		Administration Manager produits</h1></div>
-			<br/>
-			<br/>
-		
-				<!-- =============== inclusion menu gauche ========================== -->
-<div class="row">
-					<div class="col-2">
 
-						<%@ include file="/resources/template/menu_vertical_gauche.jsp"%>
+				<!-- =============== inclusion Carousel ========================== -->
+				<%@ include file="/resources/template/carousel.jsp"%>
 
+				<!-- =============== end carousel ========================== -->
+
+				<!-- =============== inclusion Barre recherche ==================== -->
+				<Br />
+				<%@ include file="/resources/template/barre_recheche.jsp"%>
+				<Br />
+				<!-- =============== end Barre recherche ========================== -->
+
+				<form action="${pageContext.request.contextPath}/produit/add"
+					method="post" enctype="multipart/form-data">
+
+					<div class="row">
+						<div class="col-6">
+
+							<br />
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-2 col-form-label">Nom</label>
+
+								<div class="col-sm-7">
+									<input type="text" name="designation" class="form-control"
+										placeholder="Nom du produit" />
+								</div>
+
+							</div>
+
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-2 col-form-label">Catégorie</label>
+
+								<div class="col-sm-7">
+									<input type="text" class="form-control"
+										value="${categorie.nomCategorie}" readonly="readonly" /> <input
+										type="hidden" type="number" name="idCategorie"
+										value="${categorie.idCategorie}" />
+
+								</div>
+
+							</div>
+
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-2 col-form-label">Description</label>
+
+								<div class="col-sm-7">
+									<textarea class="form-control"
+										placeholder="Description du produit" name="description"
+										rows="3"></textarea>
+								</div>
+
+							</div>
+						</div>
+						<!-- end col-6 -->
+						<div class="col-6">
+
+
+							<br />
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-3 col-form-label">Prix</label>
+
+								<div class="col-sm-7">
+									<input type="number" name="prix" class="form-control"
+										placeholder="Prix du produit" />
+								</div>
+
+							</div>
+
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-3 col-form-label">Quantité</label>
+
+								<div class="col-sm-7">
+									<input type="number" name="quantite" class="form-control"
+										placeholder="Quantité initiale" />
+								</div>
+
+							</div>
+
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-3 col-form-label">Photo</label>
+
+								<div class="col-sm-7">
+									<input name="photo" type="file" />
+								</div>
+
+							</div>
+
+
+
+						</div>
+						<!-- end col-6 -->
 					</div>
-					<div class="col-1"></div>
-<div class="col-5" style="background-color:lightgrey" >
-<br/>
-		<div align="center"><h3 style="color: darkblue">Ajout d'un nouveau produit</h3></div>
-		<br/>
-		<br/>
-		<form action="${pageContext.request.contextPath}/produit/add" method="post" enctype="multipart/form-data">
-			
-			<table width="60%" align="center" cellpadding="6" >
-				
-				<tr>
-				
-					<td colspan="3" align="center"> <label> Nom :</label> </td>
-					<td>
-						<input type ="text" name="designation"/>
-					</td>
-				
-				</tr>
-					<tr>
-				
-					<td colspan="3" align="center" > <label> Catégorie :</label> </td>
-					<td>
-						<input type="number" name="idCategorie"/>
-					</td>
-				
-				</tr>
-				
-				<tr>
-				
-   		<td colspan="3" align="center" > <label> Description :</label> </td>
-					<td>
-						<textarea name="description" ></textarea>
-					</td>
-					
-				
-				</tr>
-				
-				<tr>
-				
-					<td colspan="3" align="center"> <label> Prix :</label> </td>
-					<td>
-						<input type="number" name="prix"/>
-					</td>
-				
-				</tr>
-				
-				<tr>
-				
-					<td colspan="3" align="center"> <label > Quantité :</label> </td>
-					<td>
-						<input type="number" name="quantite"/>
-					</td>
-				
-				</tr>
-				
-				<tr>
-				
-					<td colspan="3" align="center"> 
-					<label > Photo :</label> </td>
-					<td>
-						<input name="photo" type="file"/>
-					</td>
-				
-				</tr>
-				
-				bouton
-				
-				<tr>
-					<td colspan="3">
-						<button type="submit" class="btn btn-success">Ajouter ce produit</button>
-					</td>
-				</tr>
-			</table>
-		</form>
+					<!-- end row -->
+					<br /> <br />
+					<div class="row justify-content-center">
+						<div class="col-4">
+							<div class="form-group row justify-content-md-center">
+								<button class="btn btn-outline-primary btn-lg btn-block"
+									type="submit">Ajouter ce produit</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-			<div class="col-1"></div>
-					<div class="col-3">
-					
-					<p align="center">Mémento : Liste
-			des catégories</p>
-
-		<table cellspacing="0" cellpadding="6" width="100%" border="1px">
-			<tr bgcolor="grey" style="color: white;">
-				<th>Id</th>
-				<th>Nom</th>
-			</tr>
-
-			<c:forEach items="${liste_categories}" var="fonct">
-				<tr bgcolor="white">
-					<td><b>${fonct.idCategorie}</b></td>
-					<td>${fonct.nomCategorie}</td>
-				</tr>
-			
-			</c:forEach>
-
-		</table>
-					</div>
-					
-</div>
-</div>
-</div>
-</div>
 
 	<br />
 	<br />
 	<!-- =============== inlusion du footer ========================== -->
 	<%@ include file="/resources/template/footer.jsp"%>
-	
+
 </body>
 </html>

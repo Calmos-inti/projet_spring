@@ -88,7 +88,8 @@ public class AccueilController {
 
 		// Etape 2 : Encapsulation de la liste dans l'objet ModelMap
 		modelDonnees.addAttribute("liste_produits", listeProduit);
-
+		modelDonnees.addAttribute("id_categorie", pIdCategorie);
+		
 		return "accueil_listeProduits";
 	}
 

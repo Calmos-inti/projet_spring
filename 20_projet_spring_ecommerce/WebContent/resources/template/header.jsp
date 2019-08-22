@@ -16,25 +16,17 @@
 				<!-- à faire : rendre la balise accessible uniquement au 'ROLE_PRODUIT' -->
 				
 				<s:authorize access="hasRole('ROLE_PRODUIT')">
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/accueil_backoffice">Administration Produits</a></li>
-</s:authorize>
+					<li class="nav-item"><span class="badge badge-warning mr-sm-2">Manager Produit</span></li>
+				</s:authorize>
 			
-				
+				<s:authorize access="hasRole('ROLE_CATEGORIE')">
+				<li class="nav-item"><span class="badge badge-danger mr-sm-2">Manager Catégorie</span></li>
+				</s:authorize>
 			
 			</ul>
 			<!-- end coté gauche -->
 
 			<!-- coté droit -->
-			<!--  
-			<form class="form-inline" method="get"
-				action="${pageContext.request.contextPath}/accueil/recherche">
-				<input class="form-control form-control-sm mr-sm-2" type="text"
-					placeholder="Rechercher" name="mot">
-				<button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit">
-					<i class="fas fa-search"></i>
-				</button>
-			</form>
-			-->
 			<ul class="navbar-nav justify-content-end">
 
 				<li class="nav-item"><a class="nav-link" data-toggle="collapse"
