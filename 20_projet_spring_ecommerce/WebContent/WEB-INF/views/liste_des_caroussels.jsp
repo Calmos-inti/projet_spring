@@ -77,9 +77,9 @@
 					<td><img src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?id=${fonct.idCaroussel}"/></td>
 					<td><img src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?id=${fonct.idCaroussel}"/></td>
 					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
-					<td><a
+						 <s:authorize access="hasRole('ROLE_CATEGORIE')"><td><a
 						href="${pageContext.request.contextPath}/caroussel/delete/${fonct.idCaroussel}">Supprimer</a>
-					</td>	
+					</td></s:authorize>	
 							
 				</tr>
 				
