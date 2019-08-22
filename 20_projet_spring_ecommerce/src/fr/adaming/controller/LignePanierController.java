@@ -76,7 +76,7 @@ public class LignePanierController {
 			return "redirect:/ligne_panier/liste";
 		}
 		
-		
+		//lappli ne se lance pas
 		
 			
 	}
