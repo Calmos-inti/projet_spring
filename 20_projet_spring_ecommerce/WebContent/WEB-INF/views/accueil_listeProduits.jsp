@@ -121,7 +121,7 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-3">
-											<img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${produit.idProduit}"/>
+											<img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${produit.idProduit}" width="150px" height="150px"/>
 											
 										</div>
 

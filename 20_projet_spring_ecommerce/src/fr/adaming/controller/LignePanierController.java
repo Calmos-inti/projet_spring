@@ -3,15 +3,17 @@ package fr.adaming.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.adaming.model.LignePanier;
-import fr.adaming.model.Panier;
 import fr.adaming.service.ILignePanierService;
+import fr.adaming.service.IPanierService;
 
+@Controller
 public class LignePanierController {
 	
 	
@@ -25,23 +27,36 @@ public class LignePanierController {
 		this.lignePanierManager = lignePanierManager;
 	}
 	
+	@Autowired
+	private IPanierService panierManager;
+	
+	//setter pour injection spring
+
+	public void setPanierManager(IPanierService panierManager) {
+		this.panierManager = panierManager;
+	}
+	
 	
 	/* _____________________ TESTS LIGNE PANIER________________________________ */
 	
 	@RequestMapping(value="/ligne_panier/test")
 	public String tester() {
 		
-		LignePanier lp1 = new LignePanier(2, 15, null);
-		LignePanier lp2 = new LignePanier(1, 20, null);
-		LignePanier lp3 = new LignePanier(6, 45, null);
-		LignePanier lp4 = new LignePanier(3, 60, null);
+		LignePanier lp1 = new LignePanier();
+		lp1.setPanier(panierManager.getPanierService(1));
+		LignePanier lp2 = new LignePanier();
+		lp2.setPanier(panierManager.getPanierService(2));
+		LignePanier lp3 = new LignePanier();
+		lp3.setPanier(panierManager.getPanierService(3));
+//		LignePanier lp4 = new LignePanier(3, null);
+//		lp1.setPanier(panierManager.getPanierService(1));
 		
 		lignePanierManager.addLignePanierService(lp1);
 		lignePanierManager.addLignePanierService(lp2);
 		lignePanierManager.addLignePanierService(lp3);
-		lignePanierManager.addLignePanierService(lp4);
+//		lignePanierManager.addLignePanierService(lp4);
 		
-		return "testLignePanier";
+		return "testProduit";
 	}
 		
 		@RequestMapping(value = "/ligne_panier/liste", method = RequestMethod.GET)

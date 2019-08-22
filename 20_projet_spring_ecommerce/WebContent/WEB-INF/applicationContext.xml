@@ -80,7 +80,6 @@
 		<!-- 3. déclaration des fichiers des classes annotées -->
 		<property name="annotatedClasses">
 			<list>
-<<<<<<< HEAD
  				<value>fr.adaming.model.Client</value>
  				<value>fr.adaming.model.User</value>
  				<value>fr.adaming.model.Role</value>
@@ -89,13 +88,7 @@
  				<value>fr.adaming.model.Panier</value>
  				<value>fr.adaming.model.Commande</value>
  				<value>fr.adaming.model.LignePanier</value>
-=======
-				<value>fr.adaming.model.Client</value>
-				<value>fr.adaming.model.User</value>
-				<value>fr.adaming.model.Role</value>
-				<value>fr.adaming.model.Produit</value>
-				<value>fr.adaming.model.Categorie</value>
->>>>>>> branch 'master' of https://github.com/Calmos-inti/projet_spring
+
 			</list>
 		</property>
 	</bean>

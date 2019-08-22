@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.LignePanier;
 
+@Repository
 public class LignePanierDaoImpl implements ILignePanierDao {
 	
 	

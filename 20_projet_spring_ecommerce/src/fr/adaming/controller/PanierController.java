@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IPanierService;
 
+@Controller
 public class PanierController {
 	
 	
@@ -45,7 +47,7 @@ public class PanierController {
 		panierManager.addPanierService(panier2);
 		panierManager.addPanierService(panier3);
 		
-		return "testPanier";
+		return "testProduit";
 	}
 	
 	@RequestMapping(value = "/panier/liste", method = RequestMethod.GET)
@@ -78,7 +80,7 @@ public class PanierController {
 		modelDonnees.addAttribute("liste_paniers", listePanierBDD);
 
 		// Etape 3 : Renvoi non logique + redirection
-		return "redirect:/panier/liste";
+		return "";
 	}
 	
 	

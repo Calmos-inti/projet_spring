@@ -105,8 +105,8 @@
 									<div class="col-4">
 										<div class="card" style="margin-bottom: 25px">
 											<div class="card-body">
-												<img
-													src="${pageContext.request.contextPath}/myImage/imageCategorieDisplay?id=${categorie.idCategorie}" />
+												<img class=""
+													src="${pageContext.request.contextPath}/myImage/imageCategorieDisplay?id=${categorie.idCategorie}" width="175px" height="175px"/>
 
 												<h3>${categorie.nomCategorie}</h3>
 												<p>${categorie.description}</p>

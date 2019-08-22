@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity (name="client")
 @DiscriminatorValue("1")
 public class Client extends User {
@@ -29,6 +32,7 @@ public class Client extends User {
 	/* _____________________ Association (UML) ________________________ */
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="client")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Commande> listeCommandes;
 	
 	@OneToOne

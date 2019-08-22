@@ -16,6 +16,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity(name="user")
 @Table(name="users")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -42,6 +45,7 @@ public class User {
 	
 	/*_____________________ Association (UML) ________________________*/
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Role> listeRoles;
 	
 

@@ -27,16 +27,19 @@
 	<br />
 	<!-- Liens pour les tests (seront supprimés quand les tests seront finis) -->
 	<h3>Test clients :</h3>
-	<a href="${pageContext.request.contextPath}/client/test/">test
-		Client</a>
+	<a href="${pageContext.request.contextPath}/client/test/">click 1</a>
 	<br />
 	<h3>Test manager produit :</h3>
-	<a href="${pageContext.request.contextPath}/produit/test/">test
-		produit</a>
+	<a href="${pageContext.request.contextPath}/produit/test/">click 5</a>
 	<br />
 	<h3>Test manager categorie :</h3>
-	<a href="${pageContext.request.contextPath}/categorie/test/">test
-		categorie</a>
+	<a href="${pageContext.request.contextPath}/categorie/test/">click 2</a>
+	<br />
+	<h3>test panier :</h3>
+	<a href="${pageContext.request.contextPath}/panier/test">click 3</a>
+	<br />
+	<h3>test lignePanier :</h3>
+	<a href="${pageContext.request.contextPath}/ligne_panier/test">click 4</a>
 	<br />
 	<hr />
 	<br />
