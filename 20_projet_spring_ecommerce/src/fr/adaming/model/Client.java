@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Client extends User {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Commande> listeCommandes;
 	
-	@OneToOne
+	@OneToOne(mappedBy="client", cascade=CascadeType.ALL)
 	private Panier panier;
 
 	/* _____________________ Constructeurs ________________________ */

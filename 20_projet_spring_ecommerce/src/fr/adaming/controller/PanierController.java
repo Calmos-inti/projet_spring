@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
@@ -38,14 +36,6 @@ public class PanierController {
 	
 	@RequestMapping(value="/panier/test")
 	public String tester() {
-		
-		Panier panier1 = new Panier(100, null);
-		Panier panier2 = new Panier(100, null);
-		Panier panier3 = new Panier(100, null);
-		
-		panierManager.addPanierService(panier1);
-		panierManager.addPanierService(panier2);
-		panierManager.addPanierService(panier3);
 		
 		return "testProduit";
 	}
