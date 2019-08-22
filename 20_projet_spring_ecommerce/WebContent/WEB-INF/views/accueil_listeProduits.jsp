@@ -57,12 +57,12 @@
 				<!-- =============== end carousel ========================== -->
 
 				<!-- =============== inclusion Barre recherche ==================== -->
-				<Br/>
+				<Br />
 				<%@ include file="/resources/template/barre_recheche.jsp"%>
-				<Br/>
+				<Br />
 				<!-- =============== end Barre recherche ========================== -->
-				
-				
+
+
 				<div class="row">
 					<!-- =============== inclusion menu gauche ========================== -->
 
@@ -99,20 +99,30 @@
 							<br />
 						</c:if>
 
+						<s:authorize access="hasRole('ROLE_PRODUIT')">
+						<c:if test="${mot_cle==null}">
+							<div class="container">
+								<div class="row justify-content-center">
+									<div class="col-6 ">
+										<button
+											onclick="location.href='${pageContext.request.contextPath}/addProduit?idCategorgie=${id_categorie}'"
+											class="btn btn-outline-secondary btn-lg btn-block "
+											type="button">Ajouter un produit</button>
+									</div>
+								</div>
+							</div>
+							<br />
+						</c:if>
+						</s:authorize>
 
 						<c:forEach items="${liste_produits}" var="produit">
 
 							<div class="card">
-								<div class="card-body ">
+								<div class="card-body">
 									<div class="row">
 										<div class="col-3">
-											<svg class="bd-placeholder-img rounded-circle" width="140"
-												height="140" xmlns="http://www.w3.org/2000/svg"
-												preserveAspectRatio="xMidYMid slice" focusable="false"
-												role="img" aria-label="Placeholder: 140x140">
-					<title>Placeholder</title><rect width="100%" height="100%"
-													fill="#777" />
-					<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+											<img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${produit.idProduit}"/>
+											
 										</div>
 
 
@@ -151,6 +161,7 @@
 												<button type="button" class="btn btn-outline-success">Ajouter
 													au Panier</button>
 											</form:form>
+											
 										</div>
 
 

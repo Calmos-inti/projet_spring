@@ -39,10 +39,23 @@
 	<!-- =============== inclusion du header ========================== -->
 	<%@ include file="/resources/template/header.jsp"%>
 	<!-- ============================================================== -->
+	<br />
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
-<br/>
+			
+				<!-- =============== inclusion Carousel ========================== -->
+				<%@ include file="/resources/template/carousel.jsp"%>
+
+				<!-- =============== end carousel ========================== -->
+
+				<!-- =============== inclusion Barre recherche ==================== -->
+				<br/>
+				<%@ include file="/resources/template/barre_recheche.jsp"%>
+				<br/>
+				<!-- =============== end Barre recherche ========================== -->
+		
+		
 		<div align="center">
 		<h1>
 		Administration Manager</h1></div>

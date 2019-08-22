@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class Categorie {
 	@Column(name = "nom")
 	private String nomCategorie;
 	
-	@Column(name = "photo")
+	@Column(name = "photo", columnDefinition="longblob")
 	private byte[] photo;
 	
 	@Column(name = "description")
