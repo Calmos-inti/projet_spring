@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import fr.adaming.controller.ProduitPanier;
+
 
 @Entity (name="panier")
 @Table(name="paniers")
