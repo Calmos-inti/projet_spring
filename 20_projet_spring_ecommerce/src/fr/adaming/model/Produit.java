@@ -45,18 +45,11 @@ public class Produit {
 	private byte[] photo;
 
 	// transformation de l'association UML en Java
-//	@ManyToOne
-//	@JoinColumn(name = "categorie_id", referencedColumnName = "id_categorie")
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "categorie_id", nullable = false) 
 	private Categorie categorie;
 	
-	// a faire : ManyToMany
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="lignePanier_id",nullable = false)
-	private LignePanier lignePanier;
-//	@ManyToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name="lignePanier_id",nullable = false)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "produit")
 	private List<LignePanier> listeLignePanier;
 
