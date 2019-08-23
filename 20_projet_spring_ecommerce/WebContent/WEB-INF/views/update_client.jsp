@@ -56,7 +56,7 @@
 				<form:form modelAttribute="clientCommandUpadate" action="${pageContext.request.contextPath}/client/updateClient" method="post">
 					
 					<form:hidden path="id"/>
-					
+					<form:hidden path="enabled"/>
 					<div class="row">
 						<div class="col-6">
 							<fieldset>

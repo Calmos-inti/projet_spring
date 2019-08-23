@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
+import fr.adaming.model.Commande;
 import fr.adaming.model.Role;
 import fr.adaming.model.User;
 import fr.adaming.service.ClientServiceImpl;
@@ -254,5 +255,18 @@ public class ClientController {
 		
 		return "accueil";
 	}	// end UpdateClient
+	
+	
+	@RequestMapping(value = "/client/afficherCommandes", method = RequestMethod.GET)
+	public String afficherCommandes(ModelMap modeleDonnes) {
+
+		Client client = recuperationClientConnecte();
+		
+		List<Commande> listeCommande = client.getListeCommandes();
+		
+		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+		
+		return "commandes_client";
+	}	// end afficherCommandes
 
 }	// end class

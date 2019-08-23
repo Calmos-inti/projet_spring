@@ -59,5 +59,5 @@ public class CommandeServiceImpl implements ICommandeService {
 	
 		return commandeDao.getAllCommandeDao();
 	}
-
+	
 }
