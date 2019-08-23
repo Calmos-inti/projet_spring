@@ -1,7 +1,5 @@
 package fr.adaming.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,11 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity(name = "lignePanier")
 @Table(name = "ligne_paniers")
@@ -34,19 +28,7 @@ public class LignePanier {
 
 	// * _____________________ Association (UML) ________________________ */
 
-	// a faire : ManyToMany
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy ="lignePanier")
-	@Fetch(value = FetchMode.SUBSELECT)
-	private List<Produit> listeProduit;
-	
-	// @Fetch(value = FetchMode.SUBSELECT)
-	// @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	// @JoinTable(name = "lignePanier_produit", joinColumns = {
-	// @JoinColumn(name = "id_lignePanier", nullable = false, updatable = false) },
-	// inverseJoinColumns = {
-	// @JoinColumn(name = "id_produit", nullable = false, updatable = false) })
-	// private List<Produit> listeProduit;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "produit_id", nullable = false) 
 	private Produit produit;
