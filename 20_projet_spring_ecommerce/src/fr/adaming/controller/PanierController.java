@@ -74,7 +74,7 @@ public class PanierController {
 		modelDonnees.addAttribute("liste_paniers", listePanierBDD);
 
 		// Etape 3 : Renvoi non logique + redirection
-		return "";
+		return "accueil";
 	}
 	
 	
