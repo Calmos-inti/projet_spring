@@ -11,7 +11,7 @@
   
     <s:authorize access="hasRole('ROLE_CATEGORIE')">
     <li class="nav-item">
-    <a class="nav-link" href="${pageContext.request.contextPath}/addCaroussel">Ajouter une catégorie</a>
+    <a class="nav-link" href="${pageContext.request.contextPath}/addCaroussel">Ajouter un caroussel</a>
   </li>  </s:authorize>
     <li class="nav-item">
     <a class="nav-link" href="${pageContext.request.contextPath}/produit/liste/">Afficher la liste des produits</a>

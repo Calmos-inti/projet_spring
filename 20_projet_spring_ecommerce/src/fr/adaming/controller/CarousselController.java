@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,8 +45,8 @@ public class CarousselController {
 
 	} 
 
-	@RequestMapping(value = { "/caroussel/delete"}, method = RequestMethod.GET)
-	public String deleteCarousselBdd(@RequestParam("idCaroussel") int aCarousselId,
+	@RequestMapping(value = { "/caroussel/delete/{pCarousselId}"}, method = RequestMethod.GET)
+	public String deleteCarousselBdd(@PathVariable("pCarousselId") int aCarousselId,
 			ModelMap modelDonnees) {
 
 		//Etape 1 : suppression de la catégorie depuis la BDD
@@ -68,7 +69,7 @@ public class CarousselController {
 		data.put("carousselCommand", caroussel);
 		
 		// Etape 2 : cration nom logique vue + renvoi du ModelandView
-		String nomVue = "ajouter_caroussel";
+		String nomVue = "ajout_caroussel";
 		
 		return new ModelAndView(nomVue, data);
 
