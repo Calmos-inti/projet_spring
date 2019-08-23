@@ -1,15 +1,25 @@
 package fr.adaming.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Role;
 import fr.adaming.model.User;
 import fr.adaming.service.ClientServiceImpl;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.IRoleService;
 import fr.adaming.service.IUserService;
@@ -18,22 +28,27 @@ import fr.adaming.service.UserServiceImpl;
 @Controller
 public class ClientController {
 
+	/* _____________ liaison avec la couche service ________________ */
+	@Autowired
+	private ICategorieService categorieManager;
+
+	// setter pour injection spring
+	public void setCategorieManager(ICategorieService categorieManager) {
+		this.categorieManager = categorieManager;
+	}
+
 	@Autowired
 	private IClientService clServ;
-
-	@Autowired
-	private IUserService userServ;
-
-	// Constructeur
-	public ClientController() {
-		super();
-	}
 
 	// setters
 	public void setClServ(ClientServiceImpl clServ) {
 		this.clServ = clServ;
 	}
 
+	@Autowired
+	private IUserService userServ;
+
+	// setters
 	public void setUserServ(UserServiceImpl userServ) {
 		this.userServ = userServ;
 	}
@@ -41,11 +56,12 @@ public class ClientController {
 	@Autowired
 	IRoleService roleService;
 
+	// setters
 	public void setRoleDao(IRoleService roleService) {
 		this.roleService = roleService;
 	}
 
-	/* _____________________ TESTS CLIENT ET USER________________________________ */
+	/* _________________ TESTS CLIENT ET USER (à supprimer)_______________ */
 
 	@RequestMapping(value = "/client/test")
 	public String tester() {
@@ -191,4 +207,52 @@ public class ClientController {
 		return "testClient";
 	}
 
-}
+
+	/* _____________ méthodes utilitaires ________________ */
+	
+	
+	public void infoMenuGauche(ModelMap modelDonnees) {
+
+		// Recupération de la liste des categories depuis la BDD
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
+
+		// Encapsulation de la liste dans l'objet ModelMap
+		modelDonnees.addAttribute("liste_categories", listeCategories);
+
+	}
+	
+	public Client recuperationClientConnecte() {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String mail = auth.getName();
+
+		return clServ.getClientbyMailService(mail);
+	}
+	
+	
+	/* _____________ méthodes d'interseption de requetes ________________ */
+	
+	@RequestMapping(value = "/client/formulaireUpdate", method = RequestMethod.GET)
+	public ModelAndView miseEnPlaceFormulaireUpdate() {
+
+		// Création de l'objet à retourner pour les données
+		Map<String, Object> data = new HashMap<String, Object>();
+		Client client = recuperationClientConnecte();
+
+		data.put("clientCommandUpadate", client);
+
+		String nomVue = "update_client";
+
+		return new ModelAndView(nomVue, data);
+	}// end miseEnPlaceFormulaireUpdate
+
+	@RequestMapping(value = "/client/updateClient", method = RequestMethod.POST)
+	public String UpdateClient(@ModelAttribute("clientCommandUpadate") Client client, ModelMap modeleDonnes) {
+
+		clServ.updateClientService(client);
+		infoMenuGauche(modeleDonnes);
+		
+		return "accueil";
+	}	// end UpdateClient
+
+}	// end class

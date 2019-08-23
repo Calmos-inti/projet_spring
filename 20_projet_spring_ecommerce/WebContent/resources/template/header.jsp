@@ -40,7 +40,7 @@
 						class="fas fa-user"></i> Mon Espace</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown07">
 						<a class="dropdown-item" href="#">Mes Commandes</a> <a
-							class="dropdown-item" href="#">Modifier Profil</a>
+							class="dropdown-item" href="${pageContext.request.contextPath}/client/formulaireUpdate">Modifier Profil</a>
 					</div></li>
 				<!-- end dropdown 'mon espace' -->
 
