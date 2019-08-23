@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,11 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LignePanier;
+import fr.adaming.model.Produit;
 import fr.adaming.model.Role;
 import fr.adaming.model.User;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ILignePanierService;
+import fr.adaming.service.IProduitService;
 import fr.adaming.service.IRoleService;
 import fr.adaming.service.IUserService;
 import fr.adaming.service.UserServiceImpl;
@@ -60,6 +66,22 @@ public class ClientController {
 	// setters
 	public void setRoleDao(IRoleService roleService) {
 		this.roleService = roleService;
+	}
+
+	@Autowired
+	private IProduitService produitManager;
+
+	// setter pour injection spring
+	public void setProduitManager(IProduitService produitManager) {
+		this.produitManager = produitManager;
+	}
+
+	@Autowired
+	private ILignePanierService lignePanierManager;
+
+	// setter
+	public void setLignePanierManager(ILignePanierService lignePanierManager) {
+		this.lignePanierManager = lignePanierManager;
 	}
 
 	/* _________________ TESTS CLIENT ET USER (à supprimer)_______________ */
@@ -208,10 +230,8 @@ public class ClientController {
 		return "testClient";
 	}
 
-
 	/* _____________ méthodes utilitaires ________________ */
-	
-	
+
 	public void infoMenuGauche(ModelMap modelDonnees) {
 
 		// Recupération de la liste des categories depuis la BDD
@@ -221,7 +241,7 @@ public class ClientController {
 		modelDonnees.addAttribute("liste_categories", listeCategories);
 
 	}
-	
+
 	public Client recuperationClientConnecte() {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -229,10 +249,9 @@ public class ClientController {
 
 		return clServ.getClientbyMailService(mail);
 	}
-	
-	
+
 	/* _____________ méthodes d'interseption de requetes ________________ */
-	
+
 	@RequestMapping(value = "/client/formulaireUpdate", method = RequestMethod.GET)
 	public ModelAndView miseEnPlaceFormulaireUpdate() {
 
@@ -252,21 +271,55 @@ public class ClientController {
 
 		clServ.updateClientService(client);
 		infoMenuGauche(modeleDonnes);
-		
+
 		return "accueil";
-	}	// end UpdateClient
-	
-	
+	} // end UpdateClient
+
 	@RequestMapping(value = "/client/afficherCommandes", method = RequestMethod.GET)
 	public String afficherCommandes(ModelMap modeleDonnes) {
 
 		Client client = recuperationClientConnecte();
-		
-		List<Commande> listeCommande = client.getListeCommandes();
-		
-		modeleDonnes.addAttribute("liste_commandes", listeCommande);
-		
-		return "commandes_client";
-	}	// end afficherCommandes
 
-}	// end class
+		List<Commande> listeCommande = client.getListeCommandes();
+
+		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+
+		return "commandes_client";
+	} // end afficherCommandes
+
+	@RequestMapping(value = "/client/ajoutPanier", method = RequestMethod.POST)
+	public String ajoutPanier(@ModelAttribute("produitCommand") Produit produit, ModelMap modeleDonnes) {
+
+		int quantite = produit.getQuantite();
+		
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("quantité : "+quantite);
+		System.out.println("id : "+produit.getIdProduit());
+		System.out.println("--------------------------------------------------------------");
+		
+		Produit produitOut = produitManager.getProduit(produit.getIdProduit());
+
+		// récupération du client connecté
+		Client client = recuperationClientConnecte();
+
+		// Calcul de la nouvelle quantité de produit + envoi dans la bdd
+		produitOut.setQuantite(produitOut.getQuantite() - quantite);
+		produitManager.updateProduit(produitOut);
+
+		// création de la ligne de panier
+		LignePanier lignePanier = new LignePanier();
+		lignePanier.setProduit(produitOut);
+		lignePanier.setQuantité(quantite);
+		lignePanier.setPanier(client.getPanier());
+
+		// ajout de la ligne dans la bdd
+		lignePanierManager.addLignePanierService(lignePanier);
+		
+		// mise à jour du menu gauche
+		infoMenuGauche(modeleDonnes);
+		
+		// redirection
+		return "accueil";
+	} // end UpdateClient
+
+} // end class

@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,7 +80,7 @@ public class AccueilController {
 	}
 
 	@RequestMapping(value = "/accueil/liste_produit", method = RequestMethod.GET)
-	public String listerProduits(@RequestParam("idCategorie") int pIdCategorie, ModelMap modelDonnees) {
+	public String listerProduits(@RequestParam("idCategorie") int pIdCategorie, ModelMap modelDonnees, Model model) {
 
 		infoMenuGauche(modelDonnees);
 
@@ -90,11 +91,13 @@ public class AccueilController {
 		modelDonnees.addAttribute("liste_produits", listeProduit);
 		modelDonnees.addAttribute("id_categorie", pIdCategorie);
 		
+		model.addAttribute("produitCommand", new Produit()); 
+		
 		return "accueil_listeProduits";
 	}
 
 	@RequestMapping(value = "/accueil/produit", method = RequestMethod.GET)
-	public String rechercheProduitsbyId(@RequestParam("idProduit") int pIdProduit, ModelMap modelDonnees) {
+	public String rechercheProduitsbyId(@RequestParam("idProduit") int pIdProduit, ModelMap modelDonnees, Model model) {
 
 		infoMenuGauche(modelDonnees);
 
@@ -106,12 +109,14 @@ public class AccueilController {
 
 		// Etape 2 : Encapsulation de la liste dans l'objet ModelMap
 		modelDonnees.addAttribute("liste_produits", listeProduit);
-
+		
+		model.addAttribute("produitCommand", new Produit());
+		
 		return "accueil_listeProduits";
 	}
 
 	@RequestMapping(value = "/accueil/recherche", method = RequestMethod.GET)
-	public String rechercheProduitsMotCle(@RequestParam("mot") String pMot, ModelMap modelDonnees) {
+	public String rechercheProduitsMotCle(@RequestParam("mot") String pMot, ModelMap modelDonnees, Model model) {
 
 		infoMenuGauche(modelDonnees);
 
@@ -137,7 +142,9 @@ public class AccueilController {
 		modelDonnees.addAttribute("liste_produits", listeRecherche);
 		modelDonnees.addAttribute("nombre_trouve", nombreTrouve);
 		modelDonnees.addAttribute("mot_cle", pMot);
-
+		
+		model.addAttribute("produitCommand", new Produit());
+		
 		return "accueil_listeProduits";
 	}
 
@@ -175,6 +182,7 @@ public class AccueilController {
         
 	    return "accueil";
 	}
+	
 	@RequestMapping(value = "/accueil_backoffice", method = RequestMethod.GET)
 	public String allerAccueilBackOffice (ModelMap modelDonnees) {
 

@@ -1,5 +1,6 @@
 package fr.adaming.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.LignePanier;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IPanierService;
 
 @Controller
 public class PanierController {
+	
+	private Map<Integer, LignePanier> articles = new HashMap<Integer, LignePanier>();
 	
 	
 	/* _______________ Déclaration de la classe Service ________________ */
@@ -70,7 +74,7 @@ public class PanierController {
 		modelDonnees.addAttribute("liste_paniers", listePanierBDD);
 
 		// Etape 3 : Renvoi non logique + redirection
-		return "";
+		return "accueil";
 	}
 	
 	
@@ -102,8 +106,59 @@ public class PanierController {
 		
 	}
 	
+	
 	@RequestMapping(value="/panier/addProduit", method=RequestMethod.POST)
 	public void addProduitPanier(Produit p, int quantite) {
 		
+		LignePanier lp=articles.get(p.getIdProduit());
+		
+		if(lp==null) {
+			
+			LignePanier ligPan = new LignePanier();
+			ligPan.setProduit(p);
+			ligPan.setQuantité(quantite);
+			ligPan.setPrix(p.getPrix());
+			articles.put(p.getIdProduit(), ligPan);
+			
+			
+			
+		}else {
+			
+			lp.setQuantité(lp.getQuantité() + quantite);
+		}
+	
 	}
+	
+	//methode pour recuerer la liste des produits du panier
+			@RequestMapping(value="/panier/getProduits", method=RequestMethod.GET)
+			public Collection<LignePanier> getProduitsPanier(){
+				return articles.values();
+			}
+			
+			
+	//methode pour recuperer le nombre de produits dans le panier
+			@RequestMapping(value="/panier/getNbreProduits", method=RequestMethod.GET)
+			public int getSizePanier() {
+				return articles.size();
+			}
+			
+	
+	//methode pour recuperer le prix total du panier
+			@RequestMapping(value="/panier/getTotal", method=RequestMethod.GET)
+			public double getTotal() {
+				double total = 0;
+				for(LignePanier lp : articles.values()) {
+					total += lp.getPrix()* lp.getQuantité();
+				}
+				return total;
+			}
+			
+			
+	//methode pour supprimer un produit d'un panier
+			@RequestMapping(value="/panier/suppProduit", method=RequestMethod.GET)
+			public void deleteProduitPanier(int idProduit) {
+				articles.remove(idProduit);
+			}
+			
+			
 }

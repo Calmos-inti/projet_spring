@@ -1,3 +1,8 @@
+
+<!-- taglib de jsp -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand"
@@ -83,25 +88,16 @@
 				<div class="col-4 align-self-end">
 
 					<ul class="list-group">
+					<c:forEach items="${liste_lignePaniers}" var = "var">
 						<li
 							class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="#"><i class="far fa-trash-alt"></i></a> x 2 - Produit 1
+							<a href="${pageContext.request.contextPath}/ligne_panier/delete/{pLignePanierId}"><i class="far fa-trash-alt"></i></a> x ${var.quantité} - ${var.produit.designation}
 							<span class="badge badge-primary">20 &euro;</span>
 						</li>
-
-						<li
-							class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="#"><i class="far fa-trash-alt"></i></a>x 5 - Produit 2 <span
-							class="badge badge-primary">75 &euro;</span>
-						</li>
-
-
-						<li
-							class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="#"><i class="far fa-trash-alt"></i></a>x 8 - Produit 3 <span
-							class="badge badge-primary">30 &euro;</span>
-						</li>
-
+					</c:forEach>
+					
+					
+					
 						<li
 							class="list-group-item d-flex justify-content-between align-items-center">
 							Total : <span class="badge badge-primary">115 &euro;</span>
