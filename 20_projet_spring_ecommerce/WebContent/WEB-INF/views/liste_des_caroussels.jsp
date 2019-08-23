@@ -73,9 +73,9 @@
 			<c:forEach items="${liste_caroussels}" var="fonct">
 				<tr bgcolor="lightyellow">
 					<td><b>${fonct.idCaroussel}</b></td>
-					<td><img src="${pageContext.request.contextPath}/myImage/image1CarousselDisplay?id=${fonct.idCaroussel}"/></td>
-					<td><img src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?id=${fonct.idCaroussel}"/></td>
-					<td><img src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?id=${fonct.idCaroussel}"/></td>
+					<td><img src="${pageContext.request.contextPath}/myImage/image1CarousselDisplay?id=${fonct.idCaroussel}" width="250px" height="150px"/></td>
+					<td><img src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?id=${fonct.idCaroussel}" width="250px" height="150px"/></td>
+					<td><img src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?id=${fonct.idCaroussel}" width="250px" height="150px"/></td>
 					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
 						 <s:authorize access="hasRole('ROLE_CATEGORIE')"><td><a
 						href="${pageContext.request.contextPath}/caroussel/delete/${fonct.idCaroussel}">Supprimer</a>
