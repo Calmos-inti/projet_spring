@@ -135,8 +135,8 @@
 
 
 										<div class="col-3">
-											<form:form modelAttribute="#" action="#" method="post">
-
+											<form:form modelAttribute="produitCommand" action="${pageContext.request.contextPath}/client/ajoutPanier" method="post">
+												<form:hidden path="idProduit" value="${produit.idProduit}"/>
 												<h5>${produit.prix}&euro;</h5>
 
 												<span class="badge badge-success">Encore
@@ -149,17 +149,17 @@
 
 														<label class="col-sm-8 col-form-label">Quantité :</label>
 														<div class="col-sm-4">
-															<select class="form-control-plaintext" id="#">
+															<form:select class="form-control-plaintext" path="quantite">
 																<c:forEach var="i" begin="1" end="${produit.quantite}"
 																	step="1">
 																	<option>${i}</option>
 																</c:forEach>
-															</select>
+															</form:select>
 														</div>
 													</div>
 												</fieldset>
-												<button type="button" class="btn btn-outline-success">Ajouter
-													au Panier</button>
+												<form:button type="submit" class="btn btn-outline-success">Ajouter
+													au Panier</form:button>
 											</form:form>
 											
 										</div>
