@@ -23,6 +23,9 @@ public class Commande {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_commande")
 	private int id;
+	
+	@Column (name ="total")
+	private double total;
 
 	@Column(name = "validation_commande")
 	private boolean valider;
@@ -76,4 +79,12 @@ public class Commande {
 		this.listeLignePanier = listeLignePanier;
 	}
 
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	
 }

@@ -2,7 +2,7 @@ package fr.adaming.service;
 
 import java.util.List;
 
-
+import fr.adaming.model.Commande;
 import fr.adaming.model.LignePanier;
 
 public interface ILignePanierService {
@@ -16,5 +16,7 @@ public interface ILignePanierService {
 	public LignePanier getLignePanierService(int pIdLignePanier);
 
 	public List<LignePanier> getAllLignePanierService();
+	
+	public void ajouterLignePanierDansCommandeBDD(LignePanier pLignePanier, Commande pCommande);
 
 }

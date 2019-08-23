@@ -9,14 +9,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fr.adaming.model.Commande;
 import fr.adaming.model.LignePanier;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ClientServiceImpl;
+import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILignePanierService;
 import fr.adaming.service.IPanierService;
 import fr.adaming.service.IProduitService;
 
 @Controller
 public class LignePanierController {
+	
+	@Autowired
+	private ICommandeService commandeService;
+	
+	// setters
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+
+	@Autowired
+	private IClientService clServ;
+
+	// setters
+	public void setClServ(ClientServiceImpl clServ) {
+		this.clServ = clServ;
+	}
 	
 	
 	@Autowired
@@ -90,6 +111,59 @@ public class LignePanierController {
 	@RequestMapping(value="/commande/test")
 	public String testerCommande() {
 		
+		
+		Produit produit1 = produitManager.getProduit(1);
+		Produit produit2 = produitManager.getProduit(2);
+		Produit produit3 = produitManager.getProduit(3);
+		Produit produit4 = produitManager.getProduit(4);
+		
+		
+		LignePanier lp1 = new LignePanier();
+		lp1.setProduit(produit1);
+		lp1.setQuantité(1);
+		lp1.setPanier(panierManager.getPanierService(5));
+		
+		LignePanier lp2 = new LignePanier();
+		lp2.setProduit(produit2);
+		lp2.setQuantité(2);
+		lp2.setPanier(panierManager.getPanierService(5));
+		
+		LignePanier lp3 = new LignePanier();
+		lp3.setProduit(produit3);
+		lp3.setQuantité(3);
+		lp3.setPanier(panierManager.getPanierService(5));
+		
+		LignePanier lp4 = new LignePanier();
+		lp4.setProduit(produit4);
+		lp4.setQuantité(4);
+		lp4.setPanier(panierManager.getPanierService(5));
+		
+		lp1=lignePanierManager.getLignePanierService(lignePanierManager.addLignePanierService(lp1));
+		lp2=lignePanierManager.getLignePanierService(lignePanierManager.addLignePanierService(lp2));
+		lp3=lignePanierManager.getLignePanierService(lignePanierManager.addLignePanierService(lp3));
+		lp4=lignePanierManager.getLignePanierService(lignePanierManager.addLignePanierService(lp4));
+		
+		
+		Commande commande1 = new Commande();
+		commande1.setValider(false);
+		commande1.setClient(clServ.getClientService(5));
+		commande1 = commandeService.getCommandeService(commandeService.addCommandeService(commande1));
+		
+		lignePanierManager.ajouterLignePanierDansCommandeBDD(lp1, commande1);
+		lignePanierManager.ajouterLignePanierDansCommandeBDD(lp2, commande1);
+		
+		
+		Commande commande2 = new Commande();
+		commande2.setValider(false);
+		commande2.setClient(clServ.getClientService(5));
+		commande2 = commandeService.getCommandeService(commandeService.addCommandeService(commande2));
+		lignePanierManager.ajouterLignePanierDansCommandeBDD(lp3, commande2);
+		
+		Commande commande3 = new Commande();
+		commande3.setValider(false);
+		commande3.setClient(clServ.getClientService(5));
+		commande3 = commandeService.getCommandeService(commandeService.addCommandeService(commande3));
+		lignePanierManager.ajouterLignePanierDansCommandeBDD(lp4, commande3);
 			
 		return "testProduit";
 	}

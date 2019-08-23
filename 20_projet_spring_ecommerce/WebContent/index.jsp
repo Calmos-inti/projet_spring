@@ -38,6 +38,9 @@
 	<h3>test lignePanier :</h3>
 	<a href="${pageContext.request.contextPath}/ligne_panier/test">click 4</a>
 	<br />
+	<h3>test commandes :</h3>
+	<a href="${pageContext.request.contextPath}/commande/test">click 5</a>
+	<br />
 
 	<hr />
 	<br />
