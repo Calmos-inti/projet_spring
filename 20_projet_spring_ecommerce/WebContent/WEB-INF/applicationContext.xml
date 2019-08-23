@@ -78,17 +78,18 @@
 		</property>
 
 		<!-- 3. déclaration des fichiers des classes annotées -->
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
- 				<value>fr.adaming.model.Client</value>
- 				<value>fr.adaming.model.User</value>
- 				<value>fr.adaming.model.Role</value>
- 				<value>fr.adaming.model.Produit</value>
- 				<value>fr.adaming.model.Categorie</value>
- 				<value>fr.adaming.model.Panier</value>
- 				<value>fr.adaming.model.Commande</value>
- 				<value>fr.adaming.model.LignePanier</value>
-<value>fr.adaming.model.Caroussel</value>
+			<value>fr.adaming.model</value>
+<!--  				<value>fr.adaming.model.Client</value> -->
+<!--  				<value>fr.adaming.model.User</value> -->
+<!--  				<value>fr.adaming.model.Role</value> -->
+<!--  				<value>fr.adaming.model.Produit</value> -->
+<!--  				<value>fr.adaming.model.Categorie</value> -->
+<!--  				<value>fr.adaming.model.Panier</value> -->
+<!--  				<value>fr.adaming.model.Commande</value> -->
+<!--  				<value>fr.adaming.model.LignePanier</value> -->
+<!-- 				<value>fr.adaming.model.Caroussel</value> -->
 
 			</list>
 		</property>

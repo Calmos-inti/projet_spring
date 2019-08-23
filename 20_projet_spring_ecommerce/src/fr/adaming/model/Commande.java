@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity(name = "commande")
 @Table(name = "commandes")
 public class Commande {
@@ -33,10 +36,11 @@ public class Commande {
 	/* _____________________ Association (UML) ________________________ */
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "commande")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<LignePanier> listeLignePanier;
-
-	@ManyToOne
-	@JoinColumn(name = "client_id", nullable = false)
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "client_id", nullable = false) 
 	private Client client;
 
 	/* _____________________ Constructeurs ________________________ */

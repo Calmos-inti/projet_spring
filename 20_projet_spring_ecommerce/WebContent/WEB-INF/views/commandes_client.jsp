@@ -93,16 +93,14 @@
 									<ul class="list-group">
 										<c:forEach items="${commandes.listeLignePanier}" var="ligne">
 											<li class="list-group-item d-flex justify-content-between align-items-center">
-												<span>x ${ligne.quantité}</span> 
+												<span>x ${ligne.quantite}</span> 
 												<span class="text-primary">${ligne.produit.categorie.nomCategorie}</span>
 												<span>${ligne.produit.designation}</span>
 												<span>Prix unitaire : ${ligne.produit.prix} &euro;</span>
 												
 												<span>total : <span class="badge badge-primary">${ligne.prix} &euro;</span></span>
 											</li>
-										</c:forEach>
-										
-										
+										</c:forEach>							
 
 									</ul>
 

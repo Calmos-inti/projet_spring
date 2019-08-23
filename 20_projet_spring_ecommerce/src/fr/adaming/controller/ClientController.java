@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,13 +18,16 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LignePanier;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.model.Role;
 import fr.adaming.model.User;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILignePanierService;
+import fr.adaming.service.IPanierService;
 import fr.adaming.service.IProduitService;
 import fr.adaming.service.IRoleService;
 import fr.adaming.service.IUserService;
@@ -83,9 +84,56 @@ public class ClientController {
 	public void setLignePanierManager(ILignePanierService lignePanierManager) {
 		this.lignePanierManager = lignePanierManager;
 	}
+	
+	@Autowired
+	private IPanierService panierManager;
+	
+	//setter pour injection spring
 
+	public void setPanierManager(IPanierService panierManager) {
+		this.panierManager = panierManager;
+	}
+	
+	@Autowired
+	private ICommandeService commandeService;
+	
+	// setters
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
 	/* _________________ TESTS CLIENT ET USER (à supprimer)_______________ */
+	
+	@RequestMapping(value = "/test33", method = RequestMethod.GET)
+	public String testttte(ModelMap modeleDonnes) {
 
+		Client client = recuperationClientConnecte();
+
+		List<Commande> listeCommande = client.getListeCommandes();
+
+		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+		
+		System.out.println("------------------TEST------------------------");
+		
+		for(Commande command: listeCommande) {
+			System.out.println("boucle commande");
+			System.out.println("\t> Commande id :"+command.getId());
+			System.out.println("\t> Commande total :"+command.getTotal());
+			
+			List<LignePanier> list = command.getListeLignePanier();
+			
+			for(LignePanier lp : list) {
+				System.out.println("boucle lp");
+				System.out.println("\t\t> Ligne panier id :"+lp.getId());
+				System.out.println("\t\t> Ligne panier prix :"+lp.getPrix());
+			}
+			
+			
+		}
+		
+		System.out.println("-----------------FIN TEST------------------------");
+		return "testClient";
+	} // end afficherCommandes
+	
 	@RequestMapping(value = "/client/test")
 	public String tester() {
 
@@ -283,7 +331,7 @@ public class ClientController {
 		List<Commande> listeCommande = client.getListeCommandes();
 
 		modeleDonnes.addAttribute("liste_commandes", listeCommande);
-
+		
 		return "commandes_client";
 	} // end afficherCommandes
 
@@ -291,11 +339,6 @@ public class ClientController {
 	public String ajoutPanier(@ModelAttribute("produitCommand") Produit produit, ModelMap modeleDonnes) {
 
 		int quantite = produit.getQuantite();
-		
-		System.out.println("--------------------------------------------------------------");
-		System.out.println("quantité : "+quantite);
-		System.out.println("id : "+produit.getIdProduit());
-		System.out.println("--------------------------------------------------------------");
 		
 		Produit produitOut = produitManager.getProduit(produit.getIdProduit());
 
@@ -309,8 +352,9 @@ public class ClientController {
 		// création de la ligne de panier
 		LignePanier lignePanier = new LignePanier();
 		lignePanier.setProduit(produitOut);
-		lignePanier.setQuantité(quantite);
-		lignePanier.setPanier(client.getPanier());
+		lignePanier.setQuantite(quantite);
+//		lignePanier.setPanier(client.getListePanier().get(0));
+		lignePanier.setPanier(panierManager.getPanierService(client.getListePanier().get(0).getId()));
 
 		// ajout de la ligne dans la bdd
 		lignePanierManager.addLignePanierService(lignePanier);
@@ -322,4 +366,42 @@ public class ClientController {
 		return "accueil";
 	} // end UpdateClient
 
+	
+	@RequestMapping(value = "/client/validerPanier", method = RequestMethod.GET)
+	public String validerPanier(ModelMap modeleDonnes) {
+		
+		// récupération du client connecté
+		Client client = recuperationClientConnecte();
+		
+		// récupération du panier
+//		List<Panier> listePanier=client.getListePanier();
+//		Panier panier = listePanier.get(0);
+		
+		// récupération des lignes de son panier
+		List<LignePanier> listeLignePanier = client.getListePanier().get(0).getListeLignePanier();
+		
+		// Création d'une commande avec ces listes
+		Commande commande = new Commande();
+		commande.setValider(false);
+		commande.setClient(clServ.getClientService(client.getId()));
+		commande = commandeService.getCommandeService(commandeService.addCommandeService(commande));
+		
+		// ajout de la liste de ligne de panier à la commande
+		for(LignePanier lignePanier : listeLignePanier) {	
+			lignePanierManager.ajouterLignePanierDansCommandeBDD(lignePanier, commande);	
+		}
+		
+		// Suppression de l'ancien panier
+		panierManager.deletePanierService(client.getListePanier().get(0).getId());
+		
+		// Création du nouveau panier 
+		Panier panier = new Panier();
+		panier.setClient(client);
+		panierManager.addPanierService(panier);
+		
+		// mise à jour du menu gauche
+		infoMenuGauche(modeleDonnes);
+				
+		return "accueil";	
+	}
 } // end class

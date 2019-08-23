@@ -72,6 +72,11 @@
 	
 	<h3>login :</h3>
 	<a href="${pageContext.request.contextPath}/login.jsp">login</a>
+	<br/>
+	<hr/>
+	<h3>test</h3>
+	<a href="${pageContext.request.contextPath}/test33">login</a>
+	
 	
 </body>
 </html>

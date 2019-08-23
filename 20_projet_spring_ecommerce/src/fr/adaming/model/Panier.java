@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,14 +42,10 @@ public class Panier {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<LignePanier> listeLignePanier;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="client_Id",			
-				referencedColumnName="id_user")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "client_id", nullable = false)
 	private Client client;
 
-	
-	
-	
 	/* _____________________ Constructeurs ________________________ */
 	
 	

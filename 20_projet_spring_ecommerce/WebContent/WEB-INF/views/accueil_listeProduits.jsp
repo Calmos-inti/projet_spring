@@ -105,7 +105,7 @@
 								<div class="row justify-content-center">
 									<div class="col-6 ">
 										<button
-											onclick="location.href='${pageContext.request.contextPath}/addProduit?idCategorgie=${id_categorie}'"
+											onclick="location.href='${pageContext.request.contextPath}/addProduit?idCategorie=${id_categorie}'"
 											class="btn btn-outline-secondary btn-lg btn-block "
 											type="button">Ajouter un produit</button>
 									</div>

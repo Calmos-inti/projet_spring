@@ -118,7 +118,7 @@ public class ProduitController {
 	}
 
 	@RequestMapping(value = "/addProduit", method = RequestMethod.GET)
-	private ModelAndView setUpFormulaireAjout(@RequestParam("idCategorgie") int pIdCategorie, HttpServletRequest req) {
+	private ModelAndView setUpFormulaireAjout(@RequestParam("idCategorie") int pIdCategorie, HttpServletRequest req) {
 
 		// Etape 1 : création de l'objet à retourner pour les données
 		Map<String, Object> data = new HashMap<String, Object>();

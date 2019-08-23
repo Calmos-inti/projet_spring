@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 
 @Entity(name = "produit")
@@ -51,6 +54,7 @@ public class Produit {
 	private Categorie categorie;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "produit")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<LignePanier> listeLignePanier;
 
 	/* _____________________ Constructeurs ________________________ */

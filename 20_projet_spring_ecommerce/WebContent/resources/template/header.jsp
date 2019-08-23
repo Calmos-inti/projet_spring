@@ -101,7 +101,7 @@
 						<li
 							class="list-group-item d-flex justify-content-between align-items-center">
 							Finaliser ma commande
-							<button type="button" class="btn btn-success">Valider</button>
+							<button type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath}/client/validerPanier'">Valider</button>
 						</li>
 
 					</ul>
