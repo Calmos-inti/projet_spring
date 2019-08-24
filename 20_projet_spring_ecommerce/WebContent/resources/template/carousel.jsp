@@ -22,7 +22,7 @@
 
 		<div class="carousel-item">
 			<img
-				src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?id=1}" width="1300" height="150" />
+				src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?id=1" width="1300" height="150" />
 			<div class="container">
 				<div class="carousel-caption text-left">
 					<h3></h3>
