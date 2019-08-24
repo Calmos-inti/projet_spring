@@ -75,10 +75,11 @@
 					  <button type="button" class="close" data-dismiss="alert">&times;</button>
 					  Vous vous êtes correctement déconnecté(e).
 					</div>
+				</c:if>
 					<br/>
 					<a href="${pageContext.request.contextPath}/accueil">retour à la page d'accueil</a>
 					<br/><br/>
-				</c:if>
+				
 					
 					
 				<h4>

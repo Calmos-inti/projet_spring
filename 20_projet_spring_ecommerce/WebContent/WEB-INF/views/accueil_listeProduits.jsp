@@ -174,7 +174,7 @@
 														</div>
 													</div>
 												</fieldset>
-												Vous devez être <a href="${pageContext.request.contextPath}/login.jsp">connecté(e)</a> pour commander se produit
+												Vous devez être <a href="${pageContext.request.contextPath}/login.jsp">connecté(e)</a> pour commander ce produit
 												</s:authorize>
 											</form:form>
 											
