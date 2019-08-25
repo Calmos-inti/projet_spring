@@ -6,7 +6,9 @@
 
 <!-- taglib de Spring Security -->
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+  <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -44,86 +46,70 @@
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
 
-
-
 				<!-- =============== inclusion Carousel ========================== -->
 				<%@ include file="/resources/template/carousel.jsp"%>
 
 				<!-- =============== end carousel ========================== -->
-
 
 				<!-- =============== inclusion Barre recherche ==================== -->
 				<Br />
 				<%@ include file="/resources/template/barre_recheche.jsp"%>
 				<Br />
 				<!-- =============== end Barre recherche ========================== -->
+<br />
+				<form action="${pageContext.request.contextPath}/user/add"
+					method="post" enctype="multipart/form-data">
 
-				<div class="row">
-					<!-- =============== inclusion menu gauche ========================== -->
+					<div class="row">
+						<div class="col-6">
 
-					<div class="col-2">
-
-						<%@ include file="/resources/template/menu_gauche.jsp"%>
-
-					</div>
-					<!-- end col-2 -->
-
-
-					<!-- =============== fin menu gauche ========================== -->
-<div class="col-10" align="center">
-		<table cellspacing="0" cellpadding="10" width="100%">
-			
-			
-			<tr bgcolor="grey" style="color: white"; align="center">
-				<th>Id</th>
-				<th>Catégorie</th>
-				<th>Désignation</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Photo</th>
-				<th colspan="3">Operations</th>
-			</tr>
-
-			<!-- attribut_liste_foncts = listeFonctionnaires -->
-			<c:forEach items="${liste_produits}" var="fonct">
-				<tr bgcolor="lightyellow">
-					<td><b>${fonct.idProduit}</b></td>
-					<td><u>${fonct.categorie.nomCategorie}</u></td>
-					<td><i>${fonct.designation}</i></td>
-					<td>${fonct.description}</td>
-					<td><b>${fonct.prix}</b></td>
-					<td>${fonct.quantite}</td>
-					<td><img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${fonct.idProduit}"/></td>
-					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
-					<td><a
-						href="${pageContext.request.contextPath}/produit/delete/${fonct.idProduit}"><img src="${pageContext.request.contextPath}/../../images/iconeSupprimer.png" alt="supprimer"/></a>
-					</td>
-					
-		
-					<td>
-						<a href="${pageContext.request.contextPath}/produit/updateform?fonctId=${fonct.idProduit}">Modifier</a>
-					</td>	
 							
-				</tr>
-				
-			
-			</c:forEach>
+							<div class="form-group row justify-content-md-center">
 
-		</table>
-		<br/>
-		<br/>
-		<br/>
-		
-	
+								<label class="col-sm-2 col-form-label">Email</label>
 
-</div>
-	</div>
-	</div>
-	</div>
+								<div class="col-sm-7">
+									<input type="text" name="mail" class="form-control"
+										placeholder="Email" />
+								</div>
+
+							</div>
+							
+							</div>
+						<!-- end col-6 -->
+						<div class="col-6">
+
+							<div class="form-group row justify-content-md-center">
+
+								<label class="col-sm-2 col-form-label">Mot de passe</label>
+
+								<div class="col-sm-7">
+									<input type="text" class="form-control"
+										placeholder="Mot de passe" name="password"
+										/>
+								</div>
+
+							</div>
+					
+						</div>
+						<!-- end col-6 -->
+					</div>
+					<!-- end row -->
+					<br /> <br />
+					<div class="row justify-content-center">
+						<div class="col-4">
+							<div class="form-group row justify-content-md-center">
+								<button class="btn btn-outline-primary btn-lg btn-block"
+									type="submit">Ajouter ce user</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 	
-		<br />
+	<br />
 	<br />
 	<!-- =============== inlusion du footer ========================== -->
 	<%@ include file="/resources/template/footer.jsp"%>

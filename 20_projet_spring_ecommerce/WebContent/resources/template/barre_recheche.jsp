@@ -17,8 +17,8 @@
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestion
 					Employés</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown07">
-					<a class="dropdown-item" href="#">Afficher Tous</a> <a
-						class="dropdown-item" href="#">Ajouter</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/user/liste/">Afficher Tous</a> <a
+						class="dropdown-item" href="${pageContext.request.contextPath}/addUser">Ajouter</a>
 				</div></li>
 				
 				<!-- Tâches gestionnaire caroussel -->

@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+<!-- ======================================= LES TAGLIBS ========================================== -->
 <!-- taglib de jsp -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- taglib de Spring Security -->
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Accueil</title>
 
 <!-- lib icone : Fontawesome -->
 <link rel="stylesheet"
@@ -34,8 +36,10 @@
 <link
 	href="<c:url value="/resources/bootstrap-Litera/css/bootstrap.min.css" />"
 	rel="stylesheet">
+
 </head>
 <body>
+
 	<!-- =============== inclusion du header ========================== -->
 	<%@ include file="/resources/template/header.jsp"%>
 	<!-- ============================================================== -->
@@ -70,63 +74,80 @@
 
 
 					<!-- =============== fin menu gauche ========================== -->
-<div class="col-10" align="center">
-		<table cellspacing="0" cellpadding="10" width="100%">
-			
-			
-			<tr bgcolor="grey" style="color: white"; align="center">
-				<th>Id</th>
-				<th>Catégorie</th>
-				<th>Désignation</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Photo</th>
-				<th colspan="3">Operations</th>
-			</tr>
 
-			<!-- attribut_liste_foncts = listeFonctionnaires -->
-			<c:forEach items="${liste_produits}" var="fonct">
-				<tr bgcolor="lightyellow">
-					<td><b>${fonct.idProduit}</b></td>
-					<td><u>${fonct.categorie.nomCategorie}</u></td>
-					<td><i>${fonct.designation}</i></td>
-					<td>${fonct.description}</td>
-					<td><b>${fonct.prix}</b></td>
-					<td>${fonct.quantite}</td>
-					<td><img src="${pageContext.request.contextPath}/myImage/imageProduitDisplay?id=${fonct.idProduit}"/></td>
-					<!-- ${pageContext.request.contextPath} = http://localhost:8080/09_advanced_framework_spring_mvc -->
-					<td><a
-						href="${pageContext.request.contextPath}/produit/delete/${fonct.idProduit}"><img src="${pageContext.request.contextPath}/../../images/iconeSupprimer.png" alt="supprimer"/></a>
-					</td>
-					
-		
-					<td>
-						<a href="${pageContext.request.contextPath}/produit/updateform?fonctId=${fonct.idProduit}">Modifier</a>
-					</td>	
-							
-				</tr>
-				
-			
-			</c:forEach>
 
-		</table>
-		<br/>
-		<br/>
-		<br/>
-		
-	
+					<!-- =============== début du Core ========================== -->
 
-</div>
+					<div class="col-10 ">
+
+						<s:authorize access="hasRole('ROLE_CATEGORIE')">
+							<div class="container">
+								<div class="row justify-content-center">
+									<div class="col-6 ">
+										<button
+											onclick="location.href='${pageContext.request.contextPath}/addUser'"
+											class="btn btn-outline-secondary btn-lg btn-block "
+											type="button">Ajouter un employé</button>
+									</div>
+								</div>
+							</div>
+							<br />
+						</s:authorize>
+
+
+						<div class="container marketing">
+
+							<div class="row">
+
+
+								<c:forEach items="${liste_users}" var="user">
+
+									<div class="col-4">
+										<div class="card" style="margin-bottom: 25px">
+											<div class="card-body">
+												<h3>ROLES</h3>
+												<p>${user.mail}</p>
+												<p>${user.password}</p>
+												
+												
+												<s:authorize access="hasRole('ROLE_CATEGORIE')">
+												<p>
+													<a class="btn btn-warning"
+														href="${pageContext.request.contextPath}/user/updateform?idUser=${user.id}"
+														role="button">Modifier</a>
+																											<a class="btn btn-danger"
+														href="${pageContext.request.contextPath}/user/delete?idUser=${user.id}"
+														role="button">Supprimer</a>
+												</p>
+												</s:authorize>
+												
+											</div>
+										</div>
+									</div>
+									<br />
+								</c:forEach>
+
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end conteneur marketing -->
+					</div>
+					<!-- end col-8 -->
+					<!-- =============== fin du Core ========================== -->
+
+				</div>
+				<!-- end row -->
+			</div>
+			<!-- end col-sm-10 -->
+		</div>
+		<!-- end row justify-content-center -->
 	</div>
-	</div>
-	</div>
-	</div>
-	
-		<br />
+	<!-- end container-fluid -->
+
+
+	<br />
 	<br />
 	<!-- =============== inlusion du footer ========================== -->
 	<%@ include file="/resources/template/footer.jsp"%>
-	
+
 </body>
-</html>
