@@ -105,7 +105,7 @@
 								<div class="row justify-content-center">
 									<div class="col-6 ">
 										<button
-											onclick="location.href='${pageContext.request.contextPath}/addProduit?idCategorgie=${id_categorie}'"
+											onclick="location.href='${pageContext.request.contextPath}/addProduit?idCategorie=${id_categorie}'"
 											class="btn btn-outline-secondary btn-lg btn-block "
 											type="button">Ajouter un produit</button>
 									</div>
@@ -153,7 +153,7 @@
 
 												<span class="badge badge-success">Encore
 													${produit.quantite} articles disponibles ! </span>
-
+													<s:authorize access="hasRole('ROLE_CLIENT')">
 												<fieldset>
 													<div class="form-group row">
 
@@ -170,8 +170,24 @@
 														</div>
 													</div>
 												</fieldset>
+												
 												<form:button type="submit" class="btn btn-outline-success">Ajouter
 													au Panier</form:button>
+												</s:authorize>
+												<s:authorize access="hasRole('ROLE_ANONYMOUS')">
+												<fieldset>
+													<div class="form-group row">
+
+
+
+														<label class="col-sm-8 col-form-label">Quantité :</label>
+														<div class="col-sm-4">
+															
+														</div>
+													</div>
+												</fieldset>
+												Vous devez être <a href="${pageContext.request.contextPath}/login.jsp">connecté(e)</a> pour commander ce produit
+												</s:authorize>
 											</form:form>
 											
 										</div>

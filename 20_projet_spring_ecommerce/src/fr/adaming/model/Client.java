@@ -2,13 +2,11 @@ package fr.adaming.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -36,8 +34,9 @@ public class Client extends User {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Commande> listeCommandes;
 	
-	@OneToOne(mappedBy="client", cascade=CascadeType.ALL)
-	private Panier panier;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="client")
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Panier> listePanier;
 
 	/* _____________________ Constructeurs ________________________ */
 
@@ -88,21 +87,22 @@ public class Client extends User {
 		this.listeCommandes = listeCommandes;
 	}
 
-	public Panier getPanier() {
-		return panier;
+	
+	public List<Panier> getListePanier() {
+		return listePanier;
 	}
 
-	public void setPanier(Panier panier) {
-		this.panier = panier;
+	public void setListePanier(List<Panier> listePanier) {
+		this.listePanier = listePanier;
 	}
-
 	
 	/* ________________ Redéfinition de la méthode toString _________________ */
-	
+
+
 	@Override
 	public String toString() {
 		return "Client [nom=" + nom + ", adresse=" + adresse + ", telephone=" + telephone + ", listeCommandes="
-				+ listeCommandes + ", panier=" + panier + "]";
+				+ listeCommandes + "]";
 	}
 
 

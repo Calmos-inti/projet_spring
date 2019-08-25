@@ -116,7 +116,7 @@ public class PanierController {
 			
 			LignePanier ligPan = new LignePanier();
 			ligPan.setProduit(p);
-			ligPan.setQuantité(quantite);
+			ligPan.setQuantite(quantite);
 			ligPan.setPrix(p.getPrix());
 			articles.put(p.getIdProduit(), ligPan);
 			
@@ -124,7 +124,7 @@ public class PanierController {
 			
 		}else {
 			
-			lp.setQuantité(lp.getQuantité() + quantite);
+			lp.setQuantite(lp.getQuantite() + quantite);
 		}
 	
 	}
@@ -148,7 +148,7 @@ public class PanierController {
 			public double getTotal() {
 				double total = 0;
 				for(LignePanier lp : articles.values()) {
-					total += lp.getPrix()* lp.getQuantité();
+					total += lp.getPrix()* lp.getQuantite();
 				}
 				return total;
 			}

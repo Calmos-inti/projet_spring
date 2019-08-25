@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
@@ -56,6 +57,8 @@ public class AccueilController {
 	public void setClientService(IClientService clientService) {
 		this.clientService = clientService;
 	}
+	
+	
 
 	/* ___________________________ Méthodes métiers ________________________ */
 
@@ -68,6 +71,34 @@ public class AccueilController {
 		modelDonnees.addAttribute("liste_categories", listeCategories);
 
 	}
+	
+	public Client recuperationClientConnecte() {
+		try {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String mail = auth.getName();
+
+		return clientService.getClientbyMailService(mail);}
+		catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public void infoPanier(ModelMap modelDonnees) {
+		
+		Client client = recuperationClientConnecte();
+		
+		if(client!=null) {
+		// récupération du panier actif 
+		List<Panier> listPanier = client.getListePanier();
+		Panier panier = client.getListePanier().get(listPanier.size()-1);
+		
+		// Encapsulation de la liste dans l'objet ModelMap
+		modelDonnees.addAttribute("panier", panier);
+		}
+		
+	}
+	
+	
 
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
 	public String allerAccueil(ModelMap modelDonnees) {
@@ -75,7 +106,8 @@ public class AccueilController {
 		/* ________ Récupération des infos pour la page accueil ___________________ */
 
 		infoMenuGauche(modelDonnees);
-
+		infoPanier(modelDonnees);
+		
 		return "accueil";
 	}
 
@@ -83,7 +115,8 @@ public class AccueilController {
 	public String listerProduits(@RequestParam("idCategorie") int pIdCategorie, ModelMap modelDonnees, Model model) {
 
 		infoMenuGauche(modelDonnees);
-
+		infoPanier(modelDonnees);
+		
 		// Recupération de la liste des produits depuis la BDD
 		List<Produit> listeProduit = categorieManager.getCategorie(pIdCategorie).getListeProduits();
 
@@ -100,7 +133,8 @@ public class AccueilController {
 	public String rechercheProduitsbyId(@RequestParam("idProduit") int pIdProduit, ModelMap modelDonnees, Model model) {
 
 		infoMenuGauche(modelDonnees);
-
+		infoPanier(modelDonnees);
+		
 		// Recupération de la liste des produits depuis la BDD
 		Produit produit = produitManager.getProduit(pIdProduit);
 
@@ -119,7 +153,8 @@ public class AccueilController {
 	public String rechercheProduitsMotCle(@RequestParam("mot") String pMot, ModelMap modelDonnees, Model model) {
 
 		infoMenuGauche(modelDonnees);
-
+		infoPanier(modelDonnees);
+		
 		List<Produit> listeProduit = produitManager.getAllProduit();
 		List<Produit> listeRecherche = new ArrayList<>();
 
@@ -150,7 +185,7 @@ public class AccueilController {
 
 	@RequestMapping(value = "/accueil/creerCompte", method = RequestMethod.GET)
 	public ModelAndView formulaireAddClient() {
-
+		
 		// Etape 1 : création de l'objet à retourner pour les données
 		Map<String, Object> data = new HashMap<String, Object>();
 		Client client = new Client();
@@ -168,6 +203,7 @@ public class AccueilController {
 		
 		// récupération des infos pour le menu gauche
 		infoMenuGauche(modeleDonnees);
+		infoPanier(modeleDonnees);
 		
 		pClient.setEnabled(true);
 		clientService.addClientService(pClient);

@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,13 +18,16 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LignePanier;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.model.Role;
 import fr.adaming.model.User;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILignePanierService;
+import fr.adaming.service.IPanierService;
 import fr.adaming.service.IProduitService;
 import fr.adaming.service.IRoleService;
 import fr.adaming.service.IUserService;
@@ -84,7 +85,53 @@ public class ClientController {
 		this.lignePanierManager = lignePanierManager;
 	}
 
+	@Autowired
+	private IPanierService panierManager;
+
+	// setter pour injection spring
+
+	public void setPanierManager(IPanierService panierManager) {
+		this.panierManager = panierManager;
+	}
+
+	@Autowired
+	private ICommandeService commandeService;
+
+	// setters
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
 	/* _________________ TESTS CLIENT ET USER (à supprimer)_______________ */
+
+	@RequestMapping(value = "/test33", method = RequestMethod.GET)
+	public String testttte(ModelMap modeleDonnes) {
+
+		Client client = recuperationClientConnecte();
+
+		List<Commande> listeCommande = client.getListeCommandes();
+
+		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+
+		System.out.println("------------------TEST------------------------");
+
+		for (Commande command : listeCommande) {
+			System.out.println("boucle commande");
+			System.out.println("\t> Commande id :" + command.getId());
+			System.out.println("\t> Commande total :" + command.getTotal());
+
+			List<LignePanier> list = command.getListeLignePanier();
+
+			for (LignePanier lp : list) {
+				System.out.println("boucle lp");
+				System.out.println("\t\t> Ligne panier id :" + lp.getId());
+				System.out.println("\t\t> Ligne panier prix :" + lp.getPrix());
+			}
+
+		}
+
+		System.out.println("-----------------FIN TEST------------------------");
+		return "testClient";
+	} // end afficherCommandes
 
 	@RequestMapping(value = "/client/test")
 	public String tester() {
@@ -250,6 +297,19 @@ public class ClientController {
 		return clServ.getClientbyMailService(mail);
 	}
 
+	public void infoPanier(ModelMap modelDonnees) {
+
+		Client client = recuperationClientConnecte();
+
+		// récupération du panier actif
+		List<Panier> listPanier = client.getListePanier();
+		Panier panier = client.getListePanier().get(listPanier.size() - 1);
+
+		// Encapsulation de la liste dans l'objet ModelMap
+		modelDonnees.addAttribute("panier", panier);
+
+	}
+
 	/* _____________ méthodes d'interseption de requetes ________________ */
 
 	@RequestMapping(value = "/client/formulaireUpdate", method = RequestMethod.GET)
@@ -271,6 +331,8 @@ public class ClientController {
 
 		clServ.updateClientService(client);
 		infoMenuGauche(modeleDonnes);
+		infoPanier(modeleDonnes);
+
 
 		return "accueil";
 	} // end UpdateClient
@@ -283,6 +345,7 @@ public class ClientController {
 		List<Commande> listeCommande = client.getListeCommandes();
 
 		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+		infoPanier(modeleDonnes);
 
 		return "commandes_client";
 	} // end afficherCommandes
@@ -291,16 +354,16 @@ public class ClientController {
 	public String ajoutPanier(@ModelAttribute("produitCommand") Produit produit, ModelMap modeleDonnes) {
 
 		int quantite = produit.getQuantite();
-		
-		System.out.println("--------------------------------------------------------------");
-		System.out.println("quantité : "+quantite);
-		System.out.println("id : "+produit.getIdProduit());
-		System.out.println("--------------------------------------------------------------");
-		
+
 		Produit produitOut = produitManager.getProduit(produit.getIdProduit());
 
 		// récupération du client connecté
 		Client client = recuperationClientConnecte();
+		
+		// récupération du panier actif
+		List<Panier> listPanier = client.getListePanier();
+		int size = listPanier.size();
+		Panier panier= client.getListePanier().get(size - 1);
 
 		// Calcul de la nouvelle quantité de produit + envoi dans la bdd
 		produitOut.setQuantite(produitOut.getQuantite() - quantite);
@@ -309,17 +372,64 @@ public class ClientController {
 		// création de la ligne de panier
 		LignePanier lignePanier = new LignePanier();
 		lignePanier.setProduit(produitOut);
-		lignePanier.setQuantité(quantite);
-		lignePanier.setPanier(client.getPanier());
+		lignePanier.setQuantite(quantite);
+		
+		// ajout de la ligne au panier
+		lignePanier.setPanier(panier);
 
 		// ajout de la ligne dans la bdd
 		lignePanierManager.addLignePanierService(lignePanier);
 		
+		// récupérer le panier à jour
+		panier=panierManager.getPanierService(panier.getId());
+		
+		// Calcul du total du panier
+		double total = 0.0;
+		for (LignePanier lp : panier.getListeLignePanier()) {
+			total = total + lp.getPrix();
+		}
+		panier.setTotal(total);
+		panierManager.updatePanierService(panier);
+
 		// mise à jour du menu gauche
 		infoMenuGauche(modeleDonnes);
-		
+		infoPanier(modeleDonnes);
+
 		// redirection
 		return "accueil";
-	} // end UpdateClient
+	} // end ajoutPanier
 
+	@RequestMapping(value = "/client/validerPanier", method = RequestMethod.GET)
+	public String validerPanier(ModelMap modeleDonnes) {
+
+		// récupération du client connecté
+		Client client = recuperationClientConnecte();
+
+		// récupération des lignes du panier actif
+		List<Panier> listPanier = client.getListePanier();
+		int size = listPanier.size();
+		List<LignePanier> listeLignePanier = client.getListePanier().get(size - 1).getListeLignePanier();
+
+		// Création d'une commande avec ces listes
+		Commande commande = new Commande();
+		commande.setValider(false);
+		commande.setClient(clServ.getClientService(client.getId()));
+		commande = commandeService.getCommandeService(commandeService.addCommandeService(commande));
+
+		// ajout de la liste de ligne de panier à la commande
+		for (LignePanier lignePanier : listeLignePanier) {
+			lignePanierManager.ajouterLignePanierDansCommandeBDD(lignePanier, commande);
+		}
+
+		// Création du nouveau panier
+		Panier panier = new Panier();
+		panier.setClient(client);
+		panierManager.addPanierService(panier);
+
+		// mise à jour du menu gauche
+		infoMenuGauche(modeleDonnes);
+		infoPanier(modeleDonnes);
+
+		return "accueil";
+	}
 } // end class

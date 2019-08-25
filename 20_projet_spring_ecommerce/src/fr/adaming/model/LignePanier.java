@@ -21,7 +21,7 @@ public class LignePanier {
 	private int id;
 
 	@Column(name = "quantite")
-	private int quantité;
+	private int quantite;
 
 	@Column(name = "prix")
 	private double prix;
@@ -30,7 +30,7 @@ public class LignePanier {
 
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "produit_id", nullable = false) 
+	@JoinColumn(name = "produit_id", nullable = false)
 	private Produit produit;
 
 
@@ -48,22 +48,22 @@ public class LignePanier {
 		super();
 	}
 
-	public LignePanier(int id, int quantité, Produit produit) {
+	public LignePanier(int id, int quantite, Produit produit) {
 		super();
 		this.id = id;
-		this.quantité = quantité;
+		this.quantite = quantite;
 		this.produit = produit;
 	}
 
-	public LignePanier(int quantité, Produit produit) {
+	public LignePanier(int quantite, Produit produit) {
 		super();
-		this.quantité = quantité;
+		this.quantite = quantite;
 		this.produit = produit;
 	}
 
-	public LignePanier(int quantité, Produit produit, Panier panier) {
+	public LignePanier(int quantite, Produit produit, Panier panier) {
 		super();
-		this.quantité = quantité;
+		this.quantite = quantite;
 		this.produit = produit;
 		this.panier = panier;
 	}
@@ -78,12 +78,12 @@ public class LignePanier {
 		this.id = id;
 	}
 
-	public int getQuantité() {
-		return quantité;
+	public int getQuantite() {
+		return quantite;
 	}
 
-	public void setQuantité(int quantité) {
-		this.quantité = quantité;
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
 	}
 
 	public double getPrix() {
