@@ -30,12 +30,7 @@
 							Catégorie</span></li>
 				</s:authorize>
 
-				<s:authorize access="hasRole('ROLE_PRODUIT')">
-					<li class="nav-item"><a
-						href="${pageContext.request.contextPath}/accueil_backoffice">Partie
-							Administration</a></li>
-				</s:authorize>
-
+			
 
 			</ul>
 			<!-- end coté gauche -->

@@ -95,9 +95,9 @@
 						</s:authorize>
 
 
-						<div class="container marketing">
+						<div class="container marketing" align="center">
 
-							<div class="row">
+							<div class="row" >
 
 
 								<c:forEach items="${liste_users}" var="user">
@@ -105,9 +105,11 @@
 									<div class="col-4">
 										<div class="card" style="margin-bottom: 25px">
 											<div class="card-body">
-												<h3>ROLES</h3>
-												<p>${user.mail}</p>
+												
+												<h6 ><b>${user.mail}</b></h6>
 												<p>${user.password}</p>
+												<br/>
+												<p>${user.listeRoles}</p>
 												
 												
 												<s:authorize access="hasRole('ROLE_CATEGORIE')">

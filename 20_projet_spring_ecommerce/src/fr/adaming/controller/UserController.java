@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.Role;
 import fr.adaming.model.User;
 import fr.adaming.service.IUserService;
 
 @Controller
 public class UserController {
+	
+	
 	
 	@Autowired
 	private IUserService userManager;
@@ -128,7 +131,9 @@ public class UserController {
 //			@RequestParam("adresse") String adresse,
 //			@RequestParam("nom") String nom,
 //			@RequestParam("telephone") String telephone,
-			@RequestParam("id") Integer id	, ModelMap modelDonnees) throws IOException {
+			@RequestParam("id") Integer id,	
+			ModelMap modelDonnees) throws IOException {
+		
 		
 		
 		User user = userManager.getUserService(id);
