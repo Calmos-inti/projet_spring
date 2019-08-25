@@ -16,7 +16,7 @@
 
 							<div class="container">
 								<div class="carousel-caption text-left">
-									<img src="${pageContext.request.contextPath}/myImage/image1CarousselDisplay?id=1"/>
+									<img src="${pageContext.request.contextPath}/myImage/image1CarousselDisplay?idCaroussel=1"/>
 								</div>
 							</div>
 						</div>
@@ -30,7 +30,7 @@
 					<rect width="100%" height="100%" fill="#777" /></svg>
 							<div class="container">
 								<div class="carousel-caption text-left">
-									<img src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?id=1}"/>
+									<img src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?idCaroussel=1}"/>
 								</div>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 					<rect width="100%" height="100%" fill="#777" /></svg>
 							<div class="container">
 								<div class="carousel-caption text-left">
-									<img src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?id=1"/>
+									<img src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?idCaroussel=1"/>
 								</div>
 							</div>
 						</div>

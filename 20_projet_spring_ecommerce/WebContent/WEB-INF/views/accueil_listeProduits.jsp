@@ -130,6 +130,18 @@
 											<h4 class="card-title">${produit.designation}</h4>
 											<h6 class="card-subtitle mb-2 text-muted">${produit.categorie.nomCategorie}</h6>
 											<p class="card-text">${produit.description}</p>
+											
+											<s:authorize access="hasRole('ROLE_CATEGORIE')">
+												<p>
+													<a class="btn btn-warning"
+														href="${pageContext.request.contextPath}/updateProduit?idProduit=${produit.idProduit}"
+														role="button">Modifier</a>
+													
+													<a class="btn btn-danger"
+														href="${pageContext.request.contextPath}/produit/delete?idProduit=${produit.idProduit}"
+														role="button">Supprimer</a>
+												</p>
+												</s:authorize>
 										</div>
 
 
