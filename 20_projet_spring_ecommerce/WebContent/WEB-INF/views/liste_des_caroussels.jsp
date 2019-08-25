@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+<!-- ======================================= LES TAGLIBS ========================================== -->
 <!-- taglib de jsp -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- taglib de Spring Security -->
 <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Accueil</title>
 
 <!-- lib icone : Fontawesome -->
 <link rel="stylesheet"
@@ -34,30 +36,55 @@
 <link
 	href="<c:url value="/resources/bootstrap-Litera/css/bootstrap.min.css" />"
 	rel="stylesheet">
+
 </head>
 <body>
+
 	<!-- =============== inclusion du header ========================== -->
 	<%@ include file="/resources/template/header.jsp"%>
 	<!-- ============================================================== -->
+	<br />
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
-<br/>
-		<div align="center">
-		<h1>
-		Liste des caroussels</h1></div>
-			<br/>
-			<br/>
-		
-		
-				<!-- =============== inclusion menu gauche ========================== -->
-<div class="row">
-					<div class="col-2">
 
-						<%@ include file="/resources/template/menu_vertical_gauche.jsp"%>
 
-					</div>
-<div class="col-5" align="center">
+
+				<!-- =============== inclusion Carousel ========================== -->
+				<%@ include file="/resources/template/carousel.jsp"%>
+
+				<!-- =============== end carousel ========================== -->
+
+
+				<!-- =============== inclusion Barre recherche ==================== -->
+				<Br />
+				<%@ include file="/resources/template/barre_recheche.jsp"%>
+				<Br />
+				<!-- =============== end Barre recherche ========================== -->
+
+				<div class="row">
+					
+					<!-- =============== début du Core ========================== -->
+
+					<div class="col-12 ">
+
+						<s:authorize access="hasRole('ROLE_CATEGORIE')">
+							<div class="container">
+								<div class="row justify-content-center">
+									<div class="col-6 ">
+										<button
+											onclick="location.href='${pageContext.request.contextPath}/addCaroussel'"
+											class="btn btn-outline-secondary btn-lg btn-block "
+											type="button">Ajouter un caroussel</button>
+									</div>
+								</div>
+							</div>
+							<br />
+						</s:authorize>
+
+
+						<div class="container marketing">
+
 		<table cellspacing="0" cellpadding="10" width="100%">
 			
 			

@@ -20,6 +20,17 @@
 					<a class="dropdown-item" href="#">Afficher Tous</a> <a
 						class="dropdown-item" href="#">Ajouter</a>
 				</div></li>
+				
+				<!-- Tâches gestionnaire caroussel -->
+			
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="dropdown07"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestion
+					des caroussels</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown07">
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/caroussel/liste/">Afficher Tous</a> <a
+						class="dropdown-item" href="${pageContext.request.contextPath}/addCaroussel">Ajouter</a>
+				</div></li>
 		</ul>
 
 		<form class="form-inline my-2 my-lg-0" method="get"
