@@ -39,37 +39,24 @@
 	<!-- =============== inclusion du header ========================== -->
 	<%@ include file="/resources/template/header.jsp"%>
 	<!-- ============================================================== -->
-	<br />
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
-
-
-
-				<!-- =============== inclusion Carousel ========================== -->
-				<%@ include file="/resources/template/carousel.jsp"%>
-
-				<!-- =============== end carousel ========================== -->
-
-
-				<!-- =============== inclusion Barre recherche ==================== -->
-				<Br />
-				<%@ include file="/resources/template/barre_recheche.jsp"%>
-				<Br />
-				<!-- =============== end Barre recherche ========================== -->
-
-				<div class="row">
-					<!-- =============== inclusion menu gauche ========================== -->
-
+<br/>
+		<div align="center">
+		<h1>
+		Liste des produits</h1></div>
+			<br/>
+			<br/>
+		
+		
+				<!-- =============== inclusion menu gauche ========================== -->
+<div class="row">
 					<div class="col-2">
 
-						<%@ include file="/resources/template/menu_gauche.jsp"%>
+						<%@ include file="/resources/template/menu_vertical_gauche.jsp"%>
 
 					</div>
-					<!-- end col-2 -->
-
-
-					<!-- =============== fin menu gauche ========================== -->
 <div class="col-10" align="center">
 		<table cellspacing="0" cellpadding="10" width="100%">
 			

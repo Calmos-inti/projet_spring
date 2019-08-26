@@ -101,23 +101,19 @@ public class ProduitController {
 
 	}
 
-	@RequestMapping(value = { "/produit/delete" }, method = RequestMethod.GET)
-	public String deleteCategorieBdd(@RequestParam("idProduit") int aProduitId, ModelMap modelDonnees) {
+	@RequestMapping(value = { "/produit/delete/{pProduitId}" }, method = RequestMethod.GET)
+	public String deleteCategorieBdd(@PathVariable("pProduitId") int aProduitId, ModelMap modelDonnees) {
 
 		// Etape 1 : suppression de la catégorie depuis la BDD
 		produitManager.deleteProduit(aProduitId);
 
 		// Etape 2 : recup de la nouvelle liste de catégories et défintion du modèle de
 		// données
-		
-		List<Categorie> listeCategories = categorieManager.getAllCategories();
-		modelDonnees.addAttribute("liste_categories", listeCategories);
-		
-		List<Produit> listeProduits = produitManager.getAllProduit();
-		modelDonnees.addAttribute("liste_produits", listeProduits);
+		List<Produit> listeProduitsBDD = produitManager.getAllProduit();
+		modelDonnees.addAttribute("liste_produits", listeProduitsBDD);
 
 		// Etape 3 : Renvoi non logique + redirection
-		return "accueil";
+		return "redirect:/produit/liste";
 
 	}
 
@@ -143,26 +139,33 @@ public class ProduitController {
 
 	@RequestMapping(value = "/produit/add", method = RequestMethod.POST)
 	public String addCategorieBdd(@RequestParam("photo") MultipartFile photo,
-			@RequestParam("designation") String designation, 
+			@RequestParam("designation") String designation, @RequestParam("idCategorie") Integer idCategorie,
 			@RequestParam("description") String description, @RequestParam("prix") Double prix,
 			@RequestParam("quantite") Integer quantite, ModelMap modelDonnees) throws IOException {
 
 		byte[] photoBytes = photo.getBytes();
 
 		Produit produit = new Produit(designation, description, prix, quantite, true, photoBytes);
+		produit.setCategorie(categorieManager.getCategorie(idCategorie));
 
 		produitManager.addProduit(produit);
 		
 		/*______________récupération des info pour l'accueil______________________________*/
 		// Recupération de la liste des categories depuis la BDD
-		List<Produit> listeProduits = produitManager.getAllProduit();
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
 
 		// Encapsulation de la liste dans l'objet ModelMap
-		modelDonnees.addAttribute("liste_produits", listeProduits);
+		modelDonnees.addAttribute("liste_categories", listeCategories);
 		
+		// Recupération de la liste des produits depuis la BDD
+		List<Produit> listeProduit = categorieManager.getCategorie(idCategorie).getListeProduits();
 
+		// Encapsulation de la liste dans l'objet ModelMap
+		modelDonnees.addAttribute("liste_produits", listeProduit);
+		
+		modelDonnees.addAttribute("id_categorie", idCategorie);
 
-		return "accueil";
+		return "accueil_listeProduits";
 
 	}
 

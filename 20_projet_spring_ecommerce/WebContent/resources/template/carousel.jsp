@@ -12,14 +12,6 @@
 				src="${pageContext.request.contextPath}/myImage/image1CarousselDisplay?id=1"
 				width="1300" height="150" />
 
-
-							<div class="container">
-								<div class="carousel-caption text-left">
-									<img src="${pageContext.request.contextPath}/myImage/image1CarousselDisplay?idCaroussel=1"/>
-								</div>
-							</div>
-						</div>
-
 			<div class="container">
 				<div class="carousel-caption text-left">
 					<h3>C'est l'été sur AKC-Shop !</h3>
@@ -27,18 +19,6 @@
 			</div>
 		</div>
 
-						<div class="carousel-item">
-							<svg class="bd-placeholder-img" width="100%" height="100%"
-								xmlns="http://www.w3.org/2000/svg"
-								preserveAspectRatio="xMidYMid slice" focusable="false"
-								role="img">
-					<rect width="100%" height="100%" fill="#777" /></svg>
-							<div class="container">
-								<div class="carousel-caption text-left">
-									<img src="${pageContext.request.contextPath}/myImage/image2CarousselDisplay?idCaroussel=1}"/>
-								</div>
-							</div>
-						</div>
 
 		<div class="carousel-item">
 			<img
@@ -50,20 +30,6 @@
 			</div>
 		</div>
 
-						<div class="carousel-item">
-							<svg class="bd-placeholder-img" width="100%" height="100%"
-								xmlns="http://www.w3.org/2000/svg"
-								preserveAspectRatio="xMidYMid slice" focusable="false"
-								role="img">
-					<rect width="100%" height="100%" fill="#777" /></svg>
-							<div class="container">
-								<div class="carousel-caption text-left">
-									<img src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?idCaroussel=1"/>
-								</div>
-							</div>
-						</div>
-					</div>
-
 		<div class="carousel-item">
 			<img
 				src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?id=1" width="1300" height="150" />
@@ -73,8 +39,7 @@
 				</div>
 			</div>
 		</div>
-
-
+	</div>
 
 	<a class="carousel-control-prev" href="#myCarousel" role="button"
 		data-slide="prev"> <span class="carousel-control-prev-icon"
@@ -84,3 +49,4 @@
 		aria-hidden="true"></span> <span class="sr-only">Next</span>
 	</a>
 
+</div>

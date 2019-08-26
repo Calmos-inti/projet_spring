@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,11 +26,9 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
-import fr.adaming.model.User;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.IProduitService;
-import fr.adaming.service.IUserService;
 
 @Controller
 public class AccueilController {
@@ -61,14 +58,6 @@ public class AccueilController {
 		this.clientService = clientService;
 	}
 	
-	@Autowired
-	private IUserService userService;
-	
-	//setter pour injection spring
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
 	
 
 	/* ___________________________ Méthodes métiers ________________________ */
@@ -83,7 +72,6 @@ public class AccueilController {
 
 	}
 	
-
 	public Client recuperationClientConnecte() {
 		try {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -231,20 +219,13 @@ public class AccueilController {
 	    return "accueil";
 	}
 	
-	@RequestMapping(value = "/accueil/liste_users", method = RequestMethod.GET)
-	public String listerUsers(ModelMap modelDonnees) {
+	@RequestMapping(value = "/accueil_backoffice", method = RequestMethod.GET)
+	public String allerAccueilBackOffice (ModelMap modelDonnees) {
 
 		infoMenuGauche(modelDonnees);
-		infoPanier(modelDonnees);
-		
-		// Recupération de la liste des produits depuis la BDD
-		List<User> listeUsers = userService.getAllUserService();
 
-		// Etape 2 : Encapsulation de la liste dans l'objet ModelMap
-		modelDonnees.addAttribute("liste_users", listeUsers);
-		
-		
-		return "accueil_users";
+		return "accueil_backoffice";
 	}
+	
 
 }
