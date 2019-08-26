@@ -43,4 +43,11 @@ public class CarousselServiceImpl implements ICarousselService {
 		return carousselDao.getCarousselDao(pIdCaroussel);
 	}
 
+
+	@Override
+	public void updateImageService(Caroussel caroussel) {
+		carousselDao.updateCarousselDao(caroussel);
+		
+	}
+
 }

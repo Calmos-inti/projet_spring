@@ -50,4 +50,12 @@ public class CarousselDaoImpl implements ICarousselDao {
 		return session.get(Caroussel.class, pIdCaroussel);
 	}
 
+	@Transactional
+	@Override
+	public void updateCarousselDao(Caroussel caroussel) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(caroussel);
+		
+	}
+
 }

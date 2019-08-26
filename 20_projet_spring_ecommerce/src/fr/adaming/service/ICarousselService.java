@@ -13,5 +13,7 @@ public int addImageService(Caroussel caroussel);
 	public List<Caroussel> getAllCarousselService();
 	
 	public Caroussel getCarousselService (int pIdCaroussel);
+	
+	public void updateImageService (Caroussel caroussel);
 
 }

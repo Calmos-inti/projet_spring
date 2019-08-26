@@ -22,7 +22,7 @@
 		</c:forEach>
 
 	</ul>
-
+	<% response.sendRedirect("accueil"); %>
 	<h1>Page index</h1>
 	<br />
 	<!-- Liens pour les tests (seront supprimés quand les tests seront finis) -->

@@ -35,7 +35,7 @@
 				src="${pageContext.request.contextPath}/myImage/image3CarousselDisplay?id=1" width="1300" height="150" />
 			<div class="container">
 				<div class="carousel-caption text-left">
-					<h3></h3>
+					<h3>C'est bientôt la rentrée...</h3>
 				</div>
 			</div>
 		</div>

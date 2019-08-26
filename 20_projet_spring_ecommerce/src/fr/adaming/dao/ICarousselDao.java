@@ -14,5 +14,5 @@ public interface ICarousselDao {
 	
 	public Caroussel getCarousselDao (int pIdCaroussel);
 	
-	
+	public void updateCarousselDao (Caroussel caroussel);
 }

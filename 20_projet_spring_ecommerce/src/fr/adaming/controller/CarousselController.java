@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -97,6 +99,46 @@ public class CarousselController {
 
 	}
 	
+	@RequestMapping(value="/caroussel/updateform", method=RequestMethod.GET)
+	public String setUpFormulaireUpdate(@RequestParam("id") int pIdFonc, HttpServletRequest req) {
+		
+		//Etape 1 : récupération de la catégorie à modifier (via son ID) 
+		Caroussel carousselUpdate = carousselManager.getCarousselService(pIdFonc);
+		
+		req.setAttribute("caroussel", carousselUpdate);
+		
+		
+		return "update_caroussel";	
+	} 
 	
+
+	@RequestMapping(value="/caroussel/update", method=RequestMethod.POST)
+	public String setUpFormulaireUpdate(
+			@RequestParam("photo") MultipartFile photo,
+			@RequestParam("photo2") MultipartFile photo2,
+			@RequestParam("photo3") MultipartFile photo3,
+			@RequestParam("idCaroussel") Integer id	, ModelMap modelDonnees) throws IOException {
+		
+		byte[] photoBytes = photo.getBytes();
+		byte[] photoBytes2 = photo2.getBytes();
+		byte[] photoBytes3 = photo3.getBytes();
+		
+		
+		Caroussel caroussel = carousselManager.getCarousselService(id);
+		caroussel.setPhoto(photoBytes);
+		caroussel.setPhoto2(photoBytes2);
+		caroussel.setPhoto3(photoBytes3);
+		
+		carousselManager.updateImageService(caroussel);
+		
+		/*______________récupération des info pour l'accueil______________________________*/
+		// Recupération de la liste des categories depuis la BDD
+		List<Caroussel> listeCaroussels = carousselManager.getAllCarousselService();
+
+		// Encapsulation de la liste dans l'objet ModelMap
+		modelDonnees.addAttribute("liste_caroussels", listeCaroussels);
+		
+		return "redirect:/caroussel/liste";	
+	} 
 	
 }

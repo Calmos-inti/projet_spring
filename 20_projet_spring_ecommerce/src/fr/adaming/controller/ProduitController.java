@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Client;
+import fr.adaming.model.Commande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.IProduitService;
 
 @Controller
@@ -39,6 +40,13 @@ public class ProduitController {
 	// setter pour injection spring
 	public void setCategorieManager(ICategorieService categorieManager) {
 		this.categorieManager = categorieManager;
+	}
+	@Autowired
+	private ICommandeService commandeService;
+
+	// setters
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
 	}
 
 	/* ___________________méthodes gestionnaires_________________________ */
@@ -101,19 +109,23 @@ public class ProduitController {
 
 	}
 
-	@RequestMapping(value = { "/produit/delete/{pProduitId}" }, method = RequestMethod.GET)
-	public String deleteCategorieBdd(@PathVariable("pProduitId") int aProduitId, ModelMap modelDonnees) {
+	@RequestMapping(value = { "/produit/delete" }, method = RequestMethod.GET)
+	public String deleteCategorieBdd(@RequestParam("idProduit") int aProduitId, ModelMap modelDonnees) {
 
 		// Etape 1 : suppression de la catégorie depuis la BDD
 		produitManager.deleteProduit(aProduitId);
 
 		// Etape 2 : recup de la nouvelle liste de catégories et défintion du modèle de
 		// données
-		List<Produit> listeProduitsBDD = produitManager.getAllProduit();
-		modelDonnees.addAttribute("liste_produits", listeProduitsBDD);
+		
+		List<Categorie> listeCategories = categorieManager.getAllCategories();
+		modelDonnees.addAttribute("liste_categories", listeCategories);
+		
+		List<Produit> listeProduits = produitManager.getAllProduit();
+		modelDonnees.addAttribute("liste_produits", listeProduits);
 
 		// Etape 3 : Renvoi non logique + redirection
-		return "redirect:/produit/liste";
+		return "accueil";
 
 	}
 
@@ -165,7 +177,7 @@ public class ProduitController {
 		
 		modelDonnees.addAttribute("id_categorie", idCategorie);
 
-		return "accueil_listeProduits";
+		return "accueil";
 
 	}
 
@@ -209,5 +221,30 @@ public class ProduitController {
 		
 		return "accueil";
 
+	}
+	
+	@RequestMapping(value = "/produit/afficherCommandes", method = RequestMethod.GET)
+	public String afficherCommandesManager(ModelMap modeleDonnes) {
+
+
+		List<Commande> listeCommande = commandeService.getAllCommandeService();
+
+		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+
+		return "accueil_backoffice";
+	} // end afficherCommandes
+	
+	@RequestMapping(value = "/produit/validerCommande", method = RequestMethod.GET)
+	public String validerCommande(@RequestParam("id") int pId, ModelMap modeleDonnes) {
+
+		Commande commande = commandeService.getCommandeService(pId);
+		commande.setValider(true);
+		commandeService.updateCommandeService(commande);
+			
+		List<Commande> listeCommande = commandeService.getAllCommandeService();
+
+		modeleDonnes.addAttribute("liste_commandes", listeCommande);
+
+		return "accueil_backoffice";
 	}
 }

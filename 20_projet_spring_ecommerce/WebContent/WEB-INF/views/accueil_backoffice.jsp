@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+
 <!-- taglib de jsp -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -43,48 +43,90 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-sm-10 ">
-			
+
 				<!-- =============== inclusion Carousel ========================== -->
 				<%@ include file="/resources/template/carousel.jsp"%>
 
 				<!-- =============== end carousel ========================== -->
 
 				<!-- =============== inclusion Barre recherche ==================== -->
-				<br/>
+				<br />
 				<%@ include file="/resources/template/barre_recheche.jsp"%>
-				<br/>
+				<br />
 				<!-- =============== end Barre recherche ========================== -->
-		
-		
-		<div align="center">
-		<h1>
-		Administration Manager</h1></div>
-			<br/>
-			<br/>
-		
-		
-				<!-- =============== inclusion menu gauche ========================== -->
-<div class="row">
-					<div class="col-2">
 
-						<%@ include file="/resources/template/menu_vertical_gauche.jsp"%>
 
+				<div align="center">
+					<h1>Administration Manager</h1>
+				</div>
+				<br /> <br />
+				
+				<c:forEach items="${liste_commandes}" var="commandes">
+					<c:if test="${commandes.valider eq false}">
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-8">
+									<h6 class="card-title">Numéro de commande :
+										${commandes.id}</h6>
+
+									<p class="text-primary">Total : ${commandes.total} &euro;</p>
+								</div>
+								<div class="col-4">
+									<p>
+
+										<button type="button" class="btn btn-outline-success"
+						onclick="location.href='${pageContext.request.contextPath}/produit/validerCommande?id=${commandes.id}'">Valider</button>
+								
+										
+									
+									</p>
+									<p>
+										<a class="btn btn-info" href="" data-toggle="collapse"
+											data-target="#detail${commandes.id}" role="button">Détail
+											&raquo;</a>
+									</p>
+								</div>
+							</div>
+							<div id="detail${commandes.id}" class="collapse">
+								<div class="container">
+
+									<ul class="list-group">
+										<c:forEach items="${commandes.listeLignePanier}" var="ligne">
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+												<span>x ${ligne.quantite}</span> 
+												<span class="text-primary">${ligne.produit.categorie.nomCategorie}</span>
+												<span>${ligne.produit.designation}</span>
+												<span>Prix unitaire : ${ligne.produit.prix} &euro;</span>
+												
+												<span>total : <span class="badge badge-primary">${ligne.prix} &euro;</span></span>
+											</li>
+										</c:forEach>							
+
+									</ul>
+
+
+								</div>
+							</div>
+						</div>
 					</div>
-<div class="col-10" align="center">
-		
-AJOUTER ICI LA LISTE DES COMMANDES !!!
-	
 
-</div>
+					<br />
+					</c:if>
+				</c:forEach>
+				
+				
+
+
+			
+		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-	
-		<br />
+
+
+	<br />
 	<br />
 	<!-- =============== inlusion du footer ========================== -->
 	<%@ include file="/resources/template/footer.jsp"%>
-	
+
 </body>
 </html>
